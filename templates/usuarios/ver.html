@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Aprendiz{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ aprendiz.nombres }} {{ aprendiz.apellidos }}</h3>
+<div class="card"><div class="card-body">
+  <dl class="row mb-0">
+    <dt class="col-sm-3">Identificacion</dt><dd class="col-sm-9">{{ aprendiz.tipo_documento }} {{ aprendiz.identificacion }}</dd>
+    <dt class="col-sm-3">Correo</dt><dd class="col-sm-9">{{ aprendiz.correo or '-' }}</dd>
+    <dt class="col-sm-3">Telefono</dt><dd class="col-sm-9">{{ aprendiz.telefono or '-' }}</dd>
+    <dt class="col-sm-3">Direccion</dt><dd class="col-sm-9">{{ aprendiz.direccion or '-' }}</dd>
+    <dt class="col-sm-3">Ficha</dt><dd class="col-sm-9">{{ aprendiz.ficha_numero or '-' }}</dd>
+    <dt class="col-sm-3">Programa</dt><dd class="col-sm-9">{{ aprendiz.programa_nombre or '-' }}</dd>
+    <dt class="col-sm-3">Estado</dt><dd class="col-sm-9">{{ aprendiz.estado }}</dd>
+    <dt class="col-sm-3">Firma</dt><dd class="col-sm-9">
+      {% if aprendiz.firma %}<img src="{{ url_for('static', filename='firmas/' + aprendiz.firma) }}" class="firma-img" alt="firma">{% else %}-{% endif %}
+    </dd>
+  </dl>
+</div></div>
+<a href="{{ url_for('usuarios.editar', uid=aprendiz.id) }}" class="btn btn-primary mt-3">Editar</a>
+<a href="{{ url_for('usuarios.index') }}" class="btn btn-light mt-3">Volver</a>
+{% endblock %}

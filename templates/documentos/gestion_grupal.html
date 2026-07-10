@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %}Gestión Grupal{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">Gestión Grupal</h3>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">Generar Plantilla General para Grupo (Selección Múltiple)</div>
+      <div class="card-body">
+        <p class="small text-muted">Genera un <strong>único PDF</strong> con los aprendices que selecciones insertados como filas en la tabla.</p>
+        <form method="post" action="{{ url_for('documentos.generar_grupal') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          
+          <div class="mb-3"><label class="form-label">Programa</label>
+            <select id="programaGrup" class="form-select" onchange="filtrarPorPrograma()">
+              <option value="">- Todos los programas -</option>
+              {% for p in programas %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Plantilla</label>
+            <select id="plantillaGrup" name="plantilla_id" class="form-select" required>
+              <option value="">- Seleccione -</option>
+              {% for p in plantillas_todas %}
+                {% if p.tipo_generacion in ['grupal', 'ambos'] %}
+                <option data-programa="{{ p.programa_id or '' }}" value="{{ p.id }}">{{ p.nombre }} ({{ p.programa_nombre or 'Sin asociar' }})</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Ficha</label>
+            <select id="fichaGrup" name="ficha_id" class="form-select" onchange="cargarAprendices()" required>
+              <option value="">- Seleccione -</option>
+              {% for f in fichas %}<option data-programa="{{ f.programa_id }}" value="{{ f.id }}">{{ f.numero }} - {{ f.programa_nombre }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label d-flex justify-content-between align-items-center">
+              <span>Seleccione los Aprendices</span>
+              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleTodos()" id="btnTodos" disabled>Seleccionar Todos</button>
+            </label>
+            <div id="listaAprendices" class="border rounded p-3" style="max-height: 250px; overflow-y: auto; background-color: #f8f9fa;">
+              <p class="text-muted small mb-0">- Seleccione primero una ficha -</p>
+            </div>
+          </div>
+
+          <button class="btn btn-success w-100"><i class="bi bi-file-earmark-pdf"></i> Generar PDF Grupal</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let todosSeleccionados = false;
+
+function filtrarPorPrograma() {
+    const programaId = document.getElementById('programaGrup').value;
+    
+    const selectPlantilla = document.getElementById('plantillaGrup');
+    if (selectPlantilla) {
+        selectPlantilla.value = "";
+        const opcionesPlantilla = selectPlantilla.querySelectorAll('option[data-programa]');
+        opcionesPlantilla.forEach(opt => {
+            if (!programaId || opt.dataset.programa === programaId) {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+    }
+
+    const selectFicha = document.getElementById('fichaGrup');
+    if (selectFicha) {
+        selectFicha.value = "";
+        const opcionesFicha = selectFicha.querySelectorAll('option[data-programa]');
+        opcionesFicha.forEach(opt => {
+            if (!programaId || opt.dataset.programa === programaId) {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+        
+        cargarAprendices();
+    }
+}
+
+function cargarAprendices() {
+    const fichaId = document.getElementById('fichaGrup').value;
+    const lista = document.getElementById('listaAprendices');
+    const btnTodos = document.getElementById('btnTodos');
+    
+    lista.innerHTML = '<p class="text-muted small mb-0">- Cargando... -</p>';
+    btnTodos.disabled = true;
+    todosSeleccionados = false;
+    btnTodos.textContent = "Seleccionar Todos";
+
+    if (!fichaId) {
+        lista.innerHTML = '<p class="text-muted small mb-0">- Seleccione primero una ficha -</p>';
+        return;
+    }
+
+    fetch('{{ url_for("documentos.api_aprendices", ficha_id=0) }}'.replace('0', fichaId))
+        .then(response => response.json())
+        .then(data => {
+            lista.innerHTML = '';
+            if (data.length === 0) {
+                lista.innerHTML = '<p class="text-danger small mb-0">Esta ficha no tiene aprendices registrados.</p>';
+            } else {
+                data.forEach(a => {
+                    const div = document.createElement('div');
+                    div.className = 'form-check mb-2';
+                    div.innerHTML = `
+                      <input class="form-check-input aprendiz-cb" type="checkbox" name="aprendices_ids" value="${a.id}" id="chk_${a.id}">
+                      <label class="form-check-label" for="chk_${a.id}">
+                        <strong>${a.identificacion}</strong> - ${a.apellidos} ${a.nombres}
+                      </label>
+                    `;
+                    lista.appendChild(div);
+                });
+                btnTodos.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            lista.innerHTML = '<p class="text-danger small mb-0">- Error al cargar los aprendices -</p>';
+        });
+}
+
+function toggleTodos() {
+    const checkboxes = document.querySelectorAll('.aprendiz-cb');
+    todosSeleccionados = !todosSeleccionados;
+    checkboxes.forEach(cb => cb.checked = todosSeleccionados);
+    const btnTodos = document.getElementById('btnTodos');
+    btnTodos.textContent = todosSeleccionados ? "Deseleccionar Todos" : "Seleccionar Todos";
+}
+</script>
+{% endblock %}

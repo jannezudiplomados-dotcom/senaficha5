@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Flask
+instance/
+.webassets-cache
+
+# Variables de entorno (no subir credenciales)
+.env
+
+# Archivos subidos / generados en tiempo de ejecucion
+static/firmas/*
+!static/firmas/.gitkeep
+static/generados/*
+!static/generados/.gitkeep
+static/plantillas/*
+!static/plantillas/.gitkeep
+
+# Editores / Sistema operativo
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Archivos de prueba / temporales
+test_out.*
+*.tmp

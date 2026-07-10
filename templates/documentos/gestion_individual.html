@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block title %}Gestión Individual{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">Gestión Individual</h3>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-primary text-white">Generar Plantilla Individual por Aprendiz</div>
+      <div class="card-body">
+        <p class="small text-muted">Genera un PDF para un único aprendiz seleccionado.</p>
+        <form method="post" action="{{ url_for('documentos.generar_individual') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          
+          <div class="mb-3"><label class="form-label">Programa</label>
+            <select id="programaInd" class="form-select" onchange="filtrarPorPrograma()">
+              <option value="">- Todos los programas -</option>
+              {% for p in programas %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Plantilla (.docx o .xlsx)</label>
+            <select id="plantillaInd" name="plantilla_id" class="form-select" required>
+              <option value="">- Seleccione -</option>
+              {% for p in plantillas_todas %}
+                {% if p.tipo_generacion in ['individual', 'ambos'] %}
+                <option data-programa="{{ p.programa_id or '' }}" value="{{ p.id }}">{{ p.nombre }} ({{ p.programa_nombre or 'Sin asociar' }})</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Ficha</label>
+            <select id="fichaInd" name="ficha_id" class="form-select" onchange="cargarAprendices()" required>
+              <option value="">- Seleccione -</option>
+              {% for f in fichas %}<option data-programa="{{ f.programa_id }}" value="{{ f.id }}">{{ f.numero }} - {{ f.programa_nombre }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Aprendiz</label>
+            <select id="aprendizInd" name="aprendiz_id" class="form-select" required disabled>
+              <option value="">- Seleccione primero una ficha -</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary w-100"><i class="bi bi-file-earmark-pdf"></i> Generar PDF Individual</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filtrarPorPrograma() {
+    const programaId = document.getElementById('programaInd').value;
+    
+    // Filtrar plantillas
+    const selectPlantilla = document.getElementById('plantillaInd');
+    if (selectPlantilla) {
+        selectPlantilla.value = ""; // Reset
+        const opcionesPlantilla = selectPlantilla.querySelectorAll('option[data-programa]');
+        opcionesPlantilla.forEach(opt => {
+            if (!programaId || opt.dataset.programa === programaId) {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+    }
+
+    // Filtrar fichas
+    const selectFicha = document.getElementById('fichaInd');
+    if (selectFicha) {
+        selectFicha.value = ""; // Reset
+        const opcionesFicha = selectFicha.querySelectorAll('option[data-programa]');
+        opcionesFicha.forEach(opt => {
+            if (!programaId || opt.dataset.programa === programaId) {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+        
+        // Reset aprendices since ficha changed
+        cargarAprendices();
+    }
+}
+
+function cargarAprendices() {
+    const fichaId = document.getElementById('fichaInd').value;
+    const aprendizSelect = document.getElementById('aprendizInd');
+    
+    aprendizSelect.innerHTML = '<option value="">- Cargando... -</option>';
+    aprendizSelect.disabled = true;
+
+    if (!fichaId) {
+        aprendizSelect.innerHTML = '<option value="">- Seleccione primero una ficha -</option>';
+        return;
+    }
+
+    fetch('{{ url_for("documentos.api_aprendices", ficha_id=0) }}'.replace('0', fichaId))
+        .then(response => response.json())
+        .then(data => {
+            aprendizSelect.innerHTML = '<option value="">- Seleccione aprendiz -</option>';
+            if (data.length === 0) {
+                aprendizSelect.innerHTML = '<option value="">- Sin aprendices -</option>';
+            } else {
+                data.forEach(a => {
+                    const opt = document.createElement('option');
+                    opt.value = a.id;
+                    opt.textContent = `${a.nombres} ${a.apellidos} - ${a.identificacion}`;
+                    aprendizSelect.appendChild(opt);
+                });
+                aprendizSelect.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            aprendizSelect.innerHTML = '<option value="">- Error al cargar -</option>';
+        });
+}
+</script>
+{% endblock %}

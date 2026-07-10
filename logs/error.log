@@ -1,0 +1,537 @@
+2026-07-02 16:45:36,357 WARNING: Error PDF 1001001001: (-2147221008, 'No se ha llamado a CoInitialize.', None, None) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:243]
+2026-07-02 16:45:36,372 WARNING: Error PDF 1002002002: (-2147221008, 'No se ha llamado a CoInitialize.', None, None) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:243]
+2026-07-02 16:46:09,204 WARNING: Error PDF 1001001001: (-2147221008, 'No se ha llamado a CoInitialize.', None, None) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:243]
+2026-07-02 16:46:09,220 WARNING: Error PDF 1002002002: (-2147221008, 'No se ha llamado a CoInitialize.', None, None) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:243]
+2026-07-02 16:51:18,689 WARNING: Error PDF 1001001001: Se requiere comtypes para convertir Excel a PDF. Instala con: pip install comtypes [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:248]
+2026-07-02 16:51:18,789 WARNING: Error PDF 1002002002: Se requiere comtypes para convertir Excel a PDF. Instala con: pip install comtypes [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:248]
+2026-07-02 21:40:11,492 WARNING: Error PDF 346546756: Error al convertir a PDF: Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 62, in main
+    convert_xlsx(input_path, output_path)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 27, in convert_xlsx
+    import comtypes.client
+ModuleNotFoundError: No module named 'comtypes' [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:335]
+2026-07-02 21:40:11,672 WARNING: Error PDF 54756: Error al convertir a PDF: Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 62, in main
+    convert_xlsx(input_path, output_path)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 27, in convert_xlsx
+    import comtypes.client
+ModuleNotFoundError: No module named 'comtypes' [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:335]
+2026-07-02 21:40:11,846 WARNING: Error PDF 46466: Error al convertir a PDF: Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 62, in main
+    convert_xlsx(input_path, output_path)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 27, in convert_xlsx
+    import comtypes.client
+ModuleNotFoundError: No module named 'comtypes' [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:335]
+2026-07-02 21:40:32,603 ERROR: Error generando documento general: Error al convertir a PDF: Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 62, in main
+    convert_xlsx(input_path, output_path)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\convert_to_pdf.py", line 27, in convert_xlsx
+    import comtypes.client
+ModuleNotFoundError: No module named 'comtypes' [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:438]
+2026-07-04 10:50:15,592 ERROR: Error generando documento grupal: openpyxl does not support .docx file format, please check you can open it with Excel first. Supported formats are: .xlsx,.xlsm,.xltx,.xltm [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:766]
+2026-07-04 10:55:32,917 ERROR: Error generando documento grupal: No module named 'pypdf' [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:811]
+2026-07-04 10:59:31,803 ERROR: Error generando documento grupal: cannot import name 'PdfMerger' from 'pypdf' (C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\pypdf\__init__.py) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:811]
+2026-07-04 11:08:47,357 ERROR: Error generando documento grupal: Encountered unknown tag 'tr'. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:817]
+2026-07-04 11:18:13,318 ERROR: Error generando documento grupal: Encountered unknown tag 'tr'. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:817]
+2026-07-04 11:29:16,398 ERROR: Error generando documento grupal: Encountered unknown tag 'tr'. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:817]
+2026-07-04 11:32:25,127 ERROR: Error generando documento grupal: Encountered unknown tag 'tr'. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:817]
+2026-07-04 11:33:32,014 ERROR: Error generando documento grupal: Encountered unknown tag 'tr'. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:817]
+2026-07-06 19:39:04,217 ERROR: Error generando documento individual [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:688]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py", line 653, in generar_individual
+    _render_docx(ruta_plantilla, contexto, firma_path, rendered)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py", line 87, in _render_docx
+    tpl.render(ctx)
+    ~~~~~~~~~~^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\docxtpl\template.py", line 368, in render
+    xml_src = self.build_xml(context, jinja_env)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\docxtpl\template.py", line 315, in build_xml
+    xml = self.render_xml_part(xml, self.docx._part, context, jinja_env)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\docxtpl\template.py", line 245, in render_xml_part
+    raise exc
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\docxtpl\template.py", line 238, in render_xml_part
+    template = Template(src_xml)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1214, in __new__
+    return env.from_string(source, template_class=cls)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1111, in from_string
+    return cls.from_code(self, self.compile(source), gs, None)
+                               ~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "<unknown>", line 11, in template
+jinja2.exceptions.TemplateSyntaxError: unexpected '}'
+2026-07-09 09:08:39,171 ERROR: Exception on /login [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 231, in recv
+    header = self._recv_chunk(sock, size=PACKET_HEADER_LENGTH)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 176, in _recv_chunk
+    read = sock.recv_into(pkt_view, size)
+ConnectionResetError: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 30, in query
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+                                 ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 465, in _send_cmd
+    return self._socket.recv()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 631, in recv
+    return self._netbroker.recv(self.sock, self.address)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 242, in recv
+    raise OperationalError(
+        errno=2055, values=(address, _strioerror(err))
+    ) from err
+mysql.connector.errors.OperationalError: 2055: Lost connection to MySQL server at 'localhost:3306', system error: 10054 Se ha forzado la interrupción de una conexión existente por el host remoto
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 35, in query
+    conn.close()
+    ~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 379, in close
+    cnx.reset_session()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 1129, in reset_session
+    raise OperationalError("MySQL Connection not available.")
+mysql.connector.errors.OperationalError: MySQL Connection not available.
+2026-07-09 09:08:39,187 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 231, in recv
+    header = self._recv_chunk(sock, size=PACKET_HEADER_LENGTH)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 176, in _recv_chunk
+    read = sock.recv_into(pkt_view, size)
+ConnectionResetError: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 30, in query
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+                                 ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 465, in _send_cmd
+    return self._socket.recv()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 631, in recv
+    return self._netbroker.recv(self.sock, self.address)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 242, in recv
+    raise OperationalError(
+        errno=2055, values=(address, _strioerror(err))
+    ) from err
+mysql.connector.errors.OperationalError: 2055: Lost connection to MySQL server at 'localhost:3306', system error: 10054 Se ha forzado la interrupción de una conexión existente por el host remoto
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 35, in query
+    conn.close()
+    ~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 379, in close
+    cnx.reset_session()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 1129, in reset_session
+    raise OperationalError("MySQL Connection not available.")
+mysql.connector.errors.OperationalError: MySQL Connection not available.
+2026-07-09 09:08:47,777 ERROR: Exception on /login [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-09 09:08:47,785 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-09 09:08:53,727 ERROR: Exception on /login [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-09 09:08:53,734 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-09 09:09:00,295 ERROR: Exception on /login [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-09 09:09:00,303 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 50, in login
+    admin = models.obtener_admin_por_username(username)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 210, in obtener_admin_por_username
+    return query('SELECT * FROM admin WHERE username=%s', (username,), fetchone=True)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 26, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)

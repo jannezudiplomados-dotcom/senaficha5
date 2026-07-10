@@ -1,0 +1,1132 @@
+/* ============================================================
+   SIGDA — Landing Page Styles
+   Sistema Integrado de Gestión Documental de Articulación y Media Técnica
+   ============================================================ */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ---------- Variables de Marca ---------- */
+:root {
+  --sigda-blue: #2783DE;
+  --sigda-blue-dark: #1E6ABF;
+  --sigda-blue-darker: #15508A;
+  --sigda-blue-light: #E5F2FC;
+  --sigda-blue-50: #F0F7FF;
+  --sigda-green: #46A171;
+  --sigda-green-dark: #348A52;
+  --sigda-dark: #1E293B;
+  --sigda-gray: #64748B;
+  --sigda-gray-light: #94A3B8;
+  --sigda-bg: #F8FAFC;
+  --sigda-white: #FFFFFF;
+  --sigda-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --sigda-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --sigda-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --sigda-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+  --sigda-radius: 12px;
+  --sigda-radius-lg: 20px;
+  --sigda-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset para Landing ---------- */
+.landing-page {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--sigda-dark);
+  overflow-x: hidden;
+  background: var(--sigda-bg);
+}
+
+/* ---------- Navbar Público ---------- */
+.sigda-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(39, 131, 222, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: var(--sigda-transition);
+}
+
+.sigda-navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sigda-navbar .navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.sigda-navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.sigda-navbar .brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.sigda-navbar .brand:hover .brand-icon {
+  transform: scale(1.08);
+}
+
+.sigda-navbar .brand-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sigda-navbar .brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sigda-navbar .brand-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--sigda-dark);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.sigda-navbar .brand-name span {
+  color: var(--sigda-blue);
+}
+
+.sigda-navbar .brand-desc {
+  font-size: 0.68rem;
+  color: var(--sigda-gray-light);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Navbar links */
+.sigda-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sigda-navbar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--sigda-gray);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--sigda-transition);
+}
+
+.sigda-navbar .nav-link:hover {
+  color: var(--sigda-blue);
+  background: var(--sigda-blue-50);
+}
+
+.sigda-navbar .nav-link i {
+  font-size: 0.85rem;
+}
+
+.sigda-navbar .nav-link.active {
+  color: var(--sigda-blue);
+  background: var(--sigda-blue-light);
+}
+
+.sigda-navbar .btn-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--sigda-blue);
+  background: transparent;
+  border: 1.5px solid var(--sigda-blue);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: var(--sigda-transition);
+}
+
+.sigda-navbar .btn-login:hover {
+  background: var(--sigda-blue);
+  color: var(--sigda-white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(39, 131, 222, 0.3);
+}
+
+.sigda-navbar .btn-register {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--sigda-white);
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: var(--sigda-transition);
+  box-shadow: 0 2px 8px rgba(39, 131, 222, 0.25);
+}
+
+.sigda-navbar .btn-register:hover {
+  background: linear-gradient(135deg, var(--sigda-blue-dark), var(--sigda-blue-darker));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(39, 131, 222, 0.35);
+}
+
+/* Hamburger mobile */
+.sigda-navbar .hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--sigda-transition);
+}
+
+.sigda-navbar .hamburger:hover {
+  background: var(--sigda-blue-50);
+}
+
+.sigda-navbar .hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sigda-dark);
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: var(--sigda-transition);
+}
+
+/* ---------- Hero Section ---------- */
+.sigda-hero {
+  position: relative;
+  padding: 100px 1.5rem 80px;
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 25%, #2196F3 50%, #1E88E5 75%, #1565C0 100%);
+  overflow: hidden;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+}
+
+.sigda-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 80% 30%, rgba(255,255,255,0.05) 0%, transparent 60%);
+}
+
+/* Decorative floating shapes */
+.sigda-hero .shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.06;
+  background: white;
+}
+
+.sigda-hero .shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.sigda-hero .shape-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  left: 10%;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+.sigda-hero .shape-3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  left: 60%;
+  animation: float 25s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(20px, -30px) rotate(3deg); }
+  66% { transform: translate(-15px, 15px) rotate(-2deg); }
+}
+
+.sigda-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.sigda-hero .hero-text {
+  color: white;
+}
+
+.sigda-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.sigda-hero .hero-badge i {
+  color: #56C285;
+}
+
+.sigda-hero h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 20px;
+  letter-spacing: -1.5px;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.sigda-hero h1 .highlight {
+  background: linear-gradient(135deg, #90CAF9 0%, #BBDEFB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sigda-hero .hero-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 32px;
+  max-width: 480px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.sigda-hero .hero-buttons {
+  display: flex;
+  gap: 12px;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.sigda-hero .btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: white;
+  color: var(--sigda-blue-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: var(--sigda-transition);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.sigda-hero .btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.sigda-hero .btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: var(--sigda-transition);
+  backdrop-filter: blur(10px);
+}
+
+.sigda-hero .btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Hero visual card */
+.sigda-hero .hero-visual {
+  display: flex;
+  justify-content: center;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.sigda-hero .hero-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--sigda-radius-lg);
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.sigda-hero .hero-card .stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sigda-hero .hero-card .stat-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--sigda-radius);
+  padding: 20px 16px;
+  text-align: center;
+  transition: var(--sigda-transition);
+}
+
+.sigda-hero .hero-card .stat-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.sigda-hero .hero-card .stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  font-size: 1rem;
+  color: white;
+}
+
+.sigda-hero .hero-card .stat-icon.blue { background: rgba(33, 150, 243, 0.4); }
+.sigda-hero .hero-card .stat-icon.green { background: rgba(76, 175, 80, 0.4); }
+.sigda-hero .hero-card .stat-icon.purple { background: rgba(156, 39, 176, 0.4); }
+.sigda-hero .hero-card .stat-icon.orange { background: rgba(255, 152, 0, 0.4); }
+
+.sigda-hero .hero-card .stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+}
+
+.sigda-hero .hero-card .stat-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ---------- Features Section ---------- */
+.sigda-features {
+  padding: 80px 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sigda-features .section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sigda-features .section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sigda-features .section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--sigda-dark);
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+}
+
+.sigda-features .section-subtitle {
+  font-size: 1.05rem;
+  color: var(--sigda-gray);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.sigda-features .features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sigda-features .feature-card {
+  background: var(--sigda-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--sigda-radius-lg);
+  padding: 32px 28px;
+  transition: var(--sigda-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.sigda-features .feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sigda-blue), var(--sigda-blue-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.sigda-features .feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sigda-shadow-xl);
+  border-color: transparent;
+}
+
+.sigda-features .feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.sigda-features .feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.sigda-features .feature-icon.blue {
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue);
+}
+
+.sigda-features .feature-icon.green {
+  background: #E8F5E9;
+  color: var(--sigda-green);
+}
+
+.sigda-features .feature-icon.purple {
+  background: #F3E5F5;
+  color: #9C27B0;
+}
+
+.sigda-features .feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sigda-dark);
+  margin: 0 0 10px;
+}
+
+.sigda-features .feature-card p {
+  font-size: 0.92rem;
+  color: var(--sigda-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- Programs Section ---------- */
+.sigda-programs {
+  padding: 80px 1.5rem;
+  background: linear-gradient(180deg, var(--sigda-bg) 0%, var(--sigda-blue-50) 100%);
+}
+
+.sigda-programs .programs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sigda-programs .section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sigda-programs .section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sigda-programs .section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--sigda-dark);
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+}
+
+.sigda-programs .section-subtitle {
+  font-size: 1.05rem;
+  color: var(--sigda-gray);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.sigda-programs .programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.sigda-programs .program-card {
+  background: var(--sigda-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--sigda-radius);
+  padding: 24px;
+  transition: var(--sigda-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.sigda-programs .program-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sigda-shadow-lg);
+}
+
+.sigda-programs .program-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.sigda-programs .program-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--sigda-dark);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.sigda-programs .program-card .program-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--sigda-gray-light);
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.sigda-programs .program-card .program-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sigda-programs .empty-programs {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--sigda-gray);
+}
+
+.sigda-programs .empty-programs i {
+  font-size: 2.5rem;
+  color: var(--sigda-blue-light);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ---------- Footer ---------- */
+.sigda-footer {
+  background: var(--sigda-dark);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 48px 1.5rem 24px;
+}
+
+.sigda-footer .footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+}
+
+.sigda-footer .footer-brand img {
+  height: 40px;
+  margin-bottom: 14px;
+}
+
+.sigda-footer .footer-brand p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.sigda-footer h5 {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sigda-footer .footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sigda-footer .footer-links li {
+  margin-bottom: 10px;
+}
+
+.sigda-footer .footer-links a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: var(--sigda-transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sigda-footer .footer-links a:hover {
+  color: var(--sigda-blue);
+  transform: translateX(3px);
+}
+
+.sigda-footer .footer-bottom {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+/* ---------- Login Page Redesign ---------- */
+.login-page {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--sigda-bg);
+}
+
+.login-page .login-hero {
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #2196F3 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-page .login-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 500px 400px at 30% 40%, rgba(255,255,255,0.08), transparent 70%),
+    radial-gradient(ellipse 300px 300px at 70% 70%, rgba(255,255,255,0.05), transparent 60%);
+}
+
+.login-page .login-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.login-page .login-hero-content img {
+  height: 60px;
+  margin-bottom: 24px;
+}
+
+.login-page .login-hero-content h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.login-page .login-hero-content p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.login-page .login-form-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 40px;
+}
+
+.login-page .login-form-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-page .login-form-card .form-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-page .login-form-card .form-logo img {
+  height: 48px;
+}
+
+.login-page .login-form-card .form-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--sigda-dark);
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.login-page .login-form-card .form-subtitle {
+  font-size: 0.92rem;
+  color: var(--sigda-gray);
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.login-page .form-group {
+  margin-bottom: 18px;
+}
+
+.login-page .form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sigda-dark);
+  margin-bottom: 6px;
+}
+
+.login-page .form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.92rem;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  background: white;
+  transition: var(--sigda-transition);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.login-page .form-group input:focus {
+  border-color: var(--sigda-blue);
+  box-shadow: 0 0 0 3px rgba(39, 131, 222, 0.1);
+}
+
+.login-page .btn-submit {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sigda-transition);
+  font-family: inherit;
+  margin-top: 6px;
+}
+
+.login-page .btn-submit:hover {
+  background: linear-gradient(135deg, var(--sigda-blue-dark), var(--sigda-blue-darker));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(39, 131, 222, 0.3);
+}
+
+.login-page .login-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.login-page .login-footer a {
+  color: var(--sigda-blue);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.88rem;
+  transition: var(--sigda-transition);
+}
+
+.login-page .login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.gd-2 { top: 65%; left: 15%; animation-delay: 1s; }
+.gd-3 { bottom: 20%; right: 25%; animation-delay: 2s; }
+
+/* ---------- Animated Logo 3D ---------- */
+.stage { text-align: center; position: relative; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; }
+.halo {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%; animation: pulseHalo 3.2s ease-in-out infinite; z-index: 0;
+}
+.logo-anim-3d {
+  width: 220px; height: 220px; position: relative; z-index: 1; margin-bottom: 20px;
+  filter: drop-shadow(0 18px 34px rgba(0,0,0,.25));
+  animation: dropLogo 1s cubic-bezier(.2,.8,.2,1) both, floatLogo 4.5s ease-in-out 1s infinite;
+}
+.text-white-center {
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  position: relative; z-index: 2;
+  opacity: 0; animation: riseText 0.8s ease 0.5s both;
+}
+@keyframes dropLogo { from { opacity: 0; transform: translateY(-46px) scale(.86); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes pulseHalo { 0%, 100% { transform: translateX(-50%) scale(.9); opacity: .7; } 50% { transform: translateX(-50%) scale(1.1); opacity: 1; } }
+@keyframes riseText { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in-delay-3 { animation-delay: 0.3s; }
+.animate-in-delay-4 { animation-delay: 0.4s; }
+
+/* ---------- Flash Messages (Landing) ---------- */
+.sigda-flash {
+  max-width: 1200px;
+  margin: 16px auto;
+  padding: 0 1.5rem;
+}
+
+.sigda-flash .alert {
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .sigda-hero .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .sigda-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .sigda-hero .hero-description {
+    margin: 0 auto 32px;
+  }
+
+  .sigda-hero .hero-buttons {
+    justify-content: center;
+  }
+
+  .sigda-features .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sigda-footer .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sigda-navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 16px;
+    box-shadow: var(--sigda-shadow-lg);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .sigda-navbar .nav-links.active {
+    display: flex;
+  }
+
+  .sigda-navbar .hamburger {
+    display: block;
+  }
+
+  .sigda-hero {
+    padding: 60px 1.5rem 50px;
+    min-height: auto;
+  }
+
+  .sigda-hero h1 {
+    font-size: 2rem;
+  }
+
+  .sigda-hero .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sigda-hero .hero-visual {
+    display: none;
+  }
+
+  .sigda-features .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sigda-footer .footer-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sigda-footer .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  /* Login responsive */
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-page .login-hero {
+    display: none;
+  }
+
+  .login-page .login-form-side {
+    padding: 32px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sigda-hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .sigda-features .section-title,
+  .sigda-programs .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* ---------- Animated Logo 3D ---------- */
+.stage { text-align: center; position: relative; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; }
+.halo {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%; animation: pulseHalo 3.2s ease-in-out infinite; z-index: 0;
+}
+.logo-anim-3d {
+  width: 220px; height: 220px; position: relative; z-index: 1; margin-bottom: 20px;
+  filter: drop-shadow(0 18px 34px rgba(0,0,0,.25));
+  animation: dropLogo 1s cubic-bezier(.2,.8,.2,1) both, floatLogo 4.5s ease-in-out 1s infinite;
+}
+.text-white-center {
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  position: relative; z-index: 2;
+  opacity: 0; animation: riseText 0.8s ease 0.5s both;
+}
+@keyframes dropLogo { from { opacity: 0; transform: translateY(-46px) scale(.86); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes pulseHalo { 0%, 100% { transform: translateX(-50%) scale(.9); opacity: .7; } 50% { transform: translateX(-50%) scale(1.1); opacity: 1; } }
+@keyframes riseText { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }

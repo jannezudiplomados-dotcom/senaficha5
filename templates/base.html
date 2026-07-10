@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SIGDA — Gestión Documental{% endblock %}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/icons/favicon.svg') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/sigda-icono.png') }}">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% if session.get('admin_id') %}
+<nav class="navbar navbar-expand-lg navbar-dark sena-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ url_for('dashboard.index') }}">
+      <img src="{{ url_for('static', filename='images/icons/sigda-icono.svg') }}" alt="SIGDA" style="width:32px;height:32px;border-radius:6px;">
+      <span>SIG<span style="color:#90CAF9">DA</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard.index') }}">Panel</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('programas.index') }}">Programas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('fichas.index') }}">Fichas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('usuarios.index') }}">Aprendices</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('colegios.index') }}">Colegios</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('plantillas.index') }}">Plantillas</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Documentos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('documentos.index') }}">Gestión de Documentos</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('documentos.gestion_individual') }}">Gestión individual</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('documentos.gestion_grupal') }}">Gestión grupal</a></li>
+          </ul>
+        </li>
+        {% if rol_actual == 'superadmin' %}
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admins.index') }}">Administradores</a></li>
+        {% endif %}
+      </ul>
+      <span class="navbar-text text-white me-3"><i class="bi bi-person-circle"></i> {{ usuario_actual }} ({{ rol_actual }})</span>
+      <form method="post" action="{{ url_for('auth.logout') }}" class="d-inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-outline-light btn-sm" type="submit">Salir</button>
+      </form>
+    </div>
+  </div>
+</nav>
+{% endif %}
+<div class="container py-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, msg in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show">{{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
+

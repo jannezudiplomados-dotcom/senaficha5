@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if ficha else 'Nueva' }} ficha{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Editar' if ficha else 'Nueva' }} ficha</h3>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="row g-3">
+    <div class="col-md-4"><label class="form-label">Numero *</label><input name="numero" class="form-control" required value="{{ ficha.numero if ficha else '' }}"></div>
+    <div class="col-md-4"><label class="form-label">Programa *</label>
+      <select name="programa_id" class="form-select" required>
+        <option value="">- Seleccione -</option>
+        {% for p in programas %}<option value="{{ p.id }}" {{ 'selected' if ficha and ficha.programa_id==p.id else '' }}>{{ p.codigo }} - {{ p.nombre }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4"><label class="form-label">Colegio</label>
+      <select name="colegio_id" class="form-select">
+        <option value="">- Ninguno -</option>
+        {% for c in colegios %}<option value="{{ c.idcolegio }}" {{ 'selected' if ficha and ficha.colegio_id==c.idcolegio else '' }}>{{ c.nombre_colegio }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4"><label class="form-label">Jornada</label>
+      <select name="jornada" class="form-select">
+        {% for j in ['Manana','Tarde','Noche','Mixta'] %}<option value="{{ j }}" {{ 'selected' if ficha and ficha.jornada==j else '' }}>{{ j }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4"><label class="form-label">Fecha inicio</label><input type="date" name="fecha_inicio" class="form-control" value="{{ ficha.fecha_inicio if ficha and ficha.fecha_inicio else '' }}"></div>
+    <div class="col-md-4"><label class="form-label">Fecha fin</label><input type="date" name="fecha_fin" class="form-control" value="{{ ficha.fecha_fin if ficha and ficha.fecha_fin else '' }}"></div>
+  </div>
+  <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('fichas.index') }}" class="btn btn-light">Cancelar</a></div>
+</form>
+{% endblock %}

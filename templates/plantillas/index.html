@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Plantillas{% endblock %}
+{% block content %}
+<h3 class="mb-4">Gestión de Plantillas</h3>
+
+<div class="card mb-4">
+  <div class="card-header">Filtrar por Programa</div>
+  <div class="card-body">
+    <div class="row g-2">
+      <div class="col-md-10">
+        <select id="filtroPrograma" class="form-select" onchange="filtrarPlantillas()">
+          <option value="">- Todos los programas -</option>
+          {% for p in programas %}
+          <option value="{{ p.id }}">{{ p.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-outline-secondary w-100" onclick="document.getElementById('filtroPrograma').value=''; filtrarPlantillas();">Limpiar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-header">Plantillas (.docx / .xlsx)</div>
+  <div class="card-body">
+    <form method="post" action="{{ url_for('plantillas.subir') }}" enctype="multipart/form-data" class="row g-2 mb-3">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="col-md-3">
+        <select name="programa_id" class="form-select" required>
+          <option value="">- Asociar a Programa -</option>
+          {% for p in programas %}
+          <option value="{{ p.id }}">{{ p.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select name="tipo_generacion" class="form-select" required>
+          <option value="">- Tipo de Generación -</option>
+          <option value="individual">Individual</option>
+          <option value="grupal">Grupal</option>
+          <option value="ambos">Ambos</option>
+        </select>
+      </div>
+      <div class="col-md-2"><input name="nombre" class="form-control" placeholder="Nombre plantilla"></div>
+      <div class="col-md-2"><input type="file" name="plantilla" class="form-control" accept=".docx,.xlsx" required></div>
+      <div class="col-md-2"><button class="btn btn-primary w-100">Subir</button></div>
+    </form>
+    
+    <table class="table table-sm">
+      <thead><tr><th>Nombre</th><th>Programa</th><th>Tipo</th><th>Archivo</th><th></th></tr></thead>
+      <tbody id="tablaPlantillas">
+      {% for p in plantillas %}
+        <tr data-programa="{{ p.programa_id or '' }}">
+          <td>{{ p.nombre }}</td>
+          <td>{{ p.programa_nombre or '-' }}</td>
+          <td>{{ p.tipo_generacion | capitalize }}</td>
+          <td class="small text-muted">{{ p.archivo }}</td>
+          <td class="text-end">
+            <form method="post" action="{{ url_for('plantillas.eliminar', pid=p.id) }}" class="d-inline" onsubmit="return confirm('¿Eliminar plantilla?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr id="msgVacioGlobal"><td colspan="5" class="text-muted text-center">Sin plantillas</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    
+    <p class="small text-muted mb-0 mt-3">En tu plantilla usa variables entre dobles llaves: {% raw %}{{ tipo_documento }}{% endraw %}, {% raw %}{{ identificacion }}{% endraw %}, {% raw %}{{ nombres }}{% endraw %}, {% raw %}{{ apellidos }}{% endraw %}, {% raw %}{{ direccion }}{% endraw %}, {% raw %}{{ correo }}{% endraw %}, {% raw %}{{ telefono }}{% endraw %}, {% raw %}{{ estado }}{% endraw %}, {% raw %}{{ numero }}{% endraw %} (ficha), {% raw %}{{ ficha }}{% endraw %}, {% raw %}{{ nombre }}{% endraw %} (programa), {% raw %}{{ programa }}{% endraw %}, {% raw %}{{ codigo_programa }}{% endraw %}, {% raw %}{{ fecha_inicio }}{% endraw %}, {% raw %}{{ fecha_fin }}{% endraw %}, {% raw %}{{ fecha_inicio_programa }}{% endraw %}, {% raw %}{{ fecha_fin_programa }}{% endraw %}, {% raw %}{{ fecha }}{% endraw %} y {% raw %}{{ firma }}{% endraw %} (imagen).</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filtrarPlantillas() {
+    const programaId = document.getElementById('filtroPrograma').value;
+    const filas = document.querySelectorAll('#tablaPlantillas tr[data-programa]');
+    
+    let visibles = 0;
+    filas.forEach(fila => {
+        if (!programaId || fila.dataset.programa === programaId) {
+            fila.style.display = '';
+            visibles++;
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+
+    const msgVacioGlobal = document.getElementById('msgVacioGlobal');
+    if (msgVacioGlobal) msgVacioGlobal.style.display = 'none';
+
+    const msgVacio = document.getElementById('msgVacioFiltro');
+    if (visibles === 0 && filas.length > 0) {
+        if (!msgVacio) {
+            const tr = document.createElement('tr');
+            tr.id = 'msgVacioFiltro';
+            tr.innerHTML = '<td colspan="5" class="text-muted text-center">No hay plantillas asociadas a este programa</td>';
+            document.getElementById('tablaPlantillas').appendChild(tr);
+        } else {
+            msgVacio.style.display = '';
+        }
+    } else if (msgVacio) {
+        msgVacio.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

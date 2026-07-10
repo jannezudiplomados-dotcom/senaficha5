@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if aprendiz else 'Nuevo' }} aprendiz{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Editar' if aprendiz else 'Nuevo' }} aprendiz</h3>
+<form method="post" enctype="multipart/form-data">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="firma_base64" id="firma_base64">
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label class="form-label">Tipo documento</label>
+      <select name="tipo_documento" class="form-select">
+        {% for t in ['CC','TI','CE','PEP','PPT'] %}
+          <option value="{{ t }}" {{ 'selected' if aprendiz and aprendiz.tipo_documento==t else '' }}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Identificacion *</label>
+      <input type="text" name="identificacion" class="form-control" required value="{{ aprendiz.identificacion if aprendiz else '' }}">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Estado</label>
+      <select name="estado" class="form-select">
+        {% for e in ['Activo','Retirado','Graduado'] %}
+          <option value="{{ e }}" {{ 'selected' if aprendiz and aprendiz.estado==e else '' }}>{{ e }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Nombres *</label>
+      <input type="text" name="nombres" class="form-control" required value="{{ aprendiz.nombres if aprendiz else '' }}">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Apellidos *</label>
+      <input type="text" name="apellidos" class="form-control" required value="{{ aprendiz.apellidos if aprendiz else '' }}">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Correo</label>
+      <input type="email" name="correo" class="form-control" value="{{ aprendiz.correo if aprendiz and aprendiz.correo else '' }}">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Telefono</label>
+      <input type="text" name="telefono" class="form-control" value="{{ aprendiz.telefono if aprendiz and aprendiz.telefono else '' }}">
+    </div>
+    <div class="col-12">
+      <label class="form-label">Direccion</label>
+      <input type="text" name="direccion" class="form-control" value="{{ aprendiz.direccion if aprendiz and aprendiz.direccion else '' }}">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Ficha</label>
+      <select name="ficha_id" class="form-select">
+        <option value="">- Sin ficha -</option>
+        {% for f in fichas %}
+          <option value="{{ f.id }}" {{ 'selected' if aprendiz and aprendiz.ficha_id==f.id else '' }}>{{ f.numero }} - {{ f.programa_nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label d-block">Firma</label>
+      
+      <ul class="nav nav-tabs mb-3" id="firmaTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="canvas-tab" data-bs-toggle="tab" data-bs-target="#canvas-pane" type="button" role="tab">Dibujar firma</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload-pane" type="button" role="tab">Subir imagen</button>
+        </li>
+      </ul>
+      
+      <div class="tab-content" id="firmaTabContent">
+        <div class="tab-pane fade show active" id="canvas-pane" role="tabpanel">
+          <div class="firma-wrap">
+            <canvas id="firmaCanvas" width="400" height="150"></canvas>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary mt-1" id="limpiarFirma">Limpiar firma</button>
+        </div>
+        <div class="tab-pane fade" id="upload-pane" role="tabpanel">
+          <input type="file" name="firma_imagen" class="form-control" accept="image/png, image/jpeg, image/jpg">
+          <small class="text-muted d-block mt-1">Formato: PNG o JPG. Tamaño máximo: 2 MB.</small>
+        </div>
+      </div>
+
+      {% if aprendiz and aprendiz.firma %}
+        <div class="mt-2"><small class="text-info"><i class="bi bi-info-circle"></i> Ya hay una firma guardada. Solo dibuja o sube una nueva si deseas reemplazarla.</small></div>
+        <div class="mt-2 border p-2 d-inline-block bg-white"><img src="{{ url_for('static', filename='firmas/' ~ aprendiz.firma) }}" alt="Firma actual" style="max-height: 50px;"></div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a href="{{ url_for('usuarios.index') }}" class="btn btn-light">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

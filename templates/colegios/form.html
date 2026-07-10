@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if colegio else 'Nuevo' }} Colegio{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Editar' if colegio else 'Nuevo' }} Colegio</h3>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre del Colegio *</label>
+      <input type="text" name="nombre_colegio" class="form-control" required value="{{ colegio.nombre_colegio if colegio else '' }}">
+    </div>
+    <div class="col-md-12">
+      <label class="form-label">Descripción</label>
+      <textarea name="descripcion" class="form-control" rows="3">{{ colegio.descripcion if colegio else '' }}</textarea>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-success">Guardar</button>
+    <a href="{{ url_for('colegios.index') }}" class="btn btn-light">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

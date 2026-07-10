@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Panel{% endblock %}
+{% block content %}
+<h3 class="mb-4">Panel de control</h3>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3"><div class="card stat-card"><div class="card-body"><div class="stat-num">{{ stats.total_aprendices }}</div><div class="stat-lbl">Aprendices</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card"><div class="card-body"><div class="stat-num">{{ stats.total_fichas }}</div><div class="stat-lbl">Fichas</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card"><div class="card-body"><div class="stat-num">{{ stats.total_programas }}</div><div class="stat-lbl">Programas</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card"><div class="card-body"><div class="stat-num">{{ stats.aprendices_activos }}</div><div class="stat-lbl">Activos</div></div></div></div>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-5">
+    <div class="card h-100"><div class="card-header">Aprendices por estado</div>
+      <div class="card-body"><canvas id="chartEstado" height="240"></canvas></div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card h-100"><div class="card-header">Aprendices por programa</div>
+      <div class="card-body"><canvas id="chartPrograma" height="240"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">Aprendices por ficha</div>
+  <div class="card-body"><canvas id="chartFicha" height="140"></canvas></div>
+</div>
+
+<div class="card">
+  <div class="card-header">Actividad reciente</div>
+  <div class="table-responsive">
+    <table class="table table-sm mb-0">
+      <thead><tr><th>Fecha</th><th>Usuario</th><th>Accion</th><th>Entidad</th><th>Detalle</th></tr></thead>
+      <tbody>
+      {% for l in logs %}
+        <tr><td>{{ l.created_at }}</td><td>{{ l.admin_username }}</td><td><span class="badge bg-secondary">{{ l.accion }}</span></td><td>{{ l.entidad }}</td><td>{{ l.detalle }}</td></tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center text-muted">Sin actividad</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const dEstado = {{ por_estado | tojson }};
+const dPrograma = {{ por_programa | tojson }};
+const dFicha = {{ por_ficha | tojson }};
+const colores = ['#39A900', '#6c757d', '#0d6efd', '#ffc107', '#dc3545', '#20c997'];
+
+if (document.getElementById('chartEstado')) {
+  new Chart(document.getElementById('chartEstado'), {
+    type: 'doughnut',
+    data: {
+      labels: dEstado.map(function (x) { return x.estado; }),
+      datasets: [{ data: dEstado.map(function (x) { return x.total; }), backgroundColor: colores }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+  });
+}
+
+if (document.getElementById('chartPrograma')) {
+  new Chart(document.getElementById('chartPrograma'), {
+    type: 'bar',
+    data: {
+      labels: dPrograma.map(function (x) { return x.programa; }),
+      datasets: [{ label: 'Aprendices', data: dPrograma.map(function (x) { return x.total; }), backgroundColor: '#39A900' }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+  });
+}
+
+if (document.getElementById('chartFicha')) {
+  new Chart(document.getElementById('chartFicha'), {
+    type: 'bar',
+    data: {
+      labels: dFicha.map(function (x) { return x.ficha; }),
+      datasets: [{ label: 'Aprendices', data: dFicha.map(function (x) { return x.total; }), backgroundColor: '#0d6efd' }]
+    },
+    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0 } } } }
+  });
+}
+</script>
+{% endblock %}

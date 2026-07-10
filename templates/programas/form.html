@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if programa else 'Nuevo' }} programa{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Editar' if programa else 'Nuevo' }} programa</h3>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="row g-3">
+    <div class="col-md-4"><label class="form-label">Codigo *</label><input name="codigo" class="form-control" required value="{{ programa.codigo if programa else '' }}"></div>
+    <div class="col-md-8"><label class="form-label">Nombre *</label><input name="nombre" class="form-control" required value="{{ programa.nombre if programa else '' }}"></div>
+    <div class="col-md-4"><label class="form-label">Duracion (meses)</label><input type="number" name="duracion_meses" class="form-control" value="{{ programa.duracion_meses if programa else 0 }}"></div>
+    <div class="col-md-4"><label class="form-label">Fecha de Inicio</label><input type="date" name="fecha_inicio" class="form-control" value="{{ programa.fecha_inicio if programa else '' }}"></div>
+    <div class="col-md-4"><label class="form-label">Fecha de Finalización</label><input type="date" name="fecha_fin" class="form-control" value="{{ programa.fecha_fin if programa else '' }}"></div>
+    <div class="col-12"><label class="form-label">Descripcion</label><textarea name="descripcion" class="form-control" rows="3">{{ programa.descripcion if programa else '' }}</textarea></div>
+  </div>
+  <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('programas.index') }}" class="btn btn-light">Cancelar</a></div>
+</form>
+{% endblock %}

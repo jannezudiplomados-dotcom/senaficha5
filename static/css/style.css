@@ -1,0 +1,50 @@
+/* ============================================================
+   SIGDA — Admin Panel Styles
+   ============================================================ */
+
+/* ---------- Variables ---------- */
+:root {
+  --sigda-blue: #2783DE;
+  --sigda-blue-dark: #1E6ABF;
+  --sigda-green: #46A171;
+  --sigda-dark: #1E293B;
+}
+
+/* ---------- Base ---------- */
+body {
+  background: #f4f6f9;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Admin Navbar ---------- */
+.sena-nav {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ---------- Iconos ---------- */
+.sena-icon { font-size: 3rem; color: var(--sigda-blue); }
+
+/* ---------- Stat Cards ---------- */
+.stat-card { border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.1); border-radius: 12px; }
+.stat-num { font-size: 2rem; font-weight: 700; color: var(--sigda-blue); }
+.stat-lbl { color: #6c757d; font-size: .9rem; }
+
+/* ---------- Botones de marca ---------- */
+.btn-success, .bg-success {
+  background-color: var(--sigda-blue) !important;
+  border-color: var(--sigda-blue) !important;
+}
+.btn-success:hover {
+  background-color: var(--sigda-blue-dark) !important;
+  border-color: var(--sigda-blue-dark) !important;
+}
+
+/* ---------- Firma ---------- */
+.firma-wrap { border: 1px dashed #adb5bd; border-radius: .5rem; display: inline-block; background: #fff; }
+#firmaCanvas { touch-action: none; cursor: crosshair; display: block; }
+.firma-img { max-width: 220px; border: 1px solid #dee2e6; border-radius: .25rem; background: #fff; }
+
+/* ---------- Cards ---------- */
+.card-header { font-weight: 600; }
+.card { border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); }

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if admin else 'Nuevo' }} administrador{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Editar' if admin else 'Nuevo' }} administrador</h3>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="row g-3">
+    {% if not admin %}
+    <div class="col-md-6"><label class="form-label">Usuario *</label><input name="username" class="form-control" required></div>
+    {% endif %}
+    <div class="col-md-6"><label class="form-label">Nombre *</label><input name="nombre" class="form-control" required value="{{ admin.nombre if admin else '' }}"></div>
+    <div class="col-md-6"><label class="form-label">Contrasena {{ '(dejar en blanco para no cambiar)' if admin else '*' }}</label><input type="password" name="password" class="form-control" {{ 'required' if not admin else '' }}></div>
+    <div class="col-md-6"><label class="form-label">Rol</label>
+      <select name="rol" class="form-select">
+        <option value="admin" {{ 'selected' if admin and admin.rol=='admin' else '' }}>admin</option>
+        <option value="superadmin" {{ 'selected' if admin and admin.rol=='superadmin' else '' }}>superadmin</option>
+      </select>
+    </div>
+    {% if admin %}
+    <div class="col-md-6 mt-4">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="activo" id="activo" {{ 'checked' if admin.activo else '' }}>
+        <label class="form-check-label" for="activo">Activo</label>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('admins.index') }}" class="btn btn-light">Cancelar</a></div>
+</form>
+{% endblock %}

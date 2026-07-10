@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar Sesión — SIGDA</title>
+  <meta name="description" content="Accede al panel de administración SIGDA.">
+  <meta name="theme-color" content="#2783DE">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/icons/favicon.svg') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/sigda-icono.png') }}">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Landing Styles (reuse) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+
+<div class="login-page">
+  <!-- ===== HERO SIDE ===== -->
+  <div class="login-hero">
+    <div class="login-hero-content">
+      <img src="{{ url_for('static', filename='images/logos/sigda-logo-horizontal-white.svg') }}" alt="SIGDA">
+      <h2>Panel de Administración</h2>
+      <p>Gestiona aprendices, fichas, programas y genera documentos de forma eficiente.</p>
+
+      <div style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 20px; text-align: center; min-width: 100px; backdrop-filter: blur(10px);">
+          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 4px;">
+            <i class="bi bi-shield-check"></i> Seguro
+          </div>
+          <div style="font-size: 0.85rem; color: white; font-weight: 600;">Protección CSRF</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 20px; text-align: center; min-width: 100px; backdrop-filter: blur(10px);">
+          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 4px;">
+            <i class="bi bi-people"></i> Roles
+          </div>
+          <div style="font-size: 0.85rem; color: white; font-weight: 600;">Admin & SuperAdmin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FORM SIDE ===== -->
+  <div class="login-form-side">
+    <div class="login-form-card">
+      <div class="form-logo">
+        <img src="{{ url_for('static', filename='images/logos/sigda-logo-horizontal.svg') }}" alt="SIGDA">
+      </div>
+
+      <h3 class="form-title">Iniciar Sesión</h3>
+      <p class="form-subtitle">Ingresa tus credenciales para acceder al panel</p>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in messages %}
+        <div style="background: {% if category == 'danger' %}#FEE2E2; color:#991B1B{% elif category == 'success' %}#D1FAE5; color:#065F46{% elif category == 'warning' %}#FEF3C7; color:#92400E{% else %}#DBEAFE; color:#1E40AF{% endif %}; padding: 10px 14px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+          <i class="bi bi-{% if category == 'danger' %}exclamation-triangle{% elif category == 'success' %}check-circle{% elif category == 'warning' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+          {{ msg }}
+        </div>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="post" action="{{ url_for('auth.login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <div class="form-group">
+          <label for="username"><i class="bi bi-person"></i> Usuario</label>
+          <input type="text" id="username" name="username" placeholder="Tu nombre de usuario" required autofocus autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password"><i class="bi bi-lock"></i> Contraseña</label>
+          <input type="password" id="password" name="password" placeholder="Tu contraseña" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="bi bi-box-arrow-in-right"></i>
+          Entrar al Panel
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <a href="{{ url_for('public.home') }}"><i class="bi bi-arrow-left"></i> Volver al inicio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
