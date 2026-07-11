@@ -23,30 +23,60 @@ def get_connection():
 
 
 def query(sql, params=None, fetchone=False):
-    conn = get_connection()
-    try:
-        cur = conn.cursor(dictionary=True)
+    last_err = None
+    for attempt in range(3):
+        conn = None
         try:
-            cur.execute(sql, params or ())
-            return cur.fetchone() if fetchone else cur.fetchall()
+            conn = get_connection()
+            cur = conn.cursor(dictionary=True)
+            try:
+                cur.execute(sql, params or ())
+                return cur.fetchone() if fetchone else cur.fetchall()
+            finally:
+                cur.close()
+        except mysql.connector.errors.OperationalError as e:
+            last_err = e
+            logging.getLogger(__name__).warning(
+                'MySQL OperationalError (intento %d/3): %s', attempt + 1, e)
+            if attempt < 2:
+                continue
+            raise
         finally:
-            cur.close()
-    finally:
-        conn.close()
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+    raise last_err  # pragma: no cover
 
 
 def execute(sql, params=None):
-    conn = get_connection()
-    try:
-        cur = conn.cursor()
+    last_err = None
+    for attempt in range(3):
+        conn = None
         try:
-            cur.execute(sql, params or ())
-            conn.commit()
-            return cur.lastrowid
+            conn = get_connection()
+            cur = conn.cursor()
+            try:
+                cur.execute(sql, params or ())
+                conn.commit()
+                return cur.lastrowid
+            finally:
+                cur.close()
+        except mysql.connector.errors.OperationalError as e:
+            last_err = e
+            logging.getLogger(__name__).warning(
+                'MySQL OperationalError en execute (intento %d/3): %s', attempt + 1, e)
+            if attempt < 2:
+                continue
+            raise
         finally:
-            cur.close()
-    finally:
-        conn.close()
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+    raise last_err  # pragma: no cover
 
 
 # ---------- PROGRAMAS ----------
@@ -281,6 +311,7 @@ def estadisticas():
         'total_fichas': query('SELECT COUNT(*) AS c FROM fichas', fetchone=True)['c'],
         'total_programas': query('SELECT COUNT(*) AS c FROM programas', fetchone=True)['c'],
         'total_plantillas': query('SELECT COUNT(*) AS c FROM plantillas', fetchone=True)['c'],
+        'total_colegios': query('SELECT COUNT(*) AS c FROM colegios', fetchone=True)['c'],
         'aprendices_activos': query("SELECT COUNT(*) AS c FROM usuarios WHERE estado='Activo'", fetchone=True)['c'],
     }
 
@@ -298,6 +329,34 @@ def aprendices_por_ficha():
     return query('''SELECT f.numero AS ficha, COUNT(u.id) AS total
         FROM fichas f LEFT JOIN usuarios u ON u.ficha_id = f.id
         GROUP BY f.id, f.numero ORDER BY f.numero''')
+
+def aprendices_por_colegio():
+    """Cantidad de aprendices por colegio (a través de fichas)."""
+    return query('''SELECT c.nombre_colegio AS colegio, COUNT(u.id) AS total
+        FROM colegios c
+        LEFT JOIN fichas f ON f.colegio_id = c.idcolegio
+        LEFT JOIN usuarios u ON u.ficha_id = f.id
+        GROUP BY c.idcolegio, c.nombre_colegio ORDER BY total DESC''')
+
+def fichas_por_programa_stats():
+    """Cantidad de fichas por programa para gráfica donut."""
+    return query('''SELECT p.nombre AS programa, COUNT(f.id) AS total
+        FROM programas p
+        LEFT JOIN fichas f ON f.programa_id = p.id
+        GROUP BY p.id, p.nombre ORDER BY total DESC''')
+
+def top_fichas(limite=10):
+    """Top fichas con más aprendices, incluyendo programa y colegio."""
+    return query('''SELECT f.numero AS ficha, p.nombre AS programa,
+            COALESCE(c.nombre_colegio, '—') AS colegio,
+            f.jornada, COUNT(u.id) AS total
+        FROM fichas f
+        LEFT JOIN programas p ON f.programa_id = p.id
+        LEFT JOIN colegios c ON f.colegio_id = c.idcolegio
+        LEFT JOIN usuarios u ON u.ficha_id = f.id
+        GROUP BY f.id, f.numero, p.nombre, c.nombre_colegio, f.jornada
+        ORDER BY total DESC LIMIT %s''', (limite,))
+
 
 
 # ---------- PÚBLICO (landing page) ----------

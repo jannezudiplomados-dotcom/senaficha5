@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS plantillas (
     archivo VARCHAR(255) NOT NULL,
     descripcion TEXT,
     programa_id INT,
+    tipo_generacion ENUM('individual','grupal','ambos') DEFAULT 'ambos',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_plantilla_programa FOREIGN KEY (programa_id)
         REFERENCES programas(id) ON DELETE CASCADE,
@@ -109,7 +110,7 @@ CREATE TABLE IF NOT EXISTS log_actividades (
 -- Para regenerar: python -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('admin123'))"
 -- ============================================
 INSERT INTO admin (username, password_hash, nombre, rol) VALUES
-('admin', 'scrypt:32768:8:1$6tI6dMDDX75YJlH1$305eea05eb9c1831f8af3d315ec6501607c433178a051836757573f76f0ef970738cdc836ca70c27698ad91dd0869391be5c5154c317ceb8497d656612df19c9',
+('admin', 'scrypt:32768:8:1$BZQi9hv67r9m4Ud8$df8da3a23ed32636d5c74be18429b75971dd96185d546a73ec223c33a2502f695b69d1be0821f237dbf144b2b3d03f7f79d9936d9a08b21f5443e7b77ef0dfa7',
  'Administrador General', 'superadmin')
 ON DUPLICATE KEY UPDATE username = username;
 

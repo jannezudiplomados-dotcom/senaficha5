@@ -116,10 +116,11 @@ def nuevo():
         except ValueError as e:
             flash(str(e), 'danger')
         except MySQLError as e:
-            flash(f'Error de base de datos: {e.msg}', 'danger')
+            current_app.logger.error('Error BD al crear aprendiz: %s', e)
+            flash('Error de base de datos al crear el aprendiz.', 'danger')
         except Exception as e:
             current_app.logger.exception('Error al crear aprendiz')
-            flash(f'Error inesperado: {e}', 'danger')
+            flash('Ha ocurrido un error inesperado.', 'danger')
         return redirect(url_for('usuarios.nuevo'))
 
     return render_template('usuarios/form.html', aprendiz=None,
@@ -155,10 +156,11 @@ def editar(uid):
         except ValueError as e:
             flash(str(e), 'danger')
         except MySQLError as e:
-            flash(f'Error de base de datos: {e.msg}', 'danger')
+            current_app.logger.error('Error BD al actualizar aprendiz %s: %s', uid, e)
+            flash('Error de base de datos al actualizar el aprendiz.', 'danger')
         except Exception as e:
             current_app.logger.exception('Error al actualizar aprendiz')
-            flash(f'Error inesperado: {e}', 'danger')
+            flash('Ha ocurrido un error inesperado.', 'danger')
         return redirect(url_for('usuarios.editar', uid=uid))
 
     return render_template('usuarios/form.html', aprendiz=aprendiz,
@@ -185,7 +187,8 @@ def eliminar(uid):
                              request.remote_addr)
         flash('Aprendiz eliminado.', 'success')
     except MySQLError as e:
-        flash(f'No se pudo eliminar: {e.msg}', 'danger')
+        current_app.logger.error('Error eliminando aprendiz %s: %s', uid, e)
+        flash('No se pudo eliminar el aprendiz.', 'danger')
     return redirect(url_for('usuarios.index'))
 
 

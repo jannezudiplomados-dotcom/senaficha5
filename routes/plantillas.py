@@ -11,6 +11,17 @@ plantillas_bp = Blueprint('plantillas', __name__)
 def _permitido(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ('docx', 'xlsx')
 
+
+def _validar_contenido(file_storage):
+    """Valida los magic bytes del archivo para confirmar que el contenido
+    coincide con la extension declarada (DOCX/XLSX son archivos ZIP)."""
+    header = file_storage.read(4)
+    file_storage.seek(0)
+    # PK\x03\x04 = ZIP header (docx, xlsx son formatos ZIP)
+    if header[:2] != b'PK':
+        return False
+    return True
+
 @plantillas_bp.route('/')
 @login_required
 def index():
@@ -32,6 +43,10 @@ def subir():
     
     if not archivo or archivo.filename == '' or not _permitido(archivo.filename):
         flash('Debes subir un archivo .docx o .xlsx valido.', 'danger')
+        return redirect(url_for('plantillas.index'))
+
+    if not _validar_contenido(archivo):
+        flash('El contenido del archivo no coincide con un formato DOCX/XLSX valido.', 'danger')
         return redirect(url_for('plantillas.index'))
         
     if not programa_id:

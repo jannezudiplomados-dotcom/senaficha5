@@ -57,7 +57,7 @@ def login():
             models.registrar_log(admin['id'], admin['username'], 'LOGIN', 'admin',
                                   admin['id'], 'Inicio de sesion', request.remote_addr)
             next_url = request.args.get('next') or request.form.get('next')
-            if next_url and next_url.startswith('/'):
+            if next_url and next_url.startswith('/') and not next_url.startswith('//'):
                 return redirect(next_url)
             return redirect(url_for('dashboard.index'))
         intentos = session.get('login_intentos', 0) + 1

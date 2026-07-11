@@ -37,3 +37,7 @@ Thumbs.db
 # Archivos de prueba / temporales
 test_out.*
 *.tmp
+output.log
+
+# Logs de la aplicacion (contienen stack traces e info sensible)
+logs/

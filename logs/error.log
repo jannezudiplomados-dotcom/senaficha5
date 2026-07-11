@@ -535,3 +535,1653 @@ Traceback (most recent call last):
   File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
     raise InterfaceError(msg) from err
 mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-10 20:44:57,956 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:44:58,070 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:00,173 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:00,178 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:01,947 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:01,951 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:05,883 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:05,887 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:08,195 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:45:08,201 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:46:13,112 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:46:13,121 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:46:18,155 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:46:18,159 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:48:06,543 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:48:06,548 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:50:44,329 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:50:44,340 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:25,524 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:25,541 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:29,911 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:29,928 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:41,042 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:51:41,060 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:52:06,595 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:52:06,605 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:54:16,982 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:54:16,997 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:54:37,296 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-07-10 20:54:37,304 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 16, in index
+    fichas_programa = models.fichas_por_programa_stats()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    top = models.top_fichas(10)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return render_template('dashboard.html', stats=stats, logs=logs,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 75, in top-level template code
+    {% block scripts %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 244, in block 'scripts'
+    const dFichasPrograma = {{ fichas_programa | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable

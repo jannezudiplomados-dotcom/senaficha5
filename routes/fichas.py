@@ -44,7 +44,8 @@ def nuevo():
             flash('Ficha creada.', 'success')
             return redirect(url_for('fichas.index'))
         except MySQLError as e:
-            flash(f'Error: {e.msg}', 'danger')
+            current_app.logger.error('Error creando ficha: %s', e)
+            flash('Error al crear la ficha. Verifica que el numero no exista.', 'danger')
         return redirect(url_for('fichas.nuevo'))
     return render_template('fichas/form.html', ficha=None, programas=models.listar_programas(), colegios=models.listar_colegios())
 
@@ -70,7 +71,8 @@ def editar(fid):
             flash('Ficha actualizada.', 'success')
             return redirect(url_for('fichas.index'))
         except (MySQLError, ValueError, TypeError) as e:
-            flash(f'Error: {e}', 'danger')
+            current_app.logger.error('Error actualizando ficha %s: %s', fid, e)
+            flash('Error al actualizar la ficha.', 'danger')
         return redirect(url_for('fichas.editar', fid=fid))
     return render_template('fichas/form.html', ficha=ficha, programas=models.listar_programas(), colegios=models.listar_colegios())
 
@@ -85,5 +87,6 @@ def eliminar(fid):
                              'ELIMINAR', 'ficha', fid, None, request.remote_addr)
         flash('Ficha eliminada.', 'success')
     except MySQLError as e:
-        flash(f'No se pudo eliminar: {e.msg}', 'danger')
+        current_app.logger.error('Error eliminando ficha %s: %s', fid, e)
+        flash('No se pudo eliminar la ficha.', 'danger')
     return redirect(url_for('fichas.index'))

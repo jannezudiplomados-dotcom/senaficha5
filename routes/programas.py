@@ -44,7 +44,8 @@ def nuevo():
             flash('Programa creado.', 'success')
             return redirect(url_for('programas.index'))
         except MySQLError as e:
-            flash(f'Error: {e.msg}', 'danger')
+            current_app.logger.error('Error creando programa: %s', e)
+            flash('Error al crear el programa. Verifica que el codigo no exista.', 'danger')
         return redirect(url_for('programas.nuevo'))
     return render_template('programas/form.html', programa=None)
 
@@ -70,7 +71,8 @@ def editar(pid):
             flash('Programa actualizado.', 'success')
             return redirect(url_for('programas.index'))
         except MySQLError as e:
-            flash(f'Error: {e.msg}', 'danger')
+            current_app.logger.error('Error actualizando programa %s: %s', pid, e)
+            flash('Error al actualizar el programa.', 'danger')
         return redirect(url_for('programas.editar', pid=pid))
     return render_template('programas/form.html', programa=programa)
 
@@ -85,5 +87,6 @@ def eliminar(pid):
                              'ELIMINAR', 'programa', pid, None, request.remote_addr)
         flash('Programa eliminado.', 'success')
     except MySQLError as e:
-        flash(f'No se pudo eliminar: {e.msg}', 'danger')
+        current_app.logger.error('Error eliminando programa %s: %s', pid, e)
+        flash('No se pudo eliminar el programa.', 'danger')
     return redirect(url_for('programas.index'))

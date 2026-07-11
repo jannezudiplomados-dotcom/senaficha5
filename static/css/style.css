@@ -25,7 +25,139 @@ body {
 /* ---------- Iconos ---------- */
 .sena-icon { font-size: 3rem; color: var(--sigda-blue); }
 
-/* ---------- Stat Cards ---------- */
+/* ---------- KPI Cards (Dashboard) ---------- */
+.kpi-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.1rem 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 14px 14px 0 0;
+}
+.kpi-blue::before  { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.kpi-green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.kpi-orange::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.kpi-purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.kpi-teal::before  { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.kpi-cyan::before  { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+
+.kpi-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+.kpi-blue .kpi-icon  { color: #3b82f6; }
+.kpi-green .kpi-icon { color: #10b981; }
+.kpi-orange .kpi-icon { color: #f59e0b; }
+.kpi-purple .kpi-icon { color: #8b5cf6; }
+.kpi-teal .kpi-icon  { color: #14b8a6; }
+.kpi-cyan .kpi-icon  { color: #06b6d4; }
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--sigda-dark);
+}
+.kpi-label {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
+/* ---------- Estado Cards ---------- */
+.estado-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.estado-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.estado-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.estado-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.estado-pct {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.estado-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ---------- Chart Cards ---------- */
+.chart-card {
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.chart-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--sigda-dark);
+  padding: 0.85rem 1.15rem;
+}
+
+/* ---------- Top Table ---------- */
+.top-table thead th {
+  background: #f8fafc;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #64748b;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 0.65rem 0.5rem;
+}
+.top-table tbody td {
+  font-size: 0.85rem;
+  padding: 0.6rem 0.5rem;
+  vertical-align: middle;
+}
+.top-table tbody tr:hover {
+  background: rgba(59,130,246,0.03);
+}
+
+/* ---------- Stat Cards (legacy compat) ---------- */
 .stat-card { border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.1); border-radius: 12px; }
 .stat-num { font-size: 2rem; font-weight: 700; color: var(--sigda-blue); }
 .stat-lbl { color: #6c757d; font-size: .9rem; }
@@ -48,3 +180,11 @@ body {
 /* ---------- Cards ---------- */
 .card-header { font-weight: 600; }
 .card { border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); }
+
+/* ---------- Log badges ---------- */
+.table .badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3em 0.6em;
+  letter-spacing: 0.3px;
+}

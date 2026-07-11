@@ -81,7 +81,7 @@ def _render_docx(ruta_plantilla, contexto, firma_path, output_path):
     tpl = DocxTemplate(ruta_plantilla)
     ctx = dict(contexto)
     if firma_path and os.path.exists(firma_path):
-        ctx['firma'] = InlineImage(tpl, firma_path, width=Mm(40))
+        ctx['firma'] = InlineImage(tpl, firma_path, width=Mm(40), height=Mm(15))
     else:
         ctx['firma'] = ''
     tpl.render(ctx)
@@ -654,7 +654,7 @@ def generar_por_ficha():
 
     except Exception as e:
         current_app.logger.exception('Error generando documentos por ficha')
-        flash(f'Error al generar documentos: {e}', 'danger')
+        flash('Error al generar los documentos. Consulta con el administrador.', 'danger')
         return redirect(url_for('documentos.index'))
 
     finally:
@@ -719,7 +719,7 @@ def generar_general():
 
     except Exception as e:
         current_app.logger.error(f"Error generando documento general: {e}")
-        flash(f"Error generando documento: {e}", 'danger')
+        flash('Error al generar el documento general. Consulta con el administrador.', 'danger')
         return redirect(url_for('documentos.index'))
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)
@@ -987,7 +987,7 @@ def generar_individual():
 
     except Exception as e:
         current_app.logger.exception('Error generando documento individual')
-        flash(f'Error al generar el documento: {e}', 'danger')
+        flash('Error al generar el documento individual. Consulta con el administrador.', 'danger')
         return redirect(url_for('documentos.gestion_individual'))
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
@@ -1076,7 +1076,7 @@ def generar_grupal():
                 ctx = _build_context(a, ficha_info)
                 firma_path = os.path.join(current_app.config['FIRMAS_FOLDER'], a['firma']) if a.get('firma') else None
                 if firma_path and os.path.exists(firma_path):
-                    ctx['firma'] = InlineImage(tpl, firma_path, width=Mm(40))
+                    ctx['firma'] = InlineImage(tpl, firma_path, width=Mm(40), height=Mm(15))
                 else:
                     ctx['firma'] = ''
                 lista_aprendices.append(ctx)
@@ -1116,7 +1116,7 @@ def generar_grupal():
 
     except Exception as e:
         current_app.logger.error(f"Error generando documento grupal: {e}")
-        flash(f"Error generando documento: {e}", 'danger')
+        flash('Error al generar el documento grupal. Consulta con el administrador.', 'danger')
         return redirect(url_for('documentos.gestion_grupal'))
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)

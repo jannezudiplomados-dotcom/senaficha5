@@ -39,7 +39,8 @@ def nuevo():
             flash('Colegio creado exitosamente.', 'success')
             return redirect(url_for('colegios.index'))
         except MySQLError as e:
-            flash(f'Error al crear colegio: {e.msg}', 'danger')
+            current_app.logger.error('Error creando colegio: %s', e)
+            flash('Error al crear el colegio.', 'danger')
         return redirect(url_for('colegios.nuevo'))
     return render_template('colegios/form.html', colegio=None)
 
@@ -66,7 +67,8 @@ def editar(cid):
             flash('Colegio actualizado correctamente.', 'success')
             return redirect(url_for('colegios.index'))
         except MySQLError as e:
-            flash(f'Error al actualizar: {e.msg}', 'danger')
+            current_app.logger.error('Error actualizando colegio %s: %s', cid, e)
+            flash('Error al actualizar el colegio.', 'danger')
         return redirect(url_for('colegios.editar', cid=cid))
     return render_template('colegios/form.html', colegio=colegio)
 
@@ -80,5 +82,6 @@ def eliminar(cid):
                              'ELIMINAR', 'colegio', cid, None, request.remote_addr)
         flash('Colegio eliminado.', 'success')
     except MySQLError as e:
-        flash(f'No se pudo eliminar el colegio: {e.msg}', 'danger')
+        current_app.logger.error('Error eliminando colegio %s: %s', cid, e)
+        flash('No se pudo eliminar el colegio.', 'danger')
     return redirect(url_for('colegios.index'))
