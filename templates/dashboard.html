@@ -2,18 +2,40 @@
 {% block title %}Panel de Control — SIGDA{% endblock %}
 {% block content %}
 
-<!-- ======== TÍTULO ======== -->
-<div class="page-header">
-  <div class="page-header-info">
+<div class="page-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+  <div class="page-header-info m-0">
     <div class="page-header-icon">
       <i class="bi bi-grid-1x2-fill"></i>
     </div>
     <div>
-      <h3>Panel de Control</h3>
+      <h3 class="mb-0">Panel de Control</h3>
       <span class="text-muted">Resumen general del sistema</span>
     </div>
   </div>
-  <span class="text-muted d-flex align-items-center gap-1"><i class="bi bi-clock me-1"></i>Actualizado al cargar</span>
+  <div class="d-flex flex-wrap align-items-center gap-3">
+    <form method="get" class="d-flex flex-wrap align-items-center gap-2 m-0 bg-white border rounded px-2 py-1 shadow-sm">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-funnel text-primary me-2"></i>
+        <label class="me-2 fw-semibold text-muted mb-0 small">Ficha:</label>
+        <select name="ficha_id" class="form-select form-select-sm border-0 bg-transparent shadow-none" onchange="this.form.submit()" style="cursor: pointer; min-width: 140px;">
+          <option value="">Todas mis fichas</option>
+          {% for f in mis_fichas %}
+          <option value="{{ f.id }}" {{ 'selected' if request.args.get('ficha_id', '')|string == f.id|string else '' }}>{{ f.numero }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="vr mx-1"></div>
+      <div class="d-flex align-items-center">
+        <label class="me-1 fw-semibold text-muted mb-0 small">Desde:</label>
+        <input type="date" name="desde" value="{{ request.args.get('desde', '') }}" class="form-control form-control-sm border-0 bg-transparent shadow-none px-1" onchange="this.form.submit()" style="width: 110px;">
+      </div>
+      <div class="d-flex align-items-center">
+        <label class="me-1 fw-semibold text-muted mb-0 small">Hasta:</label>
+        <input type="date" name="hasta" value="{{ request.args.get('hasta', '') }}" class="form-control form-control-sm border-0 bg-transparent shadow-none px-1" onchange="this.form.submit()" style="width: 110px;">
+      </div>
+    </form>
+    <span class="text-muted d-flex align-items-center gap-1 small"><i class="bi bi-clock me-1"></i>Actualizado al cargar</span>
+  </div>
 </div>
 
 <!-- ======== KPIs SUPERIORES ======== -->
@@ -192,12 +214,6 @@
           <i class="bi bi-person-check-fill text-success"></i>
           <span>Asistencia por Estado</span>
         </div>
-        <select id="filtroAsistenciaFicha" class="form-select form-select-sm w-auto">
-          <option value="">Todas mis fichas</option>
-          {% for f in mis_fichas %}
-          <option value="{{ f.id }}">{{ f.numero }}</option>
-          {% endfor %}
-        </select>
       </div>
       <div class="card-body d-flex align-items-center justify-content-center" style="height:300px;">
         <canvas id="graficaAsistencia"></canvas>
@@ -451,12 +467,17 @@ if (document.getElementById('chartColegio') && dColegio.length) {
 /* ===== 4. Asistencia por Estado (donut) ===== */
 if (document.getElementById('graficaAsistencia')) {
   let chartAsistencia = null;
-  
-  function cargarAsistencia(fichaId) {
-    let url = "{{ url_for('asistencia.api_resumen') }}";
-    if (fichaId) {
-      url += "?ficha_id=" + fichaId;
-    }
+  let urlFichaId = "{{ request.args.get('ficha_id', '') }}";
+  let urlDesde = "{{ request.args.get('desde', '') }}";
+  let urlHasta = "{{ request.args.get('hasta', '') }}";
+
+  function cargarAsistencia(fichaId, desde, hasta) {
+    let params = new URLSearchParams();
+    if (fichaId) params.append("ficha_id", fichaId);
+    if (desde) params.append("desde", desde);
+    if (hasta) params.append("hasta", hasta);
+    
+    let url = "{{ url_for('asistencia.api_resumen') }}?" + params.toString();
     
     fetch(url, { cache: 'no-store' }).then(r => r.json()).then(d => {
       let sum = d.data.reduce((a, b) => a + b, 0);
@@ -470,38 +491,36 @@ if (document.getElementById('graficaAsistencia')) {
         chartAsistencia.data.datasets[0].backgroundColor = plotColors;
         chartAsistencia.update();
       } else {
-        chartAsistencia = new Chart(document.getElementById('graficaAsistencia'), {
+        chartAsistencia = new Chart(document.getElementById('graficaAsistencia').getContext('2d'), {
           type: 'doughnut',
-          data: { labels: plotLabels, datasets: [{ data: plotData, backgroundColor: plotColors, borderWidth: 3, borderColor: '#fff', hoverOffset: sum === 0 ? 0 : 8 }] },
-          options: { 
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '55%',
-            plugins: { 
-              legend: { position: 'right', labels: { padding: 12, usePointStyle: true, font: { size: 11 } } },
+          data: {
+            labels: plotLabels,
+            datasets: [{ data: plotData, backgroundColor: plotColors, borderWidth: 0 }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+              legend: { position: 'right', labels: { boxWidth: 12, padding: 15, font: {family: "'Inter', sans-serif"} } },
               tooltip: {
-                backgroundColor: '#1E293B',
-                padding: 12,
-                cornerRadius: 8,
                 callbacks: {
-                  label: function(context) {
-                    if (sum === 0) return ' 0 asistencias';
-                    return ' ' + context.label + ': ' + context.raw;
+                  label: function(ctx) {
+                    if (sum === 0) return ' 0';
+                    let v = ctx.raw;
+                    let pct = Math.round((v / sum) * 100);
+                    return ` ${v} (${pct}%)`;
                   }
                 }
               }
-            } 
+            }
           }
         });
       }
-    });
+    }).catch(e => console.error("Error cargando asistencia:", e));
   }
   
-  cargarAsistencia("");
-  
-  document.getElementById('filtroAsistenciaFicha')?.addEventListener('change', (e) => {
-    cargarAsistencia(e.target.value);
-  });
+  // Carga inicial
+  cargarAsistencia(urlFichaId, urlDesde, urlHasta);
 }
 
 </script>

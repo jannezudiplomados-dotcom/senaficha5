@@ -2,10 +2,12 @@
 {% block title %}Informe de Asistencia — SIGDA{% endblock %}
 {% block content %}
 <div class="container my-4">
-  {% include 'asistencia/_tabs.html' %}
+  <div class="d-print-none">
+    {% include 'asistencia/_tabs.html' %}
+  </div>
 
   <!-- ─── FILTROS ─────────────────────────────────────── -->
-  <form method="get" class="row g-2 align-items-end mb-3" id="formFiltro">
+  <form method="get" class="row g-2 align-items-end mb-3 d-print-none" id="formFiltro">
     <div class="col-md-2">
       <label class="form-label fw-semibold">Selecciona Ficha:</label>
       <select name="ficha_id" class="form-select" id="selFicha">
@@ -87,8 +89,8 @@
       <thead>
         <tr class="table-dark text-nowrap">
           <th>#</th>
-          <th>Estudiante</th>
           <th>Identificación</th>
+          <th>Estudiante</th>
           <th class="text-center" style="color:#22c55e;">A Asiste</th>
           <th class="text-center" style="color:#3b82f6;">CE Con excusa</th>
           <th class="text-center" style="color:#f59e0b;">SE Sin excusa</th>
@@ -98,15 +100,15 @@
           <th class="text-center" style="color:#60a5fa;" title="Sin formación o feriados">SFF Feriados</th>
           <th class="text-center" style="color:#b91c1c;">RET Retirado</th>
           <th class="text-center">% Asist.</th>
-          <th class="text-center">Detalle</th>
+          <th class="text-center d-print-none">Detalle</th>
         </tr>
       </thead>
       <tbody class="text-nowrap">
         {% for d in datos %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td class="fw-semibold">{{ d.apellidos }} {{ d.nombres }}</td>
           <td>{{ d.identificacion }}</td>
+          <td class="fw-semibold">{{ d.apellidos }} {{ d.nombres }}</td>
           <td class="text-center">{{ d.asiste }}</td>
           <td class="text-center">{{ d.con_excusa }}</td>
           <td class="text-center">{{ d.sin_excusa }}</td>
@@ -121,7 +123,7 @@
               {{ pct }}%
             </span>
           </td>
-          <td class="text-center">
+          <td class="text-center d-print-none">
             <a href="{{ url_for('asistencia.informe', ficha_id=ficha_id, aprendiz_id=d.aprendiz_id, desde=desde, hasta=hasta) }}"
                class="btn-detalle" title="Ver detalle">
               <i class="bi bi-eye"></i> Ver

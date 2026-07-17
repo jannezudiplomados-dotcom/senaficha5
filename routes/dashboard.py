@@ -11,20 +11,34 @@ def index():
     rol = session.get('admin_rol')
     programa_id = session.get('admin_programa_id') if rol == 'instructor' else None
 
-    stats = models.estadisticas(programa_id)
-    logs = models.listar_logs(10)
-    por_estado = models.aprendices_por_estado(programa_id)
-    por_programa = models.aprendices_por_programa(programa_id)
-    por_colegio = models.aprendices_por_colegio(programa_id)
-    fichas_programa = models.fichas_por_programa_stats(programa_id)
-    top = models.top_fichas(10, programa_id)
-    
-    # Obtener fichas permitidas para el filtro de asistencia
+    # Obtener fichas permitidas para el filtro de asistencia y dashboard
     db = models.get_connection()
     cur = db.cursor(dictionary=True)
     from routes.asistencia.routes import fichas_permitidas
     mis_fichas = fichas_permitidas(cur)
     cur.close(); db.close()
+
+    from flask import request
+    ficha_id = request.args.get('ficha_id', type=int)
+    fichas_filtro = None
+
+    if rol == 'instructor':
+        fids = [f['id'] for f in mis_fichas]
+        if ficha_id:
+            fichas_filtro = [ficha_id] if ficha_id in fids else [-1]
+        else:
+            fichas_filtro = fids if fids else [-1]
+    else:
+        if ficha_id:
+            fichas_filtro = [ficha_id]
+
+    stats = models.estadisticas(programa_id, fichas_filtro)
+    logs = models.listar_logs(10)
+    por_estado = models.aprendices_por_estado(programa_id, fichas_filtro)
+    por_programa = models.aprendices_por_programa(programa_id, fichas_filtro)
+    por_colegio = models.aprendices_por_colegio(programa_id, fichas_filtro)
+    fichas_programa = models.fichas_por_programa_stats(programa_id, fichas_filtro)
+    top = models.top_fichas(10, programa_id, fichas_filtro)
 
     return render_template('dashboard.html', stats=stats, logs=logs,
                            por_estado=por_estado, por_programa=por_programa,

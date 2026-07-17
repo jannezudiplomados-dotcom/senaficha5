@@ -185,27 +185,38 @@ def consultar():
 def api_resumen():
     db = get_connection(); cur = db.cursor(dictionary=True)
     ficha_id = request.args.get("ficha_id", type=int)
+    desde = request.args.get("desde")
+    hasta = request.args.get("hasta")
     
-    where = ""
-    params = ()
+    where = []
+    params = []
+
     if ficha_id:
         if instructor_puede_ver_ficha(cur, ficha_id):
-            where = "WHERE ficha_id = %s"
-            params = (ficha_id,)
+            where.append("ficha_id = %s")
+            params.append(ficha_id)
         else:
-            where = "WHERE 1=0"
+            where.append("1=0")
     else:
         if session.get("admin_rol") == "instructor":
             fichas = fichas_permitidas(cur)
             fids = [f["id"] for f in fichas]
             if fids:
                 format_strings = ','.join(['%s'] * len(fids))
-                where = f"WHERE ficha_id IN ({format_strings})"
-                params = tuple(fids)
+                where.append(f"ficha_id IN ({format_strings})")
+                params.extend(fids)
             else:
-                where = "WHERE 1=0"
+                where.append("1=0")
 
-    cur.execute(f"SELECT estado, COUNT(*) AS total FROM asistencias {where} GROUP BY estado", params)
+    if desde:
+        where.append("fecha >= %s")
+        params.append(desde)
+    if hasta:
+        where.append("fecha <= %s")
+        params.append(hasta)
+
+    where_str = "WHERE " + " AND ".join(where) if where else ""
+    cur.execute(f"SELECT estado, COUNT(*) AS total FROM asistencias {where_str} GROUP BY estado", tuple(params))
     datos = {c: 0 for c in ESTADOS_ASISTENCIA}
     for row in cur.fetchall():
         if row["estado"] in datos:
@@ -556,12 +567,13 @@ def _generar_excel_asistencia():
     from openpyxl.cell.cell import MergedCell
     for col in ws.columns:
         max_length = 0
-        # Obtener la letra de columna de forma segura (las MergedCell no tienen column_letter)
         first_cell = col[0]
         if isinstance(first_cell, MergedCell):
             continue
         col_letter = get_column_letter(first_cell.column)
         for cell in col:
+            if cell.row < 7:
+                continue
             if isinstance(cell, MergedCell):
                 continue
             try:
@@ -569,13 +581,12 @@ def _generar_excel_asistencia():
                     max_length = len(str(cell.value))
             except:
                 pass
-        # Limitar ancho máximo para columnas muy anchas (como Observación)
+        
         adjusted_width = min(max_length + 2, 40)
-        # Si es la última columna (Observación), forzar un ancho razonable para que el wrap funcione bien
         if col_letter == get_column_letter(total_cols):
-            adjusted_width = 40
+            adjusted_width = 60
             
-        ws.column_dimensions[col_letter].width = max(adjusted_width, 10)
+        ws.column_dimensions[col_letter].width = max(adjusted_width, 8)
 
     # ─── HOJA RESUMEN ──────────────────────────────────────────
     resumen = wb.create_sheet("Resumen"); conteo = {}

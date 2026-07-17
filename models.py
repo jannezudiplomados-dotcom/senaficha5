@@ -305,39 +305,60 @@ def listar_logs(limite=100):
 
 
 # ---------- ESTADISTICAS ----------
-def estadisticas(programa_id=None):
-    cond_u = f" WHERE u.programa_id = {programa_id}" if programa_id else ""
-    cond_f = f" WHERE programa_id = {programa_id}" if programa_id else ""
+def estadisticas(programa_id=None, fichas_filtro=None):
+    where_u = []
+    where_f = []
+    
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        where_u.append(f"f.id IN ({ff})")
+        where_f.append(f"id IN ({ff})")
+    elif programa_id:
+        where_u.append(f"f.programa_id = {programa_id}")
+        where_f.append(f"programa_id = {programa_id}")
+        
+    where_u_str = (" WHERE " + " AND ".join(where_u)) if where_u else ""
+    where_f_str = (" WHERE " + " AND ".join(where_f)) if where_f else ""
+    
+    total_u_q = f"SELECT COUNT(*) AS c FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id{where_u_str}"
+    
+    activos_u_q = f"SELECT COUNT(*) AS c FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.estado='Activo'"
+    if where_u:
+        activos_u_q += " AND " + " AND ".join(where_u)
+
     cond_p = f" WHERE id = {programa_id}" if programa_id else ""
     cond_pl = f" WHERE programa_id = {programa_id}" if programa_id else ""
-    
-    total_u_q = f"SELECT COUNT(*) AS c FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id"
-    if programa_id:
-        total_u_q += f" WHERE f.programa_id = {programa_id}"
-    else:
-        total_u_q = "SELECT COUNT(*) AS c FROM usuarios"
-
-    activos_u_q = f"SELECT COUNT(*) AS c FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.estado='Activo'"
-    if programa_id:
-        activos_u_q += f" AND f.programa_id = {programa_id}"
 
     return {
         'total_aprendices': query(total_u_q, fetchone=True)['c'],
-        'total_fichas': query(f'SELECT COUNT(*) AS c FROM fichas{cond_f}', fetchone=True)['c'],
+        'total_fichas': query(f'SELECT COUNT(*) AS c FROM fichas{where_f_str}', fetchone=True)['c'],
         'total_programas': query(f'SELECT COUNT(*) AS c FROM programas{cond_p}', fetchone=True)['c'],
         'total_plantillas': query(f'SELECT COUNT(*) AS c FROM plantillas{cond_pl}', fetchone=True)['c'],
         'total_colegios': query('SELECT COUNT(*) AS c FROM colegios', fetchone=True)['c'],
         'aprendices_activos': query(activos_u_q, fetchone=True)['c'],
     }
 
-def aprendices_por_estado(programa_id=None):
+def aprendices_por_estado(programa_id=None, fichas_filtro=None):
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        return query(f'''SELECT u.estado, COUNT(*) AS total FROM usuarios u 
+                        LEFT JOIN fichas f ON u.ficha_id = f.id 
+                        WHERE f.id IN ({ff}) GROUP BY u.estado ORDER BY u.estado''')
     if programa_id:
         return query('''SELECT u.estado, COUNT(*) AS total FROM usuarios u 
                         LEFT JOIN fichas f ON u.ficha_id = f.id 
                         WHERE f.programa_id = %s GROUP BY u.estado ORDER BY u.estado''', (programa_id,))
     return query('SELECT estado, COUNT(*) AS total FROM usuarios GROUP BY estado ORDER BY estado')
 
-def aprendices_por_programa(programa_id=None):
+def aprendices_por_programa(programa_id=None, fichas_filtro=None):
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        return query(f'''SELECT p.nombre AS programa, COUNT(u.id) AS total
+            FROM programas p
+            LEFT JOIN fichas f ON f.programa_id = p.id
+            LEFT JOIN usuarios u ON u.ficha_id = f.id
+            WHERE f.id IN ({ff})
+            GROUP BY p.id, p.nombre ORDER BY total DESC''')
     cond = "WHERE p.id = %s" if programa_id else ""
     params = (programa_id,) if programa_id else ()
     return query(f'''SELECT p.nombre AS programa, COUNT(u.id) AS total
@@ -355,8 +376,16 @@ def aprendices_por_ficha(programa_id=None):
         {cond}
         GROUP BY f.id, f.numero ORDER BY f.numero''', params)
 
-def aprendices_por_colegio(programa_id=None):
+def aprendices_por_colegio(programa_id=None, fichas_filtro=None):
     """Cantidad de aprendices por colegio (a través de fichas)."""
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        return query(f'''SELECT c.nombre_colegio AS colegio, COUNT(u.id) AS total
+            FROM colegios c
+            LEFT JOIN fichas f ON f.colegio_id = c.idcolegio
+            LEFT JOIN usuarios u ON u.ficha_id = f.id
+            WHERE f.id IN ({ff})
+            GROUP BY c.idcolegio, c.nombre_colegio ORDER BY total DESC''')
     cond = "WHERE f.programa_id = %s" if programa_id else ""
     params = (programa_id,) if programa_id else ()
     return query(f'''SELECT c.nombre_colegio AS colegio, COUNT(u.id) AS total
@@ -366,8 +395,15 @@ def aprendices_por_colegio(programa_id=None):
         {cond}
         GROUP BY c.idcolegio, c.nombre_colegio ORDER BY total DESC''', params)
 
-def fichas_por_programa_stats(programa_id=None):
+def fichas_por_programa_stats(programa_id=None, fichas_filtro=None):
     """Cantidad de fichas por programa para gráfica donut."""
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        return query(f'''SELECT p.nombre AS programa, COUNT(f.id) AS total
+            FROM programas p
+            LEFT JOIN fichas f ON f.programa_id = p.id
+            WHERE f.id IN ({ff})
+            GROUP BY p.id, p.nombre ORDER BY total DESC''')
     cond = "WHERE p.id = %s" if programa_id else ""
     params = (programa_id,) if programa_id else ()
     return query(f'''SELECT p.nombre AS programa, COUNT(f.id) AS total
@@ -376,8 +412,20 @@ def fichas_por_programa_stats(programa_id=None):
         {cond}
         GROUP BY p.id, p.nombre ORDER BY total DESC''', params)
 
-def top_fichas(limite=10, programa_id=None):
+def top_fichas(limite=10, programa_id=None, fichas_filtro=None):
     """Top fichas con más aprendices, incluyendo programa y colegio."""
+    if fichas_filtro:
+        ff = ",".join(map(str, fichas_filtro))
+        return query(f'''SELECT f.numero AS ficha, p.nombre AS programa,
+                COALESCE(c.nombre_colegio, '—') AS colegio,
+                f.jornada, COUNT(u.id) AS total
+            FROM fichas f
+            LEFT JOIN programas p ON f.programa_id = p.id
+            LEFT JOIN colegios c ON f.colegio_id = c.idcolegio
+            LEFT JOIN usuarios u ON u.ficha_id = f.id
+            WHERE f.id IN ({ff})
+            GROUP BY f.id, f.numero, p.nombre, c.nombre_colegio, f.jornada
+            ORDER BY total DESC LIMIT %s''', (limite,))
     cond = "WHERE f.programa_id = %s" if programa_id else ""
     params = (programa_id, limite) if programa_id else (limite,)
     return query(f'''SELECT f.numero AS ficha, p.nombre AS programa,
