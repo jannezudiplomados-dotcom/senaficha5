@@ -1,64 +1,420 @@
 /* ============================================================
-   SIGDA — Admin Panel Styles
+   SIGDA — Admin Panel Styles (Premium Redesign)
+   Sistema Integrado de Gestión Documental de Articulación
    ============================================================ */
 
-/* ---------- Variables ---------- */
+/* ---------- Variables de Marca ---------- */
 :root {
+  /* Primary Blues */
   --sigda-blue: #2783DE;
   --sigda-blue-dark: #1E6ABF;
+  --sigda-blue-darker: #15508A;
+  --sigda-blue-light: #E5F2FC;
+  --sigda-blue-50: #F0F7FF;
+
+  /* Accent */
   --sigda-green: #46A171;
-  --sigda-dark: #1E293B;
+  --sigda-green-dark: #348A52;
+  --sigda-green-light: #D1FAE5;
+
+  /* Neutrals */
+  --sigda-dark: #0F172A;
+  --sigda-dark-2: #1E293B;
+  --sigda-gray-900: #1E293B;
+  --sigda-gray-700: #334155;
+  --sigda-gray-600: #475569;
+  --sigda-gray-500: #64748B;
+  --sigda-gray-400: #94A3B8;
+  --sigda-gray-300: #CBD5E1;
+  --sigda-gray-200: #E2E8F0;
+  --sigda-gray-100: #F1F5F9;
+  --sigda-gray-50: #F8FAFC;
+
+  /* Semantic */
+  --sigda-success: #10B981;
+  --sigda-warning: #F59E0B;
+  --sigda-danger: #EF4444;
+  --sigda-info: #3B82F6;
+
+  /* Design Tokens */
+  --sigda-radius-sm: 8px;
+  --sigda-radius: 12px;
+  --sigda-radius-lg: 16px;
+  --sigda-radius-xl: 20px;
+  --sigda-shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --sigda-shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --sigda-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --sigda-shadow-md: 0 6px 16px -3px rgba(0,0,0,0.1), 0 3px 6px -4px rgba(0,0,0,0.06);
+  --sigda-shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 5px 10px -6px rgba(0,0,0,0.06);
+  --sigda-shadow-xl: 0 20px 40px -8px rgba(0,0,0,0.12);
+  --sigda-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sigda-transition-fast: all 0.15s ease;
 }
 
 /* ---------- Base ---------- */
 body {
-  background: #f4f6f9;
+  background: var(--sigda-gray-50);
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--sigda-dark-2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---------- Admin Navbar ---------- */
+/* ---------- Custom Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sigda-gray-300); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sigda-gray-400); }
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(39, 131, 222, 0.2);
+  color: var(--sigda-dark);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .sena-nav {
-  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #1E6ABF 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0.15rem 0;
 }
 
-/* ---------- Iconos ---------- */
-.sena-icon { font-size: 3rem; color: var(--sigda-blue); }
+.sena-nav .navbar-brand {
+  font-size: 1.2rem;
+  letter-spacing: -0.3px;
+}
 
-/* ---------- KPI Cards (Dashboard) ---------- */
-.kpi-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 1.1rem 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.sena-nav .navbar-brand img {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.sena-nav .navbar-brand:hover img {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.sena-nav .nav-link {
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.6rem 0.85rem !important;
+  border-radius: var(--sigda-radius-sm);
+  transition: var(--sigda-transition-fast);
   position: relative;
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.sena-nav .nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.sena-nav .nav-link.active,
+.sena-nav .nav-item.active .nav-link {
+  background: rgba(255,255,255,0.15);
+  color: #fff !important;
+}
+
+.sena-nav .dropdown-menu {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--sigda-radius);
+  box-shadow: var(--sigda-shadow-lg);
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sena-nav .dropdown-item {
+  border-radius: var(--sigda-radius-sm);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: var(--sigda-transition-fast);
+}
+
+.sena-nav .dropdown-item:hover {
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue-dark);
+}
+
+.sena-nav .navbar-text {
+  font-size: 0.82rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.sena-nav .btn-outline-light {
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--sigda-radius-sm);
+  padding: 0.35rem 1rem;
+  transition: var(--sigda-transition-fast);
+}
+
+.sena-nav .btn-outline-light:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   MAIN CONTAINER
+   ============================================================ */
+.container.py-4 {
+  max-width: 1320px;
+}
+
+/* ============================================================
+   FLASH MESSAGES (ADMIN)
+   ============================================================ */
+.alert {
+  border: none;
+  border-radius: var(--sigda-radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.9rem 1.2rem;
+  box-shadow: var(--sigda-shadow-sm);
+  animation: alertSlideIn 0.35s ease;
+  border-left: 4px solid;
+}
+
+@keyframes alertSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.alert-success {
+  background: #ECFDF5;
+  color: #065F46;
+  border-left-color: var(--sigda-success);
+}
+.alert-danger {
+  background: #FEF2F2;
+  color: #991B1B;
+  border-left-color: var(--sigda-danger);
+}
+.alert-warning {
+  background: #FFFBEB;
+  color: #92400E;
+  border-left-color: var(--sigda-warning);
+}
+.alert-info {
+  background: #EFF6FF;
+  color: #1E40AF;
+  border-left-color: var(--sigda-info);
+}
+.alert-secondary {
+  background: var(--sigda-gray-100);
+  color: var(--sigda-gray-600);
+  border-left-color: var(--sigda-gray-400);
+}
+
+.alert .btn-close {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
+/* Alert auto-dismiss animation */
+.alert.alert-fade-out {
+  animation: alertFadeOut 0.4s ease forwards;
+}
+
+@keyframes alertFadeOut {
+  to { opacity: 0; transform: translateY(-10px) scale(0.98); height: 0; padding: 0; margin: 0; overflow: hidden; }
+}
+
+/* ============================================================
+   PAGE HEADERS
+   ============================================================ */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-header-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--sigda-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(39,131,222,0.3);
+  flex-shrink: 0;
+}
+
+.page-header h3 {
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: var(--sigda-dark);
+  margin-bottom: 0;
+  letter-spacing: -0.3px;
+}
+
+.page-header h3 .badge {
+  font-size: 0.72rem;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+.page-header .text-muted {
+  font-size: 0.85rem;
+  color: var(--sigda-gray-500) !important;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+.search-bar {
+  background: #fff;
+  border-radius: var(--sigda-radius);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--sigda-shadow-xs);
+  border: 1px solid var(--sigda-gray-200);
+  margin-bottom: 1.25rem;
+  transition: var(--sigda-transition);
+}
+
+.search-bar:focus-within {
+  border-color: var(--sigda-blue);
+  box-shadow: 0 0 0 3px rgba(39,131,222,0.12);
+}
+
+.search-bar .form-control {
+  border: none;
+  box-shadow: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.5rem;
+  background: transparent;
+}
+
+.search-bar .form-control:focus {
+  box-shadow: none;
+}
+
+.search-bar .btn {
+  border-radius: var(--sigda-radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: #fff;
+  border-radius: var(--sigda-radius-lg);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--sigda-shadow-sm);
+  transition: var(--sigda-transition);
   overflow: hidden;
 }
-.kpi-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+
+.card:hover {
+  box-shadow: var(--sigda-shadow);
 }
+
+.card-header {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--sigda-dark-2);
+  padding: 0.9rem 1.25rem;
+  background: var(--sigda-gray-50);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.card-header.bg-primary {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark)) !important;
+  border-bottom: none;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* ============================================================
+   KPI CARDS (Dashboard)
+   ============================================================ */
+.kpi-card {
+  background: #fff;
+  border-radius: var(--sigda-radius-lg);
+  padding: 1.15rem 1.1rem;
+  box-shadow: var(--sigda-shadow-sm);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sigda-shadow-md);
+}
+
 .kpi-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  border-radius: 14px 14px 0 0;
+  border-radius: var(--sigda-radius-lg) var(--sigda-radius-lg) 0 0;
 }
+
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  opacity: 0.05;
+  transform: translate(20px, -20px);
+  transition: opacity 0.3s ease;
+}
+
+.kpi-card:hover::after { opacity: 0.08; }
+
 .kpi-blue::before  { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.kpi-blue::after   { background: #3b82f6; }
 .kpi-green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.kpi-green::after  { background: #10b981; }
 .kpi-orange::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.kpi-orange::after  { background: #f59e0b; }
 .kpi-purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.kpi-purple::after  { background: #8b5cf6; }
 .kpi-teal::before  { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.kpi-teal::after   { background: #14b8a6; }
 .kpi-cyan::before  { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+.kpi-cyan::after   { background: #06b6d4; }
 
 .kpi-icon {
   font-size: 1.6rem;
-  margin-bottom: 0.3rem;
-  opacity: 0.8;
+  margin-bottom: 0.35rem;
+  opacity: 0.85;
 }
+
 .kpi-blue .kpi-icon  { color: #3b82f6; }
 .kpi-green .kpi-icon { color: #10b981; }
 .kpi-orange .kpi-icon { color: #f59e0b; }
@@ -67,124 +423,856 @@ body {
 .kpi-cyan .kpi-icon  { color: #06b6d4; }
 
 .kpi-value {
-  font-size: 1.85rem;
+  font-size: 1.9rem;
   font-weight: 800;
   line-height: 1.1;
   color: var(--sigda-dark);
-}
-.kpi-label {
-  font-size: 0.78rem;
-  color: #64748b;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-top: 2px;
+  letter-spacing: -0.5px;
 }
 
-/* ---------- Estado Cards ---------- */
+.kpi-label {
+  font-size: 0.72rem;
+  color: var(--sigda-gray-500);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
+
+/* KPI entrance animation */
+.kpi-card {
+  animation: kpiEntrance 0.5s ease both;
+}
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.1s; }
+.kpi-card:nth-child(3) { animation-delay: 0.15s; }
+.kpi-card:nth-child(4) { animation-delay: 0.2s; }
+.kpi-card:nth-child(5) { animation-delay: 0.25s; }
+.kpi-card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes kpiEntrance {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   ESTADO CARDS (Dashboard)
+   ============================================================ */
 .estado-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border-radius: var(--sigda-radius);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--sigda-shadow-sm);
   border: 1px solid rgba(0,0,0,0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
 }
+
 .estado-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  box-shadow: var(--sigda-shadow-md);
 }
+
 .estado-label {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--sigda-gray-600);
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 }
+
 .estado-value {
   font-size: 2rem;
   font-weight: 800;
   line-height: 1.2;
+  letter-spacing: -0.5px;
 }
+
 .estado-pct {
-  font-size: 0.75rem;
-  color: #94a3b8;
+  font-size: 0.74rem;
+  color: var(--sigda-gray-400);
   font-weight: 500;
 }
+
 .estado-icon {
   width: 52px;
   height: 52px;
-  border-radius: 12px;
+  border-radius: var(--sigda-radius);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 
-/* ---------- Chart Cards ---------- */
-.chart-card {
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+.estado-card:hover .estado-icon {
+  transform: scale(1.08);
 }
+
+/* ============================================================
+   CHART CARDS (Dashboard)
+   ============================================================ */
+.chart-card {
+  border-radius: var(--sigda-radius-lg) !important;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--sigda-shadow-sm);
+  transition: var(--sigda-transition);
+}
+
+.chart-card:hover {
+  box-shadow: var(--sigda-shadow);
+}
+
 .chart-card .card-header {
   background: transparent;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--sigda-dark);
-  padding: 0.85rem 1.15rem;
+  color: var(--sigda-dark-2);
+  padding: 0.9rem 1.25rem;
 }
 
-/* ---------- Top Table ---------- */
-.top-table thead th {
-  background: #f8fafc;
-  font-size: 0.75rem;
+.chart-card .card-header i {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+.table {
+  font-size: 0.88rem;
+}
+
+.table thead th {
+  background: var(--sigda-gray-50);
+  font-size: 0.74rem;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
-  color: #64748b;
+  letter-spacing: 0.6px;
+  color: var(--sigda-gray-500);
+  font-weight: 600;
+  border-bottom: 2px solid var(--sigda-gray-200);
+  padding: 0.75rem 0.85rem;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 0.75rem 0.85rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: var(--sigda-gray-700);
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(39, 131, 222, 0.04) !important;
+}
+
+.table-hover tbody tr:hover td {
+  color: var(--sigda-dark-2);
+}
+
+/* Table inside card — no extra border radius */
+.card .table {
+  margin-bottom: 0;
+}
+
+.card .table thead th:first-child {
+  padding-left: 1.25rem;
+}
+
+.card .table tbody td:first-child {
+  padding-left: 1.25rem;
+}
+
+/* Top Table (Dashboard) */
+.top-table thead th {
+  background: var(--sigda-gray-50);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--sigda-gray-500);
   font-weight: 600;
   border-bottom: 1px solid rgba(0,0,0,0.06);
-  padding: 0.65rem 0.5rem;
+  padding: 0.7rem 0.6rem;
 }
+
 .top-table tbody td {
   font-size: 0.85rem;
-  padding: 0.6rem 0.5rem;
+  padding: 0.65rem 0.6rem;
   vertical-align: middle;
 }
+
 .top-table tbody tr:hover {
-  background: rgba(59,130,246,0.03);
+  background: rgba(59,130,246,0.04);
 }
 
-/* ---------- Stat Cards (legacy compat) ---------- */
-.stat-card { border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.1); border-radius: 12px; }
-.stat-num { font-size: 2rem; font-weight: 700; color: var(--sigda-blue); }
-.stat-lbl { color: #6c757d; font-size: .9rem; }
-
-/* ---------- Botones de marca ---------- */
-.btn-success, .bg-success {
-  background-color: var(--sigda-blue) !important;
-  border-color: var(--sigda-blue) !important;
-}
-.btn-success:hover {
-  background-color: var(--sigda-blue-dark) !important;
-  border-color: var(--sigda-blue-dark) !important;
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 0.35em 0.65em;
+  border-radius: 6px;
 }
 
-/* ---------- Firma ---------- */
-.firma-wrap { border: 1px dashed #adb5bd; border-radius: .5rem; display: inline-block; background: #fff; }
-#firmaCanvas { touch-action: none; cursor: crosshair; display: block; }
-.firma-img { max-width: 220px; border: 1px solid #dee2e6; border-radius: .25rem; background: #fff; }
-
-/* ---------- Cards ---------- */
-.card-header { font-weight: 600; }
-.card { border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); }
-
-/* ---------- Log badges ---------- */
 .table .badge {
   font-size: 0.72rem;
   font-weight: 600;
-  padding: 0.3em 0.6em;
+  padding: 0.3em 0.65em;
   letter-spacing: 0.3px;
+}
+
+.badge.bg-success {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark)) !important;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  font-weight: 600;
+  border-radius: var(--sigda-radius-sm);
+  transition: var(--sigda-transition-fast);
+  font-size: 0.88rem;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-success, .bg-success {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark)) !important;
+  border-color: var(--sigda-blue) !important;
+  box-shadow: 0 2px 8px rgba(39,131,222,0.25);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, var(--sigda-blue-dark), var(--sigda-blue-darker)) !important;
+  border-color: var(--sigda-blue-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(39,131,222,0.35);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  border-color: var(--sigda-blue);
+  box-shadow: 0 2px 8px rgba(39,131,222,0.25);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--sigda-blue-dark), var(--sigda-blue-darker));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(39,131,222,0.35);
+}
+
+.btn-danger {
+  box-shadow: 0 2px 8px rgba(239,68,68,0.2);
+}
+
+.btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(239,68,68,0.3);
+}
+
+.btn-outline-primary {
+  border-width: 1.5px;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-danger {
+  border-width: 1.5px;
+}
+
+.btn-outline-danger:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-secondary {
+  border-width: 1.5px;
+}
+
+.btn-outline-secondary:hover {
+  transform: translateY(-1px);
+}
+
+/* Action buttons group */
+.action-btns {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.action-btns .btn {
+  padding: 0.3rem 0.55rem;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-control, .form-select {
+  border: 1.5px solid var(--sigda-gray-200);
+  border-radius: var(--sigda-radius-sm);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  transition: var(--sigda-transition-fast);
+  color: var(--sigda-gray-700);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--sigda-blue);
+  box-shadow: 0 0 0 3px rgba(39,131,222,0.12);
+}
+
+.form-control::placeholder {
+  color: var(--sigda-gray-400);
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sigda-gray-600);
+  margin-bottom: 0.35rem;
+}
+
+/* Form Card Wrapper */
+.form-card {
+  background: #fff;
+  border-radius: var(--sigda-radius-lg);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--sigda-shadow-sm);
+  overflow: hidden;
+}
+
+.form-card .form-card-header {
+  background: var(--sigda-gray-50);
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.form-card .form-card-header i {
+  font-size: 1.3rem;
+  color: var(--sigda-blue);
+}
+
+.form-card .form-card-header h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--sigda-dark-2);
+}
+
+.form-card .form-card-body {
+  padding: 1.5rem;
+}
+
+.form-card .form-card-footer {
+  padding: 1rem 1.5rem;
+  background: var(--sigda-gray-50);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ============================================================
+   FIRMA
+   ============================================================ */
+.firma-wrap {
+  border: 2px dashed var(--sigda-gray-300);
+  border-radius: var(--sigda-radius);
+  display: inline-block;
+  background: #fff;
+  transition: var(--sigda-transition-fast);
+}
+
+.firma-wrap:hover {
+  border-color: var(--sigda-blue);
+  box-shadow: 0 0 0 3px rgba(39,131,222,0.08);
+}
+
+#firmaCanvas {
+  touch-action: none;
+  cursor: crosshair;
+  display: block;
+}
+
+.firma-img {
+  max-width: 220px;
+  border: 1px solid var(--sigda-gray-200);
+  border-radius: var(--sigda-radius-sm);
+  background: #fff;
+}
+
+/* ============================================================
+   STAT CARDS (Legacy Compat)
+   ============================================================ */
+.stat-card {
+  border: 0;
+  box-shadow: var(--sigda-shadow-sm);
+  border-radius: var(--sigda-radius);
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--sigda-blue);
+}
+
+.stat-lbl {
+  color: var(--sigda-gray-500);
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+.pagination {
+  gap: 0.25rem;
+}
+
+.pagination .page-link {
+  border: none;
+  border-radius: var(--sigda-radius-sm) !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sigda-gray-600);
+  padding: 0.4rem 0.8rem;
+  transition: var(--sigda-transition-fast);
+  background: transparent;
+}
+
+.pagination .page-link:hover {
+  background: var(--sigda-blue-light);
+  color: var(--sigda-blue-dark);
+  transform: translateY(-1px);
+}
+
+.pagination .page-item.active .page-link {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(39,131,222,0.3);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--sigda-gray-300);
+  background: transparent;
+}
+
+/* ============================================================
+   ASISTENCIA TABS
+   ============================================================ */
+.asistencia-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--sigda-gray-200);
+  margin-bottom: 1.5rem;
+  gap: 0;
+}
+
+.asistencia-tabs .tab-link {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: var(--sigda-gray-500);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--sigda-transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.asistencia-tabs .tab-link:hover {
+  color: var(--sigda-blue);
+  background: rgba(39,131,222,0.04);
+  border-radius: var(--sigda-radius-sm) var(--sigda-radius-sm) 0 0;
+}
+
+.asistencia-tabs .tab-link.active {
+  color: var(--sigda-blue);
+  border-bottom-color: var(--sigda-blue);
+  font-weight: 600;
+}
+
+.asistencia-tabs .tab-link i {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   INFORME DE ASISTENCIA
+   ============================================================ */
+.informe-header {
+  background: #fff;
+  border-radius: var(--sigda-radius-lg);
+  padding: 1.3rem 1.5rem;
+  box-shadow: var(--sigda-shadow-sm);
+  border: 1px solid rgba(0,0,0,0.04);
+  margin-bottom: 1.5rem;
+}
+
+.informe-header h4 {
+  font-weight: 700;
+  color: var(--sigda-dark);
+  margin-bottom: 0.3rem;
+}
+
+.informe-header .meta {
+  font-size: 0.85rem;
+  color: var(--sigda-gray-500);
+}
+
+.info-bar {
+  background: linear-gradient(135deg, #1E3A5F, #2783DE);
+  color: #fff;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--sigda-radius);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(39,131,222,0.2);
+}
+
+.pct-success { color: var(--sigda-success); font-weight: 700; }
+.pct-warning { color: var(--sigda-warning); font-weight: 700; }
+.pct-danger  { color: var(--sigda-danger); font-weight: 700; }
+
+.btn-detalle {
+  background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-detalle:hover {
+  transform: scale(1.05) translateY(-1px);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(39,131,222,0.3);
+}
+
+.export-btn-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.export-btn-group .btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--sigda-radius-sm);
+}
+
+/* ============================================================
+   EMPTY STATES
+   ============================================================ */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--sigda-gray-400);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ============================================================
+   LOADING SPINNER OVERLAY
+   ============================================================ */
+.sigda-loading {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: spinnerFadeIn 0.2s ease;
+}
+
+@keyframes spinnerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sigda-loading-content {
+  text-align: center;
+}
+
+.sigda-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--sigda-gray-200);
+  border-top-color: var(--sigda-blue);
+  border-radius: 50%;
+  animation: sigdaSpin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes sigdaSpin {
+  to { transform: rotate(360deg); }
+}
+
+.sigda-loading-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--sigda-gray-600);
+  letter-spacing: 0.2px;
+}
+
+/* Inline spinner for buttons */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: sigdaSpin 0.7s linear infinite;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   CONFIRM MODAL
+   ============================================================ */
+.sigda-confirm-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: spinnerFadeIn 0.2s ease;
+}
+
+.sigda-confirm-box {
+  background: #fff;
+  border-radius: var(--sigda-radius-lg);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--sigda-shadow-xl);
+  text-align: center;
+  animation: confirmBounce 0.3s ease;
+}
+
+@keyframes confirmBounce {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.sigda-confirm-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #FEF2F2;
+  color: var(--sigda-danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1rem;
+}
+
+.sigda-confirm-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sigda-dark);
+  margin-bottom: 0.5rem;
+}
+
+.sigda-confirm-msg {
+  font-size: 0.9rem;
+  color: var(--sigda-gray-500);
+  margin-bottom: 1.5rem;
+}
+
+.sigda-confirm-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.sigda-confirm-actions .btn {
+  min-width: 110px;
+  padding: 0.5rem 1.2rem;
+}
+
+/* ============================================================
+   ICONS
+   ============================================================ */
+.sena-icon {
+  font-size: 3rem;
+  color: var(--sigda-blue);
+}
+
+/* ============================================================
+   NAV TABS
+   ============================================================ */
+.nav-tabs {
+  border-color: var(--sigda-gray-200);
+}
+
+.nav-tabs .nav-link {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--sigda-gray-500);
+  border-radius: var(--sigda-radius-sm) var(--sigda-radius-sm) 0 0;
+  transition: var(--sigda-transition-fast);
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: var(--sigda-gray-200);
+  color: var(--sigda-blue);
+}
+
+.nav-tabs .nav-link.active {
+  font-weight: 600;
+  color: var(--sigda-blue);
+  border-color: var(--sigda-gray-200) var(--sigda-gray-200) #fff;
+}
+
+/* ============================================================
+   ADMIN FOOTER
+   ============================================================ */
+.admin-footer {
+  margin-top: 3rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--sigda-gray-200);
+  text-align: center;
+}
+
+.admin-footer p {
+  font-size: 0.8rem;
+  color: var(--sigda-gray-400);
+  font-weight: 500;
+  margin: 0;
+}
+
+.admin-footer a {
+  color: var(--sigda-blue);
+  text-decoration: none;
+}
+
+/* ============================================================
+   CARD ENTRANCE ANIMATION
+   ============================================================ */
+.card-animate {
+  animation: cardEntrance 0.4s ease both;
+}
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 991px) {
+  .sena-nav .navbar-collapse {
+    background: rgba(15,23,42,0.97);
+    backdrop-filter: blur(20px);
+    border-radius: var(--sigda-radius);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    box-shadow: var(--sigda-shadow-lg);
+  }
+
+  .sena-nav .nav-link {
+    padding: 0.6rem 0.85rem !important;
+    margin-bottom: 2px;
+  }
+
+  .sena-nav .dropdown-menu {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    box-shadow: none;
+    padding: 0 0 0 1rem;
+  }
+
+  .sena-nav .dropdown-item {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .sena-nav .dropdown-item:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 575px) {
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+
+  .page-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .table {
+    font-size: 0.82rem;
+  }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  .sena-nav,
+  .admin-footer,
+  .export-btn-group,
+  .btn,
+  .search-bar {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
 }

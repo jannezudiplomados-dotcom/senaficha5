@@ -1,40 +1,89 @@
 {% extends 'base.html' %}
-{% block title %}Fichas{% endblock %}
+{% block title %}Fichas — SIGDA{% endblock %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h3 class="mb-0">Fichas <span class="badge bg-success">{{ total }}</span></h3>
-  <a href="{{ url_for('fichas.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nueva</a>
-</div>
-<form class="row g-2 mb-3" method="get">
-  <div class="col-auto flex-grow-1">
-    <input type="text" name="q" class="form-control" placeholder="Buscar por numero de ficha o programa..." value="{{ search }}">
+<div class="page-header">
+  <div class="page-header-info">
+    <div class="page-header-icon" style="background:linear-gradient(135deg,#10b981,#059669);">
+      <i class="bi bi-folder-fill"></i>
+    </div>
+    <div>
+      <h3>Fichas <span class="badge" style="background:linear-gradient(135deg,#10b981,#059669);">{{ total }}</span></h3>
+      <span class="text-muted">Gestión de fichas de formación</span>
+    </div>
   </div>
-  <div class="col-auto"><button class="btn btn-outline-secondary">Buscar</button></div>
-</form>
-<div class="card"><div class="table-responsive">
-<table class="table table-hover mb-0 align-middle">
-<thead><tr><th>Numero</th><th>Programa</th><th>Jornada</th><th>Inicio</th><th>Fin</th><th>Aprendices</th><th></th></tr></thead>
-<tbody>
-{% for f in fichas %}
-<tr>
-  <td>{{ f.numero }}</td><td>{{ f.programa_nombre }}</td><td>{{ f.jornada }}</td>
-  <td>{{ f.fecha_inicio or '-' }}</td><td>{{ f.fecha_fin or '-' }}</td>
-  <td><span class="badge bg-info text-dark">{{ f.total_aprendices }}</span></td>
-  <td class="text-end text-nowrap">
-    <a href="{{ url_for('fichas.editar', fid=f.id) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-    <form method="post" action="{{ url_for('fichas.eliminar', fid=f.id) }}" class="d-inline" onsubmit="return confirm('Eliminar ficha?');">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-    </form>
-  </td>
-</tr>
-{% else %}<tr><td colspan="7" class="text-center text-muted py-4">Sin fichas</td></tr>{% endfor %}
-</tbody></table></div></div>
+  <a href="{{ url_for('fichas.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg me-1"></i>Nueva Ficha</a>
+</div>
+
+<div class="search-bar">
+  <form class="d-flex gap-2" method="get">
+    <div class="flex-grow-1 position-relative">
+      <i class="bi bi-search position-absolute" style="left:12px;top:50%;transform:translateY(-50%);color:var(--sigda-gray-400);"></i>
+      <input type="text" name="q" class="form-control" placeholder="Buscar por número de ficha o programa..." value="{{ search }}" style="padding-left:2.2rem;">
+    </div>
+    <button class="btn btn-outline-secondary"><i class="bi bi-search me-1"></i>Buscar</button>
+    {% if search %}
+    <a href="{{ url_for('fichas.index') }}" class="btn btn-outline-danger"><i class="bi bi-x-lg"></i></a>
+    {% endif %}
+  </form>
+</div>
+
+<div class="card card-animate">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Programa</th>
+          <th>Jornada</th>
+          <th>Inicio</th>
+          <th>Fin</th>
+          <th class="text-center">Aprendices</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for f in fichas %}
+      <tr>
+        <td><span class="badge bg-primary bg-opacity-10 text-primary fw-bold">{{ f.numero }}</span></td>
+        <td class="text-truncate fw-semibold" style="max-width:220px;" title="{{ f.programa_nombre }}">{{ f.programa_nombre }}</td>
+        <td><span class="badge bg-secondary bg-opacity-15 text-dark">{{ f.jornada }}</span></td>
+        <td>{{ f.fecha_inicio or '—' }}</td>
+        <td>{{ f.fecha_fin or '—' }}</td>
+        <td class="text-center"><span class="badge rounded-pill" style="background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;">{{ f.total_aprendices }}</span></td>
+        <td>
+          <div class="action-btns">
+            <a href="{{ url_for('fichas.editar', fid=f.id) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></a>
+            <form method="post" action="{{ url_for('fichas.eliminar', fid=f.id) }}" class="d-inline" onsubmit="return confirm('Eliminar ficha?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Eliminar"><i class="bi bi-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7">
+        <div class="empty-state">
+          <i class="bi bi-folder2-open"></i>
+          <p>No hay fichas registradas</p>
+        </div>
+      </td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {% if total_paginas > 1 %}
 <nav class="mt-3"><ul class="pagination justify-content-center">
+  {% if page > 1 %}
+  <li class="page-item"><a class="page-link" href="{{ url_for('fichas.index', page=page-1, q=search) }}"><i class="bi bi-chevron-left"></i></a></li>
+  {% endif %}
   {% for p in range(1, total_paginas+1) %}
     <li class="page-item {{ 'active' if p==page else '' }}"><a class="page-link" href="{{ url_for('fichas.index', page=p, q=search) }}">{{ p }}</a></li>
   {% endfor %}
+  {% if page < total_paginas %}
+  <li class="page-item"><a class="page-link" href="{{ url_for('fichas.index', page=page+1, q=search) }}"><i class="bi bi-chevron-right"></i></a></li>
+  {% endif %}
 </ul></nav>
 {% endif %}
 {% endblock %}

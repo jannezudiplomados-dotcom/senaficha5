@@ -1,39 +1,87 @@
 {% extends 'base.html' %}
-{% block title %}Programas{% endblock %}
+{% block title %}Programas — SIGDA{% endblock %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h3 class="mb-0">Programas <span class="badge bg-success">{{ total }}</span></h3>
-  <a href="{{ url_for('programas.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nuevo</a>
-</div>
-<form class="row g-2 mb-3" method="get">
-  <div class="col-auto flex-grow-1">
-    <input type="text" name="q" class="form-control" placeholder="Buscar por codigo o nombre..." value="{{ search }}">
+<div class="page-header">
+  <div class="page-header-info">
+    <div class="page-header-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+      <i class="bi bi-book-fill"></i>
+    </div>
+    <div>
+      <h3>Programas <span class="badge" style="background:linear-gradient(135deg,#f59e0b,#d97706);">{{ total }}</span></h3>
+      <span class="text-muted">Programas de formación registrados</span>
+    </div>
   </div>
-  <div class="col-auto"><button class="btn btn-outline-secondary">Buscar</button></div>
-</form>
-<div class="card"><div class="table-responsive">
-<table class="table table-hover mb-0 align-middle">
-<thead><tr><th>Codigo</th><th>Nombre</th><th>Duracion</th><th>Inicio</th><th>Fin</th><th></th></tr></thead>
-<tbody>
-{% for p in programas %}
-<tr>
-  <td>{{ p.codigo }}</td><td>{{ p.nombre }}</td><td>{{ p.duracion_meses }} meses</td>
-  <td>{{ p.fecha_inicio or '-' }}</td><td>{{ p.fecha_fin or '-' }}</td>
-  <td class="text-end text-nowrap">
-    <a href="{{ url_for('programas.editar', pid=p.id) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-    <form method="post" action="{{ url_for('programas.eliminar', pid=p.id) }}" class="d-inline" onsubmit="return confirm('Eliminar programa?');">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-    </form>
-  </td>
-</tr>
-{% else %}<tr><td colspan="6" class="text-center text-muted py-4">Sin programas</td></tr>{% endfor %}
-</tbody></table></div></div>
+  <a href="{{ url_for('programas.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg me-1"></i>Nuevo Programa</a>
+</div>
+
+<div class="search-bar">
+  <form class="d-flex gap-2" method="get">
+    <div class="flex-grow-1 position-relative">
+      <i class="bi bi-search position-absolute" style="left:12px;top:50%;transform:translateY(-50%);color:var(--sigda-gray-400);"></i>
+      <input type="text" name="q" class="form-control" placeholder="Buscar por código o nombre..." value="{{ search }}" style="padding-left:2.2rem;">
+    </div>
+    <button class="btn btn-outline-secondary"><i class="bi bi-search me-1"></i>Buscar</button>
+    {% if search %}
+    <a href="{{ url_for('programas.index') }}" class="btn btn-outline-danger"><i class="bi bi-x-lg"></i></a>
+    {% endif %}
+  </form>
+</div>
+
+<div class="card card-animate">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Duración</th>
+          <th>Inicio</th>
+          <th>Fin</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in programas %}
+      <tr>
+        <td><span class="badge bg-warning bg-opacity-15 text-dark fw-bold">{{ p.codigo }}</span></td>
+        <td class="fw-semibold">{{ p.nombre }}</td>
+        <td>{{ p.duracion_meses }} meses</td>
+        <td>{{ p.fecha_inicio or '—' }}</td>
+        <td>{{ p.fecha_fin or '—' }}</td>
+        <td>
+          <div class="action-btns">
+            <a href="{{ url_for('programas.editar', pid=p.id) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></a>
+            <form method="post" action="{{ url_for('programas.eliminar', pid=p.id) }}" class="d-inline" onsubmit="return confirm('Eliminar programa?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Eliminar"><i class="bi bi-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6">
+        <div class="empty-state">
+          <i class="bi bi-book"></i>
+          <p>No hay programas registrados</p>
+        </div>
+      </td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {% if total_paginas > 1 %}
 <nav class="mt-3"><ul class="pagination justify-content-center">
+  {% if page > 1 %}
+  <li class="page-item"><a class="page-link" href="{{ url_for('programas.index', page=page-1, q=search) }}"><i class="bi bi-chevron-left"></i></a></li>
+  {% endif %}
   {% for p in range(1, total_paginas+1) %}
     <li class="page-item {{ 'active' if p==page else '' }}"><a class="page-link" href="{{ url_for('programas.index', page=p, q=search) }}">{{ p }}</a></li>
   {% endfor %}
+  {% if page < total_paginas %}
+  <li class="page-item"><a class="page-link" href="{{ url_for('programas.index', page=page+1, q=search) }}"><i class="bi bi-chevron-right"></i></a></li>
+  {% endif %}
 </ul></nav>
 {% endif %}
 {% endblock %}

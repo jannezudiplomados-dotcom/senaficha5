@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  {% include 'asistencia/_tabs.html' %}
+
+  <form method="get" action="{{ url_for('asistencia.registrar') }}" class="row g-2 align-items-end mb-3">
+    <div class="col-auto">
+      <label class="form-label">Ficha</label>
+      <select name="ficha_id" class="form-select" onchange="this.form.submit()">
+        <option value="">-- Seleccionar --</option>
+        {% for f in fichas %}
+          <option value="{{ f.id }}" {{ 'selected' if f.id == ficha_id }}>{{ f.numero }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <label class="form-label">Fecha</label>
+      <input type="date" name="fecha" value="{{ fecha }}" class="form-control" onchange="this.form.submit()">
+    </div>
+  </form>
+
+  {% if not fichas %}
+    <div class="alert alert-warning">No tienes fichas asignadas. Pide al superadmin que te asigne fichas.</div>
+  {% endif %}
+
+  {% if aprendices %}
+  <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+    <button type="button" class="btn btn-sm btn-success" onclick="marcarTodos('A')">Marcar todos: Asiste</button>
+    <span id="contadores" class="ms-2 small"></span>
+  </div>
+
+  <div class="mb-2 small">
+    {% for cod, e in estados.items() %}
+      <span class="badge" style="background:{{ e.color }}">{{ e.tecla }} · {{ cod }} {{ e.label }}</span>
+    {% endfor %}
+  </div>
+
+  <table class="table table-sm align-middle" id="tablaAsistencia">
+    <thead><tr><th>#</th><th>Tipo Doc</th><th>Identificación</th><th>Aprendiz</th><th>Estado</th><th>Observación</th></tr></thead>
+    <tbody>
+      {% for ap in aprendices %}
+      {% set prev = asistencia_previa.get(ap.id) %}
+      <tr data-aprendiz="{{ ap.id }}">
+        <td>{{ loop.index }}</td>
+        <td>{{ ap.tipo_documento or '' }}</td>
+        <td>{{ ap.identificacion }}</td>
+        <td>{{ ap.nombres }} {{ ap.apellidos }}</td>
+        <td>
+          <div class="btn-group btn-group-sm flex-wrap" role="group">
+            {% for cod, e in estados.items() %}
+              <button type="button" class="btn btn-estado" data-cod="{{ cod }}"
+                      style="border:2px solid {{ e.color }}; {{ 'background:' ~ e.color ~ ';color:#fff' if prev and prev.estado == cod }}"
+                      title="{{ e.label }} (tecla {{ e.tecla }})">{{ cod }}</button>
+            {% endfor %}
+          </div>
+          <input type="hidden" class="estado-val" value="{{ prev.estado if prev else '' }}">
+        </td>
+        <td><input type="text" class="form-control form-control-sm obs" maxlength="255" value="{{ prev.observacion if prev else '' }}"></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary" id="btnGuardar">💾 Guardar asistencia</button>
+  <span id="msg" class="ms-3"></span>
+  {% elif ficha_id %}
+    <div class="alert alert-warning">Esta ficha no tiene aprendices (o no está asignada a ti).</div>
+  {% endif %}
+</div>
+
+<script>
+const COLORS = {{ estados | tojson }};
+const FICHA_ID = {{ ficha_id or 'null' }};
+const FECHA = "{{ fecha }}";
+
+document.querySelectorAll('.btn-estado').forEach(btn => {
+  btn.addEventListener('click', () => setEstado(btn.closest('tr'), btn.dataset.cod));
+});
+function setEstado(tr, cod) {
+  tr.querySelector('.estado-val').value = cod;
+  tr.querySelectorAll('.btn-estado').forEach(b => {
+    const c = COLORS[b.dataset.cod].color;
+    if (b.dataset.cod === cod) { b.style.background = c; b.style.color = '#fff'; }
+    else { b.style.background = ''; b.style.color = ''; }
+  });
+  actualizarContadores();
+}
+function marcarTodos(cod) {
+  document.querySelectorAll('#tablaAsistencia tbody tr').forEach(tr => setEstado(tr, cod));
+}
+let filaActiva = null;
+document.querySelectorAll('#tablaAsistencia tbody tr').forEach(tr => {
+  tr.addEventListener('mouseenter', () => filaActiva = tr);
+});
+document.addEventListener('keydown', e => {
+  if (!filaActiva || document.activeElement.tagName === 'INPUT') return;
+  const cod = Object.keys(COLORS).find(k => COLORS[k].tecla === e.key);
+  if (cod) setEstado(filaActiva, cod);
+});
+function actualizarContadores() {
+  const conteo = {};
+  document.querySelectorAll('.estado-val').forEach(i => { if (i.value) conteo[i.value] = (conteo[i.value]||0)+1; });
+  document.getElementById('contadores').innerHTML =
+    Object.keys(conteo).map(c => `<span class="badge" style="background:${COLORS[c].color}">${c}: ${conteo[c]}</span>`).join(' ');
+}
+document.getElementById('btnGuardar')?.addEventListener('click', async () => {
+  const registros = [];
+  document.querySelectorAll('#tablaAsistencia tbody tr').forEach(tr => {
+    const estado = tr.querySelector('.estado-val').value;
+    if (!estado) return;
+    registros.push({ aprendiz_id: parseInt(tr.dataset.aprendiz), estado, observacion: tr.querySelector('.obs').value });
+  });
+  const msg = document.getElementById('msg'); msg.textContent = 'Guardando...';
+  try {
+    const res = await fetch("{{ url_for('asistencia.guardar') }}", {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token() }}'
+      },
+      body: JSON.stringify({ ficha_id: FICHA_ID, fecha: FECHA, registros })
+    });
+    const data = await res.json();
+    msg.innerHTML = data.ok ? `<span class="text-success">✔ Guardado (${data.guardados})</span>`
+                            : `<span class="text-danger">✘ ${data.error}</span>`;
+  } catch (err) { msg.innerHTML = `<span class="text-danger">✘ ${err}</span>`; }
+});
+actualizarContadores();
+</script>
+{% endblock %}

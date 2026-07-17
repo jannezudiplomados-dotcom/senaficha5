@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}Informe de Asistencia — SIGDA{% endblock %}
+{% block content %}
+<div class="container my-4">
+  {% include 'asistencia/_tabs.html' %}
+
+  <!-- ─── FILTROS ─────────────────────────────────────── -->
+  <form method="get" class="row g-2 align-items-end mb-3" id="formFiltro">
+    <div class="col-md-2">
+      <label class="form-label fw-semibold">Selecciona Ficha:</label>
+      <select name="ficha_id" class="form-select" id="selFicha">
+        <option value="">-- Seleccionar --</option>
+        {% for f in fichas %}
+          <option value="{{ f.id }}" {{ 'selected' if f.id == ficha_id }}>{{ f.numero }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label fw-semibold">Estudiante:</label>
+      <select name="aprendiz_id" class="form-select" id="selAprendiz">
+        <option value="">Todos los estudiantes</option>
+        {% for ap in aprendices_lista %}
+          <option value="{{ ap.id }}" {{ 'selected' if ap.id == aprendiz_id }}>
+            {{ ap.apellidos }} {{ ap.nombres }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label fw-semibold">Fecha Inicial:</label>
+      <input type="date" name="desde" value="{{ desde or '' }}" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label fw-semibold">Fecha Final:</label>
+      <input type="date" name="hasta" value="{{ hasta or '' }}" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">
+        <i class="bi bi-clipboard-data"></i> Generar Informe
+      </button>
+    </div>
+  </form>
+
+  {% if datos %}
+  <!-- ─── INFO BAR ────────────────────────────────────── -->
+  <div class="info-bar">
+    <i class="bi bi-info-circle"></i>
+    Ficha: <strong>{{ numero_ficha }}</strong> |
+    Total Estudiantes: <strong>{{ datos|length }}</strong> |
+    Modo: <strong>{{ 'Aprendiz Individual' if aprendiz_id else 'Resumen por Período' }}</strong>
+    {% if desde and hasta %} | Período: {{ desde }} — {{ hasta }}{% endif %}
+  </div>
+
+  <!-- ─── ENCABEZADO DEL INFORME ──────────────────────── -->
+  <div class="informe-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h4><i class="bi bi-clipboard-check"></i> Informe de Asistencia</h4>
+        <div class="meta">
+          Ficha: <strong>{{ numero_ficha }}</strong>&nbsp;&nbsp;
+          Período: <strong>{{ desde or 'Inicio' }} – {{ hasta or 'Actual' }}</strong>&nbsp;&nbsp;
+          Total días: <strong>{{ total_dias }}</strong>
+        </div>
+      </div>
+      <div class="text-end">
+        <span class="meta">Programa: <strong>{{ nombre_programa }}</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BOTONES DE EXPORTACIÓN ──────────────────────── -->
+  <div class="export-btn-group">
+    <a class="btn btn-outline-success" href="{{ url_for('asistencia.exportar_excel', ficha_id=ficha_id, desde=desde, hasta=hasta) }}">
+      <i class="bi bi-file-earmark-excel"></i> Exportar Excel
+    </a>
+    <a class="btn btn-outline-danger" href="{{ url_for('asistencia.exportar_pdf', ficha_id=ficha_id, desde=desde, hasta=hasta) }}">
+      <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
+    </a>
+    <button class="btn btn-outline-primary" onclick="window.print()">
+      <i class="bi bi-printer"></i> Imprimir Informe
+    </button>
+  </div>
+
+  <!-- ─── TABLA DE RESUMEN ────────────────────────────── -->
+  <div class="table-responsive">
+    <table class="table table-hover table-sm align-middle" id="tablaInforme">
+      <thead>
+        <tr class="table-dark text-nowrap">
+          <th>#</th>
+          <th>Estudiante</th>
+          <th>Identificación</th>
+          <th class="text-center" style="color:#22c55e;">A Asiste</th>
+          <th class="text-center" style="color:#3b82f6;">CE Con excusa</th>
+          <th class="text-center" style="color:#f59e0b;">SE Sin excusa</th>
+          <th class="text-center" style="color:#ef4444;">INC Incapacidad</th>
+          <th class="text-center" style="color:#a855f7;">LIC Licencia</th>
+          <th class="text-center" style="color:#6b7280;">CLM Calamidad</th>
+          <th class="text-center" style="color:#60a5fa;" title="Sin formación o feriados">SFF Feriados</th>
+          <th class="text-center" style="color:#b91c1c;">RET Retirado</th>
+          <th class="text-center">% Asist.</th>
+          <th class="text-center">Detalle</th>
+        </tr>
+      </thead>
+      <tbody class="text-nowrap">
+        {% for d in datos %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td class="fw-semibold">{{ d.apellidos }} {{ d.nombres }}</td>
+          <td>{{ d.identificacion }}</td>
+          <td class="text-center">{{ d.asiste }}</td>
+          <td class="text-center">{{ d.con_excusa }}</td>
+          <td class="text-center">{{ d.sin_excusa }}</td>
+          <td class="text-center">{{ d.incapacidad }}</td>
+          <td class="text-center">{{ d.licencia }}</td>
+          <td class="text-center">{{ d.calamidad }}</td>
+          <td class="text-center">{{ d.sin_formacion }}</td>
+          <td class="text-center">{{ d.retirado }}</td>
+          <td class="text-center">
+            {% set pct = d.pct_asistencia %}
+            <span class="{{ 'pct-success' if pct >= 80 else ('pct-warning' if pct >= 60 else 'pct-danger') }}">
+              {{ pct }}%
+            </span>
+          </td>
+          <td class="text-center">
+            <a href="{{ url_for('asistencia.informe', ficha_id=ficha_id, aprendiz_id=d.aprendiz_id, desde=desde, hasta=hasta) }}"
+               class="btn-detalle" title="Ver detalle">
+              <i class="bi bi-eye"></i> Ver
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if aprendiz_id and detalle_dias %}
+  <!-- ─── DETALLE INDIVIDUAL ──────────────────────────── -->
+  <div class="card mt-4">
+    <div class="card-header bg-white">
+      <i class="bi bi-person-lines-fill"></i> Detalle de asistencia —
+      <strong>{{ datos[0].apellidos }} {{ datos[0].nombres }}</strong>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped mb-0">
+          <thead>
+            <tr class="table-light">
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for dd in detalle_dias %}
+            <tr>
+              <td>{{ dd.fecha }}</td>
+              <td>
+                <span class="badge" style="background:{{ estados[dd.estado].color }}">
+                  {{ estados[dd.estado].label }}
+                </span>
+              </td>
+              <td>{{ dd.observacion or '' }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% elif ficha_id %}
+  <div class="alert alert-info mt-3">
+    <i class="bi bi-info-circle"></i> No se encontraron registros de asistencia para los filtros seleccionados.
+  </div>
+  {% else %}
+  <div class="alert alert-secondary mt-3">
+    <i class="bi bi-arrow-up-circle"></i> Selecciona una ficha y presiona <strong>Generar Informe</strong> para ver el resumen.
+  </div>
+  {% endif %}
+</div>
+
+<script>
+// Al cambiar ficha, recargar la lista de aprendices
+document.getElementById('selFicha')?.addEventListener('change', function() {
+  const fichaId = this.value;
+  const selAp = document.getElementById('selAprendiz');
+  selAp.innerHTML = '<option value="">Todos los estudiantes</option>';
+  if (!fichaId) return;
+  fetch(`{{ url_for('asistencia.api_aprendices_ficha') }}?ficha_id=${fichaId}`)
+    .then(r => r.json())
+    .then(data => {
+      data.forEach(ap => {
+        const opt = document.createElement('option');
+        opt.value = ap.id;
+        opt.textContent = `${ap.apellidos} ${ap.nombres}`;
+        selAp.appendChild(opt);
+      });
+    });
+});
+</script>
+{% endblock %}

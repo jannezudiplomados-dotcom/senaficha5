@@ -1,27 +1,67 @@
 {% extends 'base.html' %}
-{% block title %}Administradores{% endblock %}
+{% block title %}Administradores — SIGDA{% endblock %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h3 class="mb-0">Administradores</h3>
-  <a href="{{ url_for('admins.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nuevo</a>
+<div class="page-header">
+  <div class="page-header-info">
+    <div class="page-header-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);">
+      <i class="bi bi-shield-lock-fill"></i>
+    </div>
+    <div>
+      <h3>Administradores</h3>
+      <span class="text-muted">Usuarios con acceso al panel</span>
+    </div>
+  </div>
+  <a href="{{ url_for('admins.nuevo') }}" class="btn btn-success"><i class="bi bi-plus-lg me-1"></i>Nuevo Administrador</a>
 </div>
-<div class="card"><div class="table-responsive">
-<table class="table table-hover mb-0 align-middle">
-<thead><tr><th>Usuario</th><th>Nombre</th><th>Rol</th><th>Activo</th><th></th></tr></thead>
-<tbody>
-{% for a in admins %}
-<tr>
-  <td>{{ a.username }}</td><td>{{ a.nombre }}</td>
-  <td><span class="badge bg-{{ 'danger' if a.rol=='superadmin' else 'secondary' }}">{{ a.rol }}</span></td>
-  <td>{{ 'Si' if a.activo else 'No' }}</td>
-  <td class="text-end text-nowrap">
-    <a href="{{ url_for('admins.editar', aid=a.id) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-    <form method="post" action="{{ url_for('admins.eliminar', aid=a.id) }}" class="d-inline" onsubmit="return confirm('Eliminar administrador?');">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-    </form>
-  </td>
-</tr>
-{% endfor %}
-</tbody></table></div></div>
+
+<div class="card card-animate">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Programa</th>
+          <th>Activo</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for a in admins %}
+      <tr>
+        <td class="fw-semibold">{{ a.username }}</td>
+        <td>{{ a.nombre }}</td>
+        <td>
+          {% if a.rol == 'superadmin' %}
+            <span class="badge" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;">{{ a.rol }}</span>
+          {% elif a.rol == 'instructor' %}
+            <span class="badge" style="background:rgba(6,182,212,0.12);color:#0891b2;">{{ a.rol }}</span>
+          {% else %}
+            <span class="badge bg-secondary bg-opacity-15 text-dark">{{ a.rol }}</span>
+          {% endif %}
+        </td>
+        <td>{{ a.programa_nombre or '<span class="text-muted">N/A</span>' | safe }}</td>
+        <td>
+          {% if a.activo %}
+            <span class="badge" style="background:rgba(16,185,129,0.12);color:#059669;">Sí</span>
+          {% else %}
+            <span class="badge" style="background:rgba(239,68,68,0.12);color:#dc2626;">No</span>
+          {% endif %}
+        </td>
+        <td>
+          <div class="action-btns">
+            <a href="{{ url_for('admins.editar', aid=a.id) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Editar"><i class="bi bi-pencil"></i></a>
+            <form method="post" action="{{ url_for('admins.eliminar', aid=a.id) }}" class="d-inline" onsubmit="return confirm('Eliminar administrador?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Eliminar"><i class="bi bi-trash"></i></button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

@@ -2185,3 +2185,477 @@ Traceback (most recent call last):
   File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\json\provider.py", line 120, in _default
     raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
 TypeError: Object of type Undefined is not JSON serializable
+2026-07-11 10:31:14,886 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:31:14,924 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:10,755 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:10,767 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:12,983 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:12,987 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:16,216 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:16,220 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:23,972 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:23,979 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:33,754 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-11 10:33:33,759 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:71]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 11, in index
+    rol = session.get('admin_rol')
+          ^^^^^^^
+NameError: name 'session' is not defined
+2026-07-16 21:33:35,780 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 14, in index
+    stats = models.estadisticas(programa_id)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 325, in estadisticas
+    'total_aprendices': query(total_u_q, fetchone=True)['c'],
+                        ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 30, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-16 21:33:35,941 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 14, in index
+    stats = models.estadisticas(programa_id)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 325, in estadisticas
+    'total_aprendices': query(total_u_q, fetchone=True)['c'],
+                        ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 30, in query
+    conn = get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-16 21:45:41,399 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 200, in exportar_excel
+    wb = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 409, in _generar_excel_asistencia
+    col_letter = col[0].column_letter
+                 ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MergedCell' object has no attribute 'column_letter'
+2026-07-16 21:45:41,427 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 200, in exportar_excel
+    wb = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 409, in _generar_excel_asistencia
+    col_letter = col[0].column_letter
+                 ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MergedCell' object has no attribute 'column_letter'
+2026-07-16 21:46:06,538 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 200, in exportar_excel
+    wb = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 409, in _generar_excel_asistencia
+    col_letter = col[0].column_letter
+                 ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MergedCell' object has no attribute 'column_letter'
+2026-07-16 21:46:06,541 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 200, in exportar_excel
+    wb = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 409, in _generar_excel_asistencia
+    col_letter = col[0].column_letter
+                 ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MergedCell' object has no attribute 'column_letter'
+2026-07-16 22:04:47,052 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.
+2026-07-16 22:04:47,055 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.
+2026-07-16 22:04:52,476 ERROR: Exception on /asistencia/exportar/pdf [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.
+2026-07-16 22:04:52,478 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.
+2026-07-16 22:04:58,162 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.
+2026-07-16 22:04:58,165 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 889, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1197, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a Workbook.

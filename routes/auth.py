@@ -54,6 +54,7 @@ def login():
             session['admin_username'] = admin['username']
             session['admin_nombre'] = admin['nombre']
             session['admin_rol'] = admin['rol']
+            session['admin_programa_id'] = admin['programa_id']
             models.registrar_log(admin['id'], admin['username'], 'LOGIN', 'admin',
                                   admin['id'], 'Inicio de sesion', request.remote_addr)
             next_url = request.args.get('next') or request.form.get('next')

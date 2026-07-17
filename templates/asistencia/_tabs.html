@@ -1,0 +1,15 @@
+<!-- Tabs de navegación del módulo de Asistencia -->
+<nav class="asistencia-tabs">
+  <a class="tab-link {{ 'active' if active_tab == 'registrar' }}"
+     href="{{ url_for('asistencia.registrar') }}">
+    <i class="bi bi-pencil-square"></i> Tomar Asistencia
+  </a>
+  <a class="tab-link {{ 'active' if active_tab == 'consultar' }}"
+     href="{{ url_for('asistencia.consultar') }}">
+    <i class="bi bi-search"></i> Revisar Asistencia
+  </a>
+  <a class="tab-link {{ 'active' if active_tab == 'informe' }}"
+     href="{{ url_for('asistencia.informe') }}">
+    <i class="bi bi-file-earmark-bar-graph"></i> Informe de Asistencia
+  </a>
+</nav>

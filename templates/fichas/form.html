@@ -1,31 +1,69 @@
 {% extends 'base.html' %}
-{% block title %}{{ 'Editar' if ficha else 'Nueva' }} ficha{% endblock %}
+{% block title %}{{ 'Editar' if ficha else 'Nueva' }} Ficha — SIGDA{% endblock %}
 {% block content %}
-<h3 class="mb-4">{{ 'Editar' if ficha else 'Nueva' }} ficha</h3>
-<form method="post">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <div class="row g-3">
-    <div class="col-md-4"><label class="form-label">Numero *</label><input name="numero" class="form-control" required value="{{ ficha.numero if ficha else '' }}"></div>
-    <div class="col-md-4"><label class="form-label">Programa *</label>
-      <select name="programa_id" class="form-select" required>
-        <option value="">- Seleccione -</option>
-        {% for p in programas %}<option value="{{ p.id }}" {{ 'selected' if ficha and ficha.programa_id==p.id else '' }}>{{ p.codigo }} - {{ p.nombre }}</option>{% endfor %}
-      </select>
+<div class="page-header mb-4">
+  <div class="page-header-info">
+    <div class="page-header-icon" style="background:linear-gradient(135deg,#10b981,#059669);">
+      <i class="bi bi-{{ 'pencil-square' if ficha else 'folder-plus' }}"></i>
     </div>
-    <div class="col-md-4"><label class="form-label">Colegio</label>
-      <select name="colegio_id" class="form-select">
-        <option value="">- Ninguno -</option>
-        {% for c in colegios %}<option value="{{ c.idcolegio }}" {{ 'selected' if ficha and ficha.colegio_id==c.idcolegio else '' }}>{{ c.nombre_colegio }}</option>{% endfor %}
-      </select>
+    <div>
+      <h3>{{ 'Editar' if ficha else 'Nueva' }} Ficha</h3>
+      <span class="text-muted">{% if ficha %}Modifica los datos de la ficha{% else %}Registra una nueva ficha de formación{% endif %}</span>
     </div>
-    <div class="col-md-4"><label class="form-label">Jornada</label>
-      <select name="jornada" class="form-select">
-        {% for j in ['Manana','Tarde','Noche','Mixta'] %}<option value="{{ j }}" {{ 'selected' if ficha and ficha.jornada==j else '' }}>{{ j }}</option>{% endfor %}
-      </select>
-    </div>
-    <div class="col-md-4"><label class="form-label">Fecha inicio</label><input type="date" name="fecha_inicio" class="form-control" value="{{ ficha.fecha_inicio if ficha and ficha.fecha_inicio else '' }}"></div>
-    <div class="col-md-4"><label class="form-label">Fecha fin</label><input type="date" name="fecha_fin" class="form-control" value="{{ ficha.fecha_fin if ficha and ficha.fecha_fin else '' }}"></div>
   </div>
-  <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('fichas.index') }}" class="btn btn-light">Cancelar</a></div>
-</form>
+</div>
+
+<div class="form-card card-animate">
+  <div class="form-card-header">
+    <i class="bi bi-folder-fill" style="color:#10b981;"></i>
+    <h4>Datos de la Ficha</h4>
+  </div>
+  <div class="form-card-body">
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Número <span class="text-danger">*</span></label>
+          <input name="numero" class="form-control" required value="{{ ficha.numero if ficha else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Programa <span class="text-danger">*</span></label>
+          <select name="programa_id" class="form-select" required>
+            <option value="">— Seleccione —</option>
+            {% for p in programas %}<option value="{{ p.id }}" {{ 'selected' if ficha and ficha.programa_id==p.id else '' }}>{{ p.codigo }} - {{ p.nombre }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Colegio</label>
+          <select name="colegio_id" class="form-select">
+            <option value="">— Ninguno —</option>
+            {% for c in colegios %}<option value="{{ c.idcolegio }}" {{ 'selected' if ficha and ficha.colegio_id==c.idcolegio else '' }}>{{ c.nombre_colegio }}</option>{% endfor %}
+          </select>
+        </div>
+
+        <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
+
+        <div class="col-md-4">
+          <label class="form-label">Jornada</label>
+          <select name="jornada" class="form-select">
+            {% for j in ['Manana','Tarde','Noche','Mixta'] %}<option value="{{ j }}" {{ 'selected' if ficha and ficha.jornada==j else '' }}>{{ j }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Fecha inicio</label>
+          <input type="date" name="fecha_inicio" class="form-control" value="{{ ficha.fecha_inicio if ficha and ficha.fecha_inicio else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Fecha fin</label>
+          <input type="date" name="fecha_fin" class="form-control" value="{{ ficha.fecha_fin if ficha and ficha.fecha_fin else '' }}">
+        </div>
+      </div>
+
+      <div class="form-card-footer mt-4" style="margin:-1.5rem;margin-top:1.5rem;padding:1rem 1.5rem;">
+        <button class="btn btn-success" type="submit"><i class="bi bi-check-lg me-1"></i>Guardar</button>
+        <a href="{{ url_for('fichas.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}

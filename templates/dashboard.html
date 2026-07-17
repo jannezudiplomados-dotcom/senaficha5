@@ -3,12 +3,17 @@
 {% block content %}
 
 <!-- ======== TÍTULO ======== -->
-<div class="d-flex align-items-center justify-content-between mb-4">
-  <div>
-    <h3 class="mb-0 fw-bold">Panel de Control</h3>
-    <small class="text-muted">Resumen general del sistema</small>
+<div class="page-header">
+  <div class="page-header-info">
+    <div class="page-header-icon">
+      <i class="bi bi-grid-1x2-fill"></i>
+    </div>
+    <div>
+      <h3>Panel de Control</h3>
+      <span class="text-muted">Resumen general del sistema</span>
+    </div>
   </div>
-  <span class="text-muted"><i class="bi bi-clock me-1"></i>Actualizado al cargar</span>
+  <span class="text-muted d-flex align-items-center gap-1"><i class="bi bi-clock me-1"></i>Actualizado al cargar</span>
 </div>
 
 <!-- ======== KPIs SUPERIORES ======== -->
@@ -16,42 +21,42 @@
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-blue">
       <div class="kpi-icon"><i class="bi bi-people-fill"></i></div>
-      <div class="kpi-value">{{ stats.total_aprendices }}</div>
+      <div class="kpi-value" data-count="{{ stats.total_aprendices }}">{{ stats.total_aprendices }}</div>
       <div class="kpi-label">Aprendices</div>
     </div>
   </div>
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-green">
       <div class="kpi-icon"><i class="bi bi-folder-fill"></i></div>
-      <div class="kpi-value">{{ stats.total_fichas }}</div>
+      <div class="kpi-value" data-count="{{ stats.total_fichas }}">{{ stats.total_fichas }}</div>
       <div class="kpi-label">Fichas</div>
     </div>
   </div>
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-orange">
       <div class="kpi-icon"><i class="bi bi-book-fill"></i></div>
-      <div class="kpi-value">{{ stats.total_programas }}</div>
+      <div class="kpi-value" data-count="{{ stats.total_programas }}">{{ stats.total_programas }}</div>
       <div class="kpi-label">Programas</div>
     </div>
   </div>
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-purple">
       <div class="kpi-icon"><i class="bi bi-building"></i></div>
-      <div class="kpi-value">{{ stats.total_colegios }}</div>
+      <div class="kpi-value" data-count="{{ stats.total_colegios }}">{{ stats.total_colegios }}</div>
       <div class="kpi-label">Colegios</div>
     </div>
   </div>
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-teal">
       <div class="kpi-icon"><i class="bi bi-check-circle-fill"></i></div>
-      <div class="kpi-value">{{ stats.aprendices_activos }}</div>
+      <div class="kpi-value" data-count="{{ stats.aprendices_activos }}">{{ stats.aprendices_activos }}</div>
       <div class="kpi-label">Activos</div>
     </div>
   </div>
   <div class="col-6 col-lg-2">
     <div class="kpi-card kpi-cyan">
       <div class="kpi-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
-      <div class="kpi-value">{{ stats.total_plantillas }}</div>
+      <div class="kpi-value" data-count="{{ stats.total_plantillas }}">{{ stats.total_plantillas }}</div>
       <div class="kpi-label">Plantillas</div>
     </div>
   </div>
@@ -88,7 +93,7 @@
 <!-- ======== GRÁFICAS FILA 1: Programa + Fichas por Programa ======== -->
 <div class="row g-4 mb-4">
   <div class="col-lg-7">
-    <div class="card chart-card h-100">
+    <div class="card chart-card h-100 card-animate">
       <div class="card-header d-flex align-items-center gap-2">
         <i class="bi bi-bar-chart-fill text-primary"></i>
         <span>Aprendices por Programa</span>
@@ -99,7 +104,7 @@
     </div>
   </div>
   <div class="col-lg-5">
-    <div class="card chart-card h-100">
+    <div class="card chart-card h-100 card-animate">
       <div class="card-header d-flex align-items-center gap-2">
         <i class="bi bi-pie-chart-fill text-primary"></i>
         <span>Fichas por Programa</span>
@@ -114,7 +119,7 @@
 <!-- ======== GRÁFICAS FILA 2: Colegio + Top Fichas ======== -->
 <div class="row g-4 mb-4">
   <div class="col-lg-6">
-    <div class="card chart-card h-100">
+    <div class="card chart-card h-100 card-animate">
       <div class="card-header d-flex align-items-center gap-2">
         <i class="bi bi-building text-primary"></i>
         <span>Aprendices por Colegio</span>
@@ -123,16 +128,16 @@
         {% if por_colegio %}
         <canvas id="chartColegio"></canvas>
         {% else %}
-        <div class="text-center text-muted py-5">
-          <i class="bi bi-building" style="font-size:2.5rem;"></i>
-          <p class="mt-2">No hay colegios registrados</p>
+        <div class="empty-state">
+          <i class="bi bi-building"></i>
+          <p>No hay colegios registrados</p>
         </div>
         {% endif %}
       </div>
     </div>
   </div>
   <div class="col-lg-6">
-    <div class="card chart-card h-100">
+    <div class="card chart-card h-100 card-animate">
       <div class="card-header d-flex align-items-center gap-2">
         <i class="bi bi-trophy-fill text-warning"></i>
         <span>Top 10 Fichas con más Aprendices</span>
@@ -160,7 +165,7 @@
                 <td class="text-truncate" style="max-width: 140px;" title="{{ f.colegio }}">{{ f.colegio }}</td>
                 <td><span class="badge bg-secondary bg-opacity-25 text-dark">{{ f.jornada or '—' }}</span></td>
                 <td class="text-center pe-3">
-                  <span class="badge rounded-pill bg-success">{{ f.total }}</span>
+                  <span class="badge rounded-pill" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;">{{ f.total }}</span>
                 </td>
               </tr>
               {% endfor %}
@@ -168,9 +173,9 @@
           </table>
         </div>
         {% else %}
-        <div class="text-center text-muted py-5">
-          <i class="bi bi-folder2-open" style="font-size:2.5rem;"></i>
-          <p class="mt-2">No hay fichas con aprendices</p>
+        <div class="empty-state">
+          <i class="bi bi-folder2-open"></i>
+          <p>No hay fichas con aprendices</p>
         </div>
         {% endif %}
       </div>
@@ -178,8 +183,32 @@
   </div>
 </div>
 
+<!-- ======== GRÁFICAS FILA 3: Asistencia ======== -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-6">
+    <div class="card chart-card h-100 card-animate">
+      <div class="card-header d-flex align-items-center justify-content-between gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-person-check-fill text-success"></i>
+          <span>Asistencia por Estado</span>
+        </div>
+        <select id="filtroAsistenciaFicha" class="form-select form-select-sm w-auto">
+          <option value="">Todas mis fichas</option>
+          {% for f in mis_fichas %}
+          <option value="{{ f.id }}">{{ f.numero }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="card-body d-flex align-items-center justify-content-center" style="height:300px;">
+        <canvas id="graficaAsistencia"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======== ACTIVIDAD RECIENTE ======== -->
-<div class="card chart-card">
+{% if session.get('admin_rol') != 'instructor' %}
+<div class="card chart-card card-animate">
   <div class="card-header d-flex align-items-center gap-2">
     <i class="bi bi-clock-history text-primary"></i>
     <span>Actividad Reciente</span>
@@ -219,6 +248,7 @@
     </table>
   </div>
 </div>
+{% endif %}
 
 {% endblock %}
 
@@ -247,8 +277,12 @@ const dColegio = {{ por_colegio | tojson }};
 /* ===== Chart.js defaults ===== */
 Chart.defaults.font.family = "'Inter', 'Segoe UI', system-ui, sans-serif";
 Chart.defaults.font.size = 12;
+Chart.defaults.animation = {
+  duration: 800,
+  easing: 'easeOutQuart'
+};
 
-/* ===== 1. Aprendices por Programa (barras horizontales, colores por programa) ===== */
+/* ===== 1. Aprendices por Programa (barras horizontales) ===== */
 if (document.getElementById('chartPrograma') && dPrograma.length) {
   const progLabels = dPrograma.map(x => x.programa);
   const progData = dPrograma.map(x => x.total);
@@ -261,10 +295,10 @@ if (document.getElementById('chartPrograma') && dPrograma.length) {
       datasets: [{
         label: 'Aprendices',
         data: progData,
-        backgroundColor: progColors,
-        borderColor: progColors.map(c => c),
-        borderWidth: 1,
-        borderRadius: 6,
+        backgroundColor: progColors.map(c => c + 'DD'),
+        borderColor: progColors,
+        borderWidth: 1.5,
+        borderRadius: 8,
         barPercentage: 0.7
       }]
     },
@@ -275,6 +309,12 @@ if (document.getElementById('chartPrograma') && dPrograma.length) {
       plugins: {
         legend: { display: false },
         tooltip: {
+          backgroundColor: '#1E293B',
+          titleFont: { weight: '600' },
+          bodyFont: { size: 13 },
+          padding: 12,
+          cornerRadius: 8,
+          displayColors: true,
           callbacks: {
             label: ctx => ` ${ctx.parsed.x} aprendices`
           }
@@ -284,7 +324,7 @@ if (document.getElementById('chartPrograma') && dPrograma.length) {
         x: {
           beginAtZero: true,
           ticks: { precision: 0 },
-          grid: { color: 'rgba(0,0,0,0.04)' }
+          grid: { color: 'rgba(0,0,0,0.03)', drawBorder: false }
         },
         y: {
           ticks: {
@@ -299,7 +339,6 @@ if (document.getElementById('chartPrograma') && dPrograma.length) {
       }
     }
   });
-  /* Dynamic height based on number of programs */
   const progCanvas = document.getElementById('chartPrograma');
   const progHeight = Math.max(200, dPrograma.length * 42);
   progCanvas.parentElement.style.minHeight = progHeight + 'px';
@@ -318,26 +357,29 @@ if (document.getElementById('chartFichasPrograma') && dFichasPrograma.length) {
       datasets: [{
         data: fpData,
         backgroundColor: fpColors,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: '#fff',
-        hoverOffset: 8
+        hoverOffset: 10
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: true,
-      cutout: '55%',
+      cutout: '58%',
       plugins: {
         legend: {
           position: 'bottom',
           labels: {
-            padding: 12,
+            padding: 14,
             usePointStyle: true,
             pointStyleWidth: 10,
             font: { size: 11 }
           }
         },
         tooltip: {
+          backgroundColor: '#1E293B',
+          padding: 12,
+          cornerRadius: 8,
           callbacks: {
             label: ctx => ` ${ctx.label}: ${ctx.parsed} fichas`
           }
@@ -360,8 +402,10 @@ if (document.getElementById('chartColegio') && dColegio.length) {
       datasets: [{
         label: 'Aprendices',
         data: colData,
-        backgroundColor: colColors,
-        borderRadius: 6,
+        backgroundColor: colColors.map(c => c + 'DD'),
+        borderColor: colColors,
+        borderWidth: 1.5,
+        borderRadius: 8,
         barPercentage: 0.7
       }]
     },
@@ -372,6 +416,9 @@ if (document.getElementById('chartColegio') && dColegio.length) {
       plugins: {
         legend: { display: false },
         tooltip: {
+          backgroundColor: '#1E293B',
+          padding: 12,
+          cornerRadius: 8,
           callbacks: {
             label: ctx => ` ${ctx.parsed.x} aprendices`
           }
@@ -381,7 +428,7 @@ if (document.getElementById('chartColegio') && dColegio.length) {
         x: {
           beginAtZero: true,
           ticks: { precision: 0 },
-          grid: { color: 'rgba(0,0,0,0.04)' }
+          grid: { color: 'rgba(0,0,0,0.03)', drawBorder: false }
         },
         y: {
           ticks: {
@@ -400,5 +447,62 @@ if (document.getElementById('chartColegio') && dColegio.length) {
   const colHeight = Math.max(200, dColegio.length * 42);
   colCanvas.parentElement.style.minHeight = colHeight + 'px';
 }
+
+/* ===== 4. Asistencia por Estado (donut) ===== */
+if (document.getElementById('graficaAsistencia')) {
+  let chartAsistencia = null;
+  
+  function cargarAsistencia(fichaId) {
+    let url = "{{ url_for('asistencia.api_resumen') }}";
+    if (fichaId) {
+      url += "?ficha_id=" + fichaId;
+    }
+    
+    fetch(url, { cache: 'no-store' }).then(r => r.json()).then(d => {
+      let sum = d.data.reduce((a, b) => a + b, 0);
+      let plotLabels = sum === 0 ? ['Sin registros'] : d.labels;
+      let plotData = sum === 0 ? [1] : d.data;
+      let plotColors = sum === 0 ? ['#e2e8f0'] : d.colors;
+      
+      if (chartAsistencia) {
+        chartAsistencia.data.labels = plotLabels;
+        chartAsistencia.data.datasets[0].data = plotData;
+        chartAsistencia.data.datasets[0].backgroundColor = plotColors;
+        chartAsistencia.update();
+      } else {
+        chartAsistencia = new Chart(document.getElementById('graficaAsistencia'), {
+          type: 'doughnut',
+          data: { labels: plotLabels, datasets: [{ data: plotData, backgroundColor: plotColors, borderWidth: 3, borderColor: '#fff', hoverOffset: sum === 0 ? 0 : 8 }] },
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '55%',
+            plugins: { 
+              legend: { position: 'right', labels: { padding: 12, usePointStyle: true, font: { size: 11 } } },
+              tooltip: {
+                backgroundColor: '#1E293B',
+                padding: 12,
+                cornerRadius: 8,
+                callbacks: {
+                  label: function(context) {
+                    if (sum === 0) return ' 0 asistencias';
+                    return ' ' + context.label + ': ' + context.raw;
+                  }
+                }
+              }
+            } 
+          }
+        });
+      }
+    });
+  }
+  
+  cargarAsistencia("");
+  
+  document.getElementById('filtroAsistenciaFicha')?.addEventListener('change', (e) => {
+    cargarAsistencia(e.target.value);
+  });
+}
+
 </script>
 {% endblock %}

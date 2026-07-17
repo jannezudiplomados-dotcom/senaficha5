@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  <h3>Instructores</h3>
+  <table class="table table-sm">
+    <thead><tr><th>Nombre</th><th>Usuario</th><th></th></tr></thead>
+    <tbody>
+      {% for i in instructores %}
+      <tr>
+        <td>{{ i.nombre }}</td>
+        <td>{{ i.username }}</td>
+        <td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('asignacion.asignar', instructor_id=i.id) }}">Asignar programas/fichas</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

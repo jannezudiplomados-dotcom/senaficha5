@@ -37,6 +37,12 @@ def nuevo():
         password = request.form.get('password', '')
         nombre = request.form.get('nombre', '').strip()
         rol = request.form.get('rol', 'admin')
+        programa_id = request.form.get('programa_id')
+        if programa_id and programa_id.isdigit():
+            programa_id = int(programa_id)
+        else:
+            programa_id = None
+            
         if not username or not password or not nombre:
             flash('Todos los campos son obligatorios.', 'danger')
             return redirect(url_for('admins.nuevo'))
@@ -45,7 +51,7 @@ def nuevo():
             flash(error_pw, 'danger')
             return redirect(url_for('admins.nuevo'))
         try:
-            aid = models.crear_admin(username, generate_password_hash(password), nombre, rol)
+            aid = models.crear_admin(username, generate_password_hash(password), nombre, rol, programa_id)
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'CREAR', 'admin', aid, username, request.remote_addr)
             flash('Administrador creado.', 'success')
@@ -54,7 +60,8 @@ def nuevo():
             current_app.logger.error('Error creando admin: %s', e)
             flash('Error al crear el administrador. Verifica que el usuario no exista.', 'danger')
         return redirect(url_for('admins.nuevo'))
-    return render_template('admins/form.html', admin=None)
+    programas = models.listar_programas()
+    return render_template('admins/form.html', admin=None, programas=programas)
 
 
 @admins_bp.route('/editar/<int:aid>', methods=['GET', 'POST'])
@@ -68,6 +75,12 @@ def editar(aid):
     if request.method == 'POST':
         nombre = request.form.get('nombre', '').strip()
         rol = request.form.get('rol', 'admin')
+        programa_id = request.form.get('programa_id')
+        if programa_id and programa_id.isdigit():
+            programa_id = int(programa_id)
+        else:
+            programa_id = None
+            
         activo = 1 if request.form.get('activo') == 'on' else 0
         password = request.form.get('password', '')
         if password:
@@ -76,7 +89,7 @@ def editar(aid):
                 flash(error_pw, 'danger')
                 return redirect(url_for('admins.editar', aid=aid))
         try:
-            models.actualizar_admin(aid, nombre, rol, activo,
+            models.actualizar_admin(aid, nombre, rol, activo, programa_id,
                                     generate_password_hash(password) if password else None)
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'EDITAR', 'admin', aid, admin['username'], request.remote_addr)
@@ -86,7 +99,8 @@ def editar(aid):
             current_app.logger.error('Error actualizando admin %s: %s', aid, e)
             flash('Error al actualizar el administrador.', 'danger')
         return redirect(url_for('admins.editar', aid=aid))
-    return render_template('admins/form.html', admin=admin)
+    programas = models.listar_programas()
+    return render_template('admins/form.html', admin=admin, programas=programas)
 
 
 @admins_bp.route('/eliminar/<int:aid>', methods=['POST'])

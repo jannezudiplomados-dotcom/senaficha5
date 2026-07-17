@@ -10,10 +10,12 @@ import os
 def convert_docx(abs_in, abs_out):
     import comtypes.client
     word = comtypes.client.CreateObject('Word.Application')
+    # Hacerlo visible temporalmente si hay popups bloqueantes, o forzar alertas apagadas
     word.Visible = False
-    word.DisplayAlerts = False
+    word.DisplayAlerts = 0 # wdAlertsNone
     try:
-        doc = word.Documents.Open(abs_in)
+        # Abrir en modo lectura para evitar lockups
+        doc = word.Documents.Open(abs_in, ReadOnly=True)
         doc.SaveAs(abs_out, FileFormat=17)  # 17 = wdFormatPDF
         doc.Close(False)
     finally:
@@ -28,12 +30,16 @@ def convert_xlsx(abs_in, abs_out):
     excel = comtypes.client.CreateObject('Excel.Application')
     excel.Visible = False
     excel.DisplayAlerts = False
+    excel.Interactive = False # Previene que Excel espere interaccion del usuario
     try:
-        wb = excel.Workbooks.Open(abs_in)
+        # UpdateLinks=0, ReadOnly=True
+        wb = excel.Workbooks.Open(abs_in, UpdateLinks=0, ReadOnly=True)
+        # Configuracion de pagina manejada por openpyxl
         wb.ExportAsFixedFormat(0, abs_out)  # 0 = xlTypePDF
         wb.Close(False)
     finally:
         try:
+            excel.Interactive = True
             excel.Quit()
         except Exception:
             pass

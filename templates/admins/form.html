@@ -12,8 +12,17 @@
     <div class="col-md-6"><label class="form-label">Contrasena {{ '(dejar en blanco para no cambiar)' if admin else '*' }}</label><input type="password" name="password" class="form-control" {{ 'required' if not admin else '' }}></div>
     <div class="col-md-6"><label class="form-label">Rol</label>
       <select name="rol" class="form-select">
+        <option value="instructor" {{ 'selected' if admin and admin.rol=='instructor' else '' }}>instructor</option>
         <option value="admin" {{ 'selected' if admin and admin.rol=='admin' else '' }}>admin</option>
         <option value="superadmin" {{ 'selected' if admin and admin.rol=='superadmin' else '' }}>superadmin</option>
+      </select>
+    </div>
+    <div class="col-md-6"><label class="form-label">Programa Asociado (Opcional)</label>
+      <select name="programa_id" class="form-select">
+        <option value="">-- Ninguno --</option>
+        {% for p in programas %}
+        <option value="{{ p.id }}" {{ 'selected' if admin and admin.programa_id == p.id else '' }}>{{ p.nombre }}</option>
+        {% endfor %}
       </select>
     </div>
     {% if admin %}

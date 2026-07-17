@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  <h3>Asignar a: {{ instructor.nombre }} <small class="text-muted">({{ instructor.username }})</small></h3>
+
+  <!-- Paso 1: Programas -->
+  <form method="post" action="{{ url_for('asignacion.guardar_programas', instructor_id=instructor.id) }}" class="mb-4">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h5>1. Programas</h5>
+    <div class="row">
+      {% for p in programas %}
+      <div class="col-md-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="programa_id" value="{{ p.id }}"
+                 id="prog{{ p.id }}" {{ 'checked' if p.id in prog_asignados }}>
+          <label class="form-check-label" for="prog{{ p.id }}">{{ p.nombre }}</label>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="btn btn-primary btn-sm mt-2">Guardar programas</button>
+  </form>
+
+  <!-- Paso 2: Fichas (solo de los programas asignados) -->
+  <form method="post" action="{{ url_for('asignacion.guardar_fichas', instructor_id=instructor.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h5>2. Fichas de esos programas</h5>
+    {% if fichas %}
+      <div class="row">
+        {% for f in fichas %}
+        <div class="col-md-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="ficha_id" value="{{ f.id }}"
+                   id="ficha{{ f.id }}" {{ 'checked' if f.id in fichas_asignadas }}>
+            <label class="form-check-label" for="ficha{{ f.id }}">{{ f.numero }}</label>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-success btn-sm mt-2">Guardar fichas</button>
+    {% elif prog_asignados %}
+      <div class="alert alert-warning">No se encontraron fichas registradas para los programas seleccionados.</div>
+    {% else %}
+      <div class="alert alert-info">Asigna primero uno o más programas para ver sus fichas.</div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

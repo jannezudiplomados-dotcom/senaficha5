@@ -1,25 +1,41 @@
 {% extends 'base.html' %}
-{% block title %}Documentos{% endblock %}
+{% block title %}Documentos — SIGDA{% endblock %}
 {% block content %}
-<h3 class="mb-4">Documentos y exportaciones</h3>
+<div class="page-header">
+  <div class="page-header-info">
+    <div class="page-header-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">
+      <i class="bi bi-file-earmark-richtext-fill"></i>
+    </div>
+    <div>
+      <h3>Documentos y Exportaciones</h3>
+      <span class="text-muted">Genera documentos individuales, masivos y exporta datos</span>
+    </div>
+  </div>
+</div>
+
 <div class="row g-4">
+  <!-- Plantilla Individual -->
   <div class="col-lg-4 col-md-6">
-    <div class="card h-100"><div class="card-header bg-primary text-white">Generar Plantilla Individual</div>
+    <div class="card h-100 card-animate">
+      <div class="card-header bg-primary text-white d-flex align-items-center gap-2">
+        <i class="bi bi-file-earmark-pdf"></i>
+        <span>Generar Plantilla Individual</span>
+      </div>
       <div class="card-body">
-        <p class="small text-muted">Genera un PDF por aprendiz y los descarga en un ZIP.</p>
-        <form method="post" action="{{ url_for('documentos.generar_por_ficha') }}">
+        <p class="small text-muted mb-3">Genera un PDF por aprendiz y los descarga en un ZIP.</p>
+        <form method="post" action="{{ url_for('documentos.generar_por_ficha') }}" data-loading="Generando documentos PDF...">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           
           <div class="mb-3"><label class="form-label">Programa</label>
             <select id="programaInd" class="form-select" onchange="filtrarPorPrograma('Ind')">
-              <option value="">- Todos los programas -</option>
+              <option value="">— Todos los programas —</option>
               {% for p in programas %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}
             </select>
           </div>
 
           <div class="mb-3"><label class="form-label">Plantilla (.docx o .xlsx)</label>
             <select id="plantillaInd" name="plantilla_id" class="form-select" required>
-              <option value="">- Seleccione -</option>
+              <option value="">— Seleccione —</option>
               {% for p in plantillas_todas %}
                 {% if p.tipo_generacion in ['individual', 'ambos'] %}
                 <option data-programa="{{ p.programa_id or '' }}" value="{{ p.id }}">{{ p.nombre }} ({{ p.programa_nombre or 'Sin asociar' }})</option>
@@ -29,33 +45,38 @@
           </div>
           <div class="mb-3"><label class="form-label">Ficha</label>
             <select id="fichaInd" name="ficha_id" class="form-select" required>
-              <option value="">- Seleccione -</option>
+              <option value="">— Seleccione —</option>
               {% for f in fichas %}<option data-programa="{{ f.programa_id }}" value="{{ f.id }}">{{ f.numero }} - {{ f.programa_nombre }}</option>{% endfor %}
             </select>
           </div>
-          <button class="btn btn-danger w-100"><i class="bi bi-file-zip"></i> Generar ZIP (PDFs)</button>
+          <button class="btn btn-danger w-100"><i class="bi bi-file-zip me-1"></i>Generar ZIP (PDFs)</button>
         </form>
       </div>
     </div>
   </div>
   
+  <!-- Plantilla General -->
   <div class="col-lg-4 col-md-6">
-    <div class="card h-100"><div class="card-header bg-primary text-white">Generar Plantilla General</div>
+    <div class="card h-100 card-animate" style="animation-delay:0.1s;">
+      <div class="card-header bg-primary text-white d-flex align-items-center gap-2">
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+        <span>Generar Plantilla General</span>
+      </div>
       <div class="card-body">
-        <p class="small text-muted">Genera un <strong>único PDF</strong> con todos los aprendices insertados como filas en la tabla.</p>
-        <form method="post" action="{{ url_for('documentos.generar_general') }}">
+        <p class="small text-muted mb-3">Genera un <strong>único PDF</strong> con todos los aprendices insertados como filas en la tabla.</p>
+        <form method="post" action="{{ url_for('documentos.generar_general') }}" data-loading="Generando documento PDF...">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           
           <div class="mb-3"><label class="form-label">Programa</label>
             <select id="programaGen" class="form-select" onchange="filtrarPorPrograma('Gen')">
-              <option value="">- Todos los programas -</option>
+              <option value="">— Todos los programas —</option>
               {% for p in programas %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}
             </select>
           </div>
 
           <div class="mb-3"><label class="form-label">Plantilla General (Solo .xlsx)</label>
             <select id="plantillaGen" name="plantilla_id" class="form-select" required>
-              <option value="">- Seleccione -</option>
+              <option value="">— Seleccione —</option>
               {% for p in plantillas_todas %}
                 {% if p.archivo.endswith('.xlsx') and p.tipo_generacion in ['grupal', 'ambos'] %}
                 <option data-programa="{{ p.programa_id or '' }}" value="{{ p.id }}">{{ p.nombre }} ({{ p.programa_nombre or 'Sin asociar' }})</option>
@@ -65,33 +86,38 @@
           </div>
           <div class="mb-3"><label class="form-label">Ficha</label>
             <select id="fichaGen" name="ficha_id" class="form-select" required>
-              <option value="">- Seleccione -</option>
+              <option value="">— Seleccione —</option>
               {% for f in fichas %}<option data-programa="{{ f.programa_id }}" value="{{ f.id }}">{{ f.numero }} - {{ f.programa_nombre }}</option>{% endfor %}
             </select>
           </div>
-          <button class="btn btn-danger w-100"><i class="bi bi-file-earmark-pdf"></i> Generar PDF Listado</button>
+          <button class="btn btn-danger w-100"><i class="bi bi-file-earmark-pdf me-1"></i>Generar PDF Listado</button>
         </form>
       </div>
     </div>
   </div>
 
+  <!-- Listado Básico -->
   <div class="col-lg-4 col-md-12">
-    <div class="card h-100"><div class="card-header">Listado Básico (Sin Plantilla)</div>
+    <div class="card h-100 card-animate" style="animation-delay:0.2s;">
+      <div class="card-header d-flex align-items-center gap-2">
+        <i class="bi bi-table text-primary"></i>
+        <span>Listado Básico (Sin Plantilla)</span>
+      </div>
       <div class="card-body">
-        <p class="small text-muted">Genera un Excel/Word simple y predeterminado con los datos de la ficha.</p>
-        <form method="post" action="{{ url_for('documentos.ficha_listado') }}">
+        <p class="small text-muted mb-3">Genera un Excel/Word simple y predeterminado con los datos de la ficha.</p>
+        <form method="post" action="{{ url_for('documentos.ficha_listado') }}" data-loading="Generando listado...">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
           <div class="mb-3"><label class="form-label">Programa</label>
             <select id="programaBasico" class="form-select" onchange="filtrarPorPrograma('Basico')">
-              <option value="">- Todos los programas -</option>
+              <option value="">— Todos los programas —</option>
               {% for p in programas %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}
             </select>
           </div>
 
           <div class="mb-3"><label class="form-label">Ficha</label>
             <select id="fichaBasico" name="ficha_id" class="form-select" required>
-              <option value="">- Seleccione -</option>
+              <option value="">— Seleccione —</option>
               {% for f in fichas %}<option data-programa="{{ f.programa_id }}" value="{{ f.id }}">{{ f.numero }} - {{ f.programa_nombre }}</option>{% endfor %}
             </select>
           </div>
@@ -101,17 +127,22 @@
               <option value="excel">Excel (.xlsx)</option>
             </select>
           </div>
-          <button class="btn btn-outline-primary w-100"><i class="bi bi-download"></i> Descargar Listado</button>
+          <button class="btn btn-outline-primary w-100"><i class="bi bi-download me-1"></i>Descargar Listado</button>
         </form>
       </div>
     </div>
   </div>
   
+  <!-- Exportar Todo -->
   <div class="col-12 mt-3">
-    <div class="card"><div class="card-header">Exportar todos los aprendices</div>
+    <div class="card card-animate" style="animation-delay:0.3s;">
+      <div class="card-header d-flex align-items-center gap-2">
+        <i class="bi bi-cloud-download text-primary"></i>
+        <span>Exportar todos los aprendices</span>
+      </div>
       <div class="card-body d-flex gap-2 flex-wrap">
-        <a href="{{ url_for('documentos.exportar_excel') }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-excel"></i> Exportar a Excel (.xlsx)</a>
-        <a href="{{ url_for('documentos.exportar_csv') }}" class="btn btn-outline-secondary"><i class="bi bi-filetype-csv"></i> Exportar a CSV</a>
+        <a href="{{ url_for('documentos.exportar_excel') }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-excel me-1"></i>Exportar a Excel (.xlsx)</a>
+        <a href="{{ url_for('documentos.exportar_csv') }}" class="btn btn-outline-secondary"><i class="bi bi-filetype-csv me-1"></i>Exportar a CSV</a>
       </div>
     </div>
   </div>
@@ -126,7 +157,7 @@ function filtrarPorPrograma(tipo) {
     // Filtrar plantillas
     const selectPlantilla = document.getElementById('plantilla' + tipo);
     if (selectPlantilla) {
-        selectPlantilla.value = ""; // Reset
+        selectPlantilla.value = "";
         const opcionesPlantilla = selectPlantilla.querySelectorAll('option[data-programa]');
         opcionesPlantilla.forEach(opt => {
             if (!programaId || opt.dataset.programa === programaId) {
@@ -140,7 +171,7 @@ function filtrarPorPrograma(tipo) {
     // Filtrar fichas
     const selectFicha = document.getElementById('ficha' + tipo);
     if (selectFicha) {
-        selectFicha.value = ""; // Reset
+        selectFicha.value = "";
         const opcionesFicha = selectFicha.querySelectorAll('option[data-programa]');
         opcionesFicha.forEach(opt => {
             if (!programaId || opt.dataset.programa === programaId) {

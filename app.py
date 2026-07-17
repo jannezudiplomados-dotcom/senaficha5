@@ -41,6 +41,8 @@ def create_app():
     from routes.plantillas import plantillas_bp
     from routes.admins import admins_bp
     from routes.colegios import colegios_bp
+    from routes.asistencia.routes import asistencia_bp
+    from routes.asistencia.asignacion import asignacion_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp)
@@ -52,6 +54,8 @@ def create_app():
     app.register_blueprint(plantillas_bp, url_prefix='/plantillas')
     app.register_blueprint(admins_bp, url_prefix='/admins')
     app.register_blueprint(colegios_bp, url_prefix='/colegios')
+    app.register_blueprint(asistencia_bp)
+    app.register_blueprint(asignacion_bp)
 
     @app.context_processor
     def inject_user():
@@ -76,7 +80,7 @@ def create_app():
         session.permanent = True
 
     @app.after_request
-    def add_security_headers(response):
+    def add_headers(response):
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['X-Frame-Options'] = 'SAMEORIGIN'
         response.headers['X-XSS-Protection'] = '1; mode=block'
@@ -86,7 +90,13 @@ def create_app():
         if app.config.get('SESSION_COOKIE_SECURE'):
             response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
         # Basic CSP, ajustado si necesitas recursos de terceros
-        response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data:; object-src 'none'"
+        response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data:; object-src 'none'"
+        
+        # Seteo de cookie para descargas de archivos (para ocultar el spinner en frontend)
+        cd = response.headers.get('Content-Disposition')
+        if cd and 'attachment' in cd:
+            response.set_cookie('fileDownload', 'true', path='/')
+            
         return response
 
     return app

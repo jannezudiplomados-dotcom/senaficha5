@@ -70,9 +70,12 @@ CREATE TABLE IF NOT EXISTS admin (
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     nombre VARCHAR(120) NOT NULL,
-    rol ENUM('superadmin','admin') DEFAULT 'admin',
+    rol ENUM('superadmin','admin','instructor') DEFAULT 'instructor',
+    programa_id INT DEFAULT NULL,
     activo TINYINT(1) DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_admin_programa FOREIGN KEY (programa_id) REFERENCES programas(id) ON DELETE SET NULL,
+    INDEX idx_admin_programa (programa_id)
 ) ENGINE=InnoDB;
 
 -- Tabla: plantillas
