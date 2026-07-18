@@ -1,4 +1,5 @@
 import os
+import re
 import base64
 import binascii
 import uuid
@@ -68,11 +69,71 @@ def _form_aprendiz():
         'nombres': request.form.get('nombres', '').strip(),
         'apellidos': request.form.get('apellidos', '').strip(),
         'correo': request.form.get('correo', '').strip() or None,
+        'correo_institucional': request.form.get('correo_institucional', '').strip() or None,
         'telefono': request.form.get('telefono', '').strip() or None,
         'direccion': request.form.get('direccion', '').strip() or None,
+        'portafolio_url': request.form.get('portafolio_url', '').strip() or None,
         'ficha_id': ficha_id,
         'estado': request.form.get('estado', 'Activo'),
     }
+
+
+def _form_acudiente():
+    """Extrae datos del acudiente del formulario.
+    Retorna dict o None si no se diligencio el bloque."""
+    nombres = request.form.get('acudiente_nombres', '').strip()
+    if not nombres:
+        return None
+    return {
+        'identificacion': request.form.get('acudiente_identificacion', '').strip() or None,
+        'nombres_completos': nombres,
+        'correo': request.form.get('acudiente_correo', '').strip() or None,
+        'telefono': request.form.get('acudiente_telefono', '').strip() or None,
+        'parentesco': request.form.get('acudiente_parentesco', '').strip() or None,
+    }
+
+
+def _validar_campos_nuevos(d, acud):
+    """Valida correo institucional, portafolio y datos del acudiente.
+    Retorna lista de mensajes de error (vacía si todo OK)."""
+    errores = []
+
+    # Correo institucional: si viene, debe terminar en @soy.sena.edu.co
+    ci = d.get('correo_institucional')
+    if ci:
+        if not re.match(r'^.+@soy\.sena\.edu\.co$', ci, re.IGNORECASE):
+            errores.append('El correo institucional debe terminar en @soy.sena.edu.co')
+
+    # Portafolio URL: si viene, debe ser http(s)://
+    pu = d.get('portafolio_url')
+    if pu:
+        if not re.match(r'^https?://', pu, re.IGNORECASE):
+            errores.append('El enlace del portafolio debe comenzar con http:// o https://')
+
+    # Validaciones del acudiente
+    if acud:
+        ac = acud.get('correo')
+        if ac and not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', ac):
+            errores.append('El correo del acudiente no tiene un formato válido.')
+        at = acud.get('telefono')
+        if at and not re.match(r'^[\d\s\+\-]+$', at):
+            errores.append('El teléfono del acudiente solo puede contener dígitos, espacios, + y -.')
+
+    return errores
+
+
+def _guardar_acudiente(acud):
+    """Upsert del acudiente y retorna su id."""
+    if not acud:
+        return None
+    try:
+        acudiente_id = models.upsert_acudiente(
+            acud['identificacion'], acud['nombres_completos'],
+            acud['correo'], acud['telefono'], acud['parentesco'])
+        return acudiente_id
+    except MySQLError as e:
+        current_app.logger.error('Error al guardar acudiente: %s', e)
+        raise
 
 
 @usuarios_bp.route('/')
@@ -97,27 +158,56 @@ def index():
 def nuevo():
     if request.method == 'POST':
         d = _form_aprendiz()
+        acud = _form_acudiente()
+
         if not d['identificacion'] or not d['nombres'] or not d['apellidos']:
             flash('Identificacion, nombres y apellidos son obligatorios.', 'danger')
             return redirect(url_for('usuarios.nuevo'))
         if models.usuario_existe(d['identificacion']):
             flash('Ya existe un aprendiz con esa identificacion.', 'danger')
             return redirect(url_for('usuarios.nuevo'))
+
+        # Validar campos nuevos
+        errores_val = _validar_campos_nuevos(d, acud)
+        if errores_val:
+            for msg in errores_val:
+                flash(msg, 'danger')
+            return redirect(url_for('usuarios.nuevo'))
+
         try:
             firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'))
+
+            # Guardar acudiente (upsert) si hay datos
+            acudiente_id = _guardar_acudiente(acud)
+
             uid = models.crear_usuario(
                 d['identificacion'], d['tipo'], d['nombres'], d['apellidos'],
-                d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'])
+                d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'],
+                correo_institucional=d['correo_institucional'],
+                portafolio_url=d['portafolio_url'],
+                acudiente_id=acudiente_id)
+
+            # Auditoría
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'CREAR', 'usuario', uid,
                                  f"Aprendiz {d['nombres']} {d['apellidos']}", request.remote_addr)
+            if acud and acudiente_id:
+                models.registrar_log(session.get('admin_id'), session.get('admin_username'),
+                                     'UPSERT', 'acudientes', acudiente_id,
+                                     f"Acudiente {acud['nombres_completos']} (aprendiz id={uid})",
+                                     request.remote_addr)
+
             flash('Aprendiz creado correctamente.', 'success')
             return redirect(url_for('usuarios.index'))
         except ValueError as e:
             flash(str(e), 'danger')
         except MySQLError as e:
-            current_app.logger.error('Error BD al crear aprendiz: %s', e)
-            flash('Error de base de datos al crear el aprendiz.', 'danger')
+            # Detectar duplicado de portafolio_url
+            if e.errno == 1062 and 'portafolio_url' in str(e):
+                flash('Este enlace de portafolio ya está registrado por otro aprendiz.', 'danger')
+            else:
+                current_app.logger.error('Error BD al crear aprendiz: %s', e)
+                flash('Error de base de datos al crear el aprendiz.', 'danger')
         except Exception as e:
             current_app.logger.exception('Error al crear aprendiz')
             flash('Ha ocurrido un error inesperado.', 'danger')
@@ -137,27 +227,58 @@ def editar(uid):
 
     if request.method == 'POST':
         d = _form_aprendiz()
+        acud = _form_acudiente()
+
         if not d['identificacion'] or not d['nombres'] or not d['apellidos']:
             flash('Identificacion, nombres y apellidos son obligatorios.', 'danger')
             return redirect(url_for('usuarios.editar', uid=uid))
         if models.usuario_existe(d['identificacion'], excluir_id=uid):
             flash('Ya existe otro aprendiz con esa identificacion.', 'danger')
             return redirect(url_for('usuarios.editar', uid=uid))
+
+        # Validar campos nuevos
+        errores_val = _validar_campos_nuevos(d, acud)
+        if errores_val:
+            for msg in errores_val:
+                flash(msg, 'danger')
+            return redirect(url_for('usuarios.editar', uid=uid))
+
         try:
             firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'), aprendiz.get('firma'))
+
+            # Guardar acudiente (upsert) si hay datos
+            acudiente_id = _guardar_acudiente(acud)
+            # Si no se diligenciaron datos de acudiente, mantener el actual
+            if acudiente_id is None:
+                acudiente_id = aprendiz.get('acudiente_id')
+
             models.actualizar_usuario(
                 uid, d['identificacion'], d['tipo'], d['nombres'], d['apellidos'],
-                d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'])
+                d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'],
+                correo_institucional=d['correo_institucional'],
+                portafolio_url=d['portafolio_url'],
+                acudiente_id=acudiente_id)
+
+            # Auditoría
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'EDITAR', 'usuario', uid,
                                  f"Aprendiz {d['nombres']} {d['apellidos']}", request.remote_addr)
+            if acud and acudiente_id:
+                models.registrar_log(session.get('admin_id'), session.get('admin_username'),
+                                     'UPSERT', 'acudientes', acudiente_id,
+                                     f"Acudiente {acud['nombres_completos']} (aprendiz id={uid})",
+                                     request.remote_addr)
+
             flash('Aprendiz actualizado correctamente.', 'success')
             return redirect(url_for('usuarios.index'))
         except ValueError as e:
             flash(str(e), 'danger')
         except MySQLError as e:
-            current_app.logger.error('Error BD al actualizar aprendiz %s: %s', uid, e)
-            flash('Error de base de datos al actualizar el aprendiz.', 'danger')
+            if e.errno == 1062 and 'portafolio_url' in str(e):
+                flash('Este enlace de portafolio ya está registrado por otro aprendiz.', 'danger')
+            else:
+                current_app.logger.error('Error BD al actualizar aprendiz %s: %s', uid, e)
+                flash('Error de base de datos al actualizar el aprendiz.', 'danger')
         except Exception as e:
             current_app.logger.exception('Error al actualizar aprendiz')
             flash('Ha ocurrido un error inesperado.', 'danger')

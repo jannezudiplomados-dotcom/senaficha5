@@ -211,28 +211,56 @@ def obtener_usuarios_paginados(page=1, per_page=10, search=None):
 
 def obtener_usuario(uid):
     return query('''SELECT u.*, f.programa_id, f.numero AS ficha_numero,
-        f.fecha_inicio AS ficha_inicio, f.fecha_fin AS ficha_fin, p.nombre AS programa_nombre
+        f.fecha_inicio AS ficha_inicio, f.fecha_fin AS ficha_fin, p.nombre AS programa_nombre,
+        a.identificacion AS acudiente_identificacion,
+        a.nombres_completos AS acudiente_nombres,
+        a.correo AS acudiente_correo,
+        a.telefono AS acudiente_telefono,
+        a.parentesco AS acudiente_parentesco
         FROM usuarios u LEFT JOIN fichas f ON u.ficha_id=f.id
-        LEFT JOIN programas p ON f.programa_id=p.id WHERE u.id=%s''', (uid,), fetchone=True)
+        LEFT JOIN programas p ON f.programa_id=p.id
+        LEFT JOIN acudientes a ON u.acudiente_id=a.id
+        WHERE u.id=%s''', (uid,), fetchone=True)
 
 def usuarios_por_ficha(ficha_id):
     return query('''SELECT u.*, f.numero AS ficha_numero, p.nombre AS programa_nombre
         FROM usuarios u JOIN fichas f ON u.ficha_id=f.id JOIN programas p ON f.programa_id=p.id
         WHERE u.ficha_id=%s ORDER BY u.apellidos, u.nombres''', (ficha_id,))
 
-def crear_usuario(identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado):
+def crear_usuario(identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado,
+                  correo_institucional=None, portafolio_url=None, acudiente_id=None):
     return execute('''INSERT INTO usuarios
-        (identificacion,tipo_documento,nombres,apellidos,correo,telefono,direccion,ficha_id,firma,estado)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
-        (identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado))
+        (identificacion,tipo_documento,nombres,apellidos,correo,correo_institucional,telefono,direccion,acudiente_id,ficha_id,firma,portafolio_url,estado)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
+        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, portafolio_url, estado))
 
-def actualizar_usuario(uid, identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado):
+def actualizar_usuario(uid, identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado,
+                       correo_institucional=None, portafolio_url=None, acudiente_id=None):
     execute('''UPDATE usuarios SET identificacion=%s,tipo_documento=%s,nombres=%s,apellidos=%s,
-        correo=%s,telefono=%s,direccion=%s,ficha_id=%s,firma=%s,estado=%s WHERE id=%s''',
-        (identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado, uid))
+        correo=%s,correo_institucional=%s,telefono=%s,direccion=%s,acudiente_id=%s,ficha_id=%s,firma=%s,portafolio_url=%s,estado=%s WHERE id=%s''',
+        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, portafolio_url, estado, uid))
 
 def eliminar_usuario(uid):
     execute('DELETE FROM usuarios WHERE id=%s', (uid,))
+
+
+# ---------- ACUDIENTES ----------
+def upsert_acudiente(identificacion, nombres_completos, correo=None, telefono=None, parentesco=None):
+    """Inserta o actualiza acudiente por identificación (UNIQUE).
+    Retorna el id del registro insertado o existente."""
+    return execute('''INSERT INTO acudientes (identificacion, nombres_completos, correo, telefono, parentesco)
+        VALUES (%s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+          nombres_completos = VALUES(nombres_completos),
+          correo = VALUES(correo),
+          telefono = VALUES(telefono),
+          parentesco = VALUES(parentesco),
+          id = LAST_INSERT_ID(id)''',
+        (identificacion, nombres_completos, correo, telefono, parentesco))
+
+
+def obtener_acudiente(aid):
+    return query('SELECT * FROM acudientes WHERE id=%s', (aid,), fetchone=True)
 
 
 # ---------- ADMIN (multi-admin) ----------

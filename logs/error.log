@@ -2971,3 +2971,359 @@ Traceback (most recent call last):
   File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\werkzeug\datastructures\structures.py", line 114, in get
     return type(rv)
 jinja2.exceptions.UndefinedError: 'int' is undefined
+2026-07-18 10:49:04,428 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 43, in index
+    return render_template('dashboard.html', stats=stats, logs=logs,
+                           por_estado=por_estado, por_programa=por_programa,
+                           por_colegio=por_colegio,
+                           fichas_programa=fichas_programa,
+                           top_fichas=top, mis_fichas=mis_fichas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 10:49:04,505 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 43, in index
+    return render_template('dashboard.html', stats=stats, logs=logs,
+                           por_estado=por_estado, por_programa=por_programa,
+                           por_colegio=por_colegio,
+                           fichas_programa=fichas_programa,
+                           top_fichas=top, mis_fichas=mis_fichas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 10:49:04,666 ERROR: Exception on /favicon.ico [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 841, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 450, in raise_routing_exception
+    raise request.routing_exception  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\ctx.py", line 353, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 752, in handle_user_exception
+    return self.handle_http_exception(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 727, in handle_http_exception
+    return self.ensure_sync(handler)(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\app.py", line 67, in e404
+    return render_template('errors/404.html'), 404
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\errors\404.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 10:49:04,738 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 841, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 450, in raise_routing_exception
+    raise request.routing_exception  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\ctx.py", line 353, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 752, in handle_user_exception
+    return self.handle_http_exception(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 727, in handle_http_exception
+    return self.ensure_sync(handler)(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\app.py", line 67, in e404
+    return render_template('errors/404.html'), 404
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\errors\404.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 10:49:12,132 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 43, in index
+    return render_template('dashboard.html', stats=stats, logs=logs,
+                           por_estado=por_estado, por_programa=por_programa,
+                           por_colegio=por_colegio,
+                           fichas_programa=fichas_programa,
+                           top_fichas=top, mis_fichas=mis_fichas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 10:49:12,137 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 43, in index
+    return render_template('dashboard.html', stats=stats, logs=logs,
+                           por_estado=por_estado, por_programa=por_programa,
+                           por_colegio=por_colegio,
+                           fichas_programa=fichas_programa,
+                           top_fichas=top, mis_fichas=mis_fichas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\dashboard.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\base.html", line 223, in template
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2026-07-18 12:04:52,902 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 435, in exportar_excel
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-18 12:04:52,928 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 435, in exportar_excel
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-18 12:04:56,192 ERROR: Exception on /asistencia/exportar/pdf [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 448, in exportar_pdf
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-18 12:04:56,193 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 448, in exportar_pdf
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-18 12:05:34,055 ERROR: Exception on /asistencia/exportar/excel [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 435, in exportar_excel
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-18 12:05:34,057 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:75]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 435, in exportar_excel
+    result = _generar_excel_asistencia()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\asistencia\routes.py", line 686, in _generar_excel_asistencia
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+                              ^^^^^^^^^^^
+NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?

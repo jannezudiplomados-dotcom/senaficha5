@@ -54,6 +54,8 @@ def _build_context(aprendiz, ficha_info):
         'nombres': aprendiz.get('nombres') or '',
         'apellidos': aprendiz.get('apellidos') or '',
         'correo': aprendiz.get('correo') or '',
+        'correo_institucional': aprendiz.get('correo_institucional') or '',
+        'portafolio_url': aprendiz.get('portafolio_url') or '',
         'telefono': aprendiz.get('telefono') or '',
         'direccion': aprendiz.get('direccion') or '',
         'estado': aprendiz.get('estado') or '',
@@ -761,7 +763,7 @@ def _listado_word(f, aprendices):
     doc.add_paragraph(f"Total aprendices: {len(aprendices)}")
 
     encabezados = ['Tipo Doc', 'No. Identificacion', 'Nombres', 'Apellidos', 'Direccion',
-                   'Correo', 'Telefono', 'Inicio', 'Finalizacion', 'Firma']
+                   'Correo', 'Correo Institucional', 'Telefono', 'Portafolio', 'Inicio', 'Finalizacion', 'Firma']
     tabla = doc.add_table(rows=1, cols=len(encabezados))
     tabla.style = 'Table Grid'
     hdr = tabla.rows[0].cells
@@ -781,7 +783,9 @@ def _listado_word(f, aprendices):
             a.get('apellidos') or '',
             a.get('direccion') or '',
             a.get('correo') or '',
+            a.get('correo_institucional') or '',
             a.get('telefono') or '',
+            a.get('portafolio_url') or '',
             str(f.get('fecha_inicio') or ''),
             str(f.get('fecha_fin') or ''),
         ]
@@ -790,14 +794,15 @@ def _listado_word(f, aprendices):
             for parrafo in celdas[i].paragraphs:
                 for run in parrafo.runs:
                     run.font.size = Pt(8)
+        firma_col_idx = len(encabezados) - 1
         if a.get('firma'):
             ruta = os.path.join(current_app.config['FIRMAS_FOLDER'], a['firma'])
             if os.path.exists(ruta):
-                run = celdas[9].paragraphs[0].add_run()
+                run = celdas[firma_col_idx].paragraphs[0].add_run()
                 try:
                     run.add_picture(ruta, width=Mm(22))
                 except Exception:
-                    celdas[9].text = 'Firma'
+                    celdas[firma_col_idx].text = 'Firma'
 
     buffer = io.BytesIO()
     doc.save(buffer)
@@ -818,7 +823,7 @@ def _listado_excel(f, aprendices):
                f"Finalizacion: {f.get('fecha_fin') or '-'}"])
     ws.append([])
     encabezados = ['Tipo Doc', 'No. Identificacion', 'Nombres', 'Apellidos', 'Direccion',
-                   'Correo', 'Telefono', 'Inicio', 'Finalizacion', 'Firma']
+                   'Correo', 'Correo Institucional', 'Telefono', 'Portafolio', 'Inicio', 'Finalizacion', 'Firma']
     ws.append(encabezados)
     for c in ws[4]:
         c.font = Font(bold=True)
@@ -830,7 +835,9 @@ def _listado_excel(f, aprendices):
             a.get('apellidos') or '',
             a.get('direccion') or '',
             a.get('correo') or '',
+            a.get('correo_institucional') or '',
             a.get('telefono') or '',
+            a.get('portafolio_url') or '',
             str(f.get('fecha_inicio') or ''),
             str(f.get('fecha_fin') or ''),
             'Si' if a.get('firma') else 'No',
@@ -852,11 +859,13 @@ def exportar_excel():
     ws = wb.active
     ws.title = 'Aprendices'
     ws.append(['ID', 'Identificacion', 'Tipo', 'Nombres', 'Apellidos', 'Direccion',
-               'Correo', 'Telefono', 'Ficha', 'Programa', 'Estado'])
+               'Correo', 'Correo Institucional', 'Telefono', 'Portafolio',
+               'Ficha', 'Programa', 'Estado'])
     for a in aprendices:
         ws.append([a['id'], a['identificacion'], a['tipo_documento'], a['nombres'],
                    a['apellidos'], a.get('direccion') or '', a.get('correo') or '',
-                   a.get('telefono') or '', a.get('ficha_numero') or '',
+                   a.get('correo_institucional') or '', a.get('telefono') or '',
+                   a.get('portafolio_url') or '', a.get('ficha_numero') or '',
                    a.get('programa_nombre') or '', a['estado']])
     buffer = io.BytesIO()
     wb.save(buffer)
@@ -874,11 +883,13 @@ def exportar_csv():
     buffer = io.StringIO()
     writer = csv.writer(buffer)
     writer.writerow(['ID', 'Identificacion', 'Tipo', 'Nombres', 'Apellidos', 'Direccion',
-                     'Correo', 'Telefono', 'Ficha', 'Programa', 'Estado'])
+                     'Correo', 'Correo Institucional', 'Telefono', 'Portafolio',
+                     'Ficha', 'Programa', 'Estado'])
     for a in aprendices:
         writer.writerow([a['id'], a['identificacion'], a['tipo_documento'], a['nombres'],
                          a['apellidos'], a.get('direccion') or '', a.get('correo') or '',
-                         a.get('telefono') or '', a.get('ficha_numero') or '',
+                         a.get('correo_institucional') or '', a.get('telefono') or '',
+                         a.get('portafolio_url') or '', a.get('ficha_numero') or '',
                          a.get('programa_nombre') or '', a['estado']])
     mem = io.BytesIO(buffer.getvalue().encode('utf-8-sig'))
     mem.seek(0)

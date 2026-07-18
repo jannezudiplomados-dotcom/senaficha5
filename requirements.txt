@@ -14,3 +14,4 @@ pywin32>=306
 pypdf==6.14.2
 lxml>=5.0.0
 waitress>=3.0.0
+openai>=1.0.0

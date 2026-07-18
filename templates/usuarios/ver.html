@@ -5,17 +5,41 @@
 <div class="card"><div class="card-body">
   <dl class="row mb-0">
     <dt class="col-sm-3">Identificacion</dt><dd class="col-sm-9">{{ aprendiz.tipo_documento }} {{ aprendiz.identificacion }}</dd>
-    <dt class="col-sm-3">Correo</dt><dd class="col-sm-9">{{ aprendiz.correo or '-' }}</dd>
-    <dt class="col-sm-3">Telefono</dt><dd class="col-sm-9">{{ aprendiz.telefono or '-' }}</dd>
-    <dt class="col-sm-3">Direccion</dt><dd class="col-sm-9">{{ aprendiz.direccion or '-' }}</dd>
-    <dt class="col-sm-3">Ficha</dt><dd class="col-sm-9">{{ aprendiz.ficha_numero or '-' }}</dd>
-    <dt class="col-sm-3">Programa</dt><dd class="col-sm-9">{{ aprendiz.programa_nombre or '-' }}</dd>
+    <dt class="col-sm-3">Correo</dt><dd class="col-sm-9">{{ aprendiz.correo or '—' }}</dd>
+    <dt class="col-sm-3">Correo institucional</dt><dd class="col-sm-9">{{ aprendiz.correo_institucional or '—' }}</dd>
+    <dt class="col-sm-3">Telefono</dt><dd class="col-sm-9">{{ aprendiz.telefono or '—' }}</dd>
+    <dt class="col-sm-3">Direccion</dt><dd class="col-sm-9">{{ aprendiz.direccion or '—' }}</dd>
+    <dt class="col-sm-3">Ficha</dt><dd class="col-sm-9">{{ aprendiz.ficha_numero or '—' }}</dd>
+    <dt class="col-sm-3">Programa</dt><dd class="col-sm-9">{{ aprendiz.programa_nombre or '—' }}</dd>
     <dt class="col-sm-3">Estado</dt><dd class="col-sm-9">{{ aprendiz.estado }}</dd>
+    <dt class="col-sm-3">Portafolio</dt>
+    <dd class="col-sm-9">
+      {% if aprendiz.portafolio_url %}
+        <a href="{{ aprendiz.portafolio_url }}" target="_blank" rel="noopener">{{ aprendiz.portafolio_url }}</a>
+      {% else %}—{% endif %}
+    </dd>
     <dt class="col-sm-3">Firma</dt><dd class="col-sm-9">
-      {% if aprendiz.firma %}<img src="{{ url_for('static', filename='firmas/' + aprendiz.firma) }}" class="firma-img" alt="firma">{% else %}-{% endif %}
+      {% if aprendiz.firma %}<img src="{{ url_for('static', filename='firmas/' + aprendiz.firma) }}" class="firma-img" alt="firma">{% else %}—{% endif %}
     </dd>
   </dl>
 </div></div>
+
+{# ── Acudiente ── #}
+<div class="card mt-3"><div class="card-body">
+  <h6 class="fw-semibold mb-3"><i class="bi bi-people me-1"></i>Acudiente</h6>
+  {% if aprendiz.acudiente_nombres %}
+  <dl class="row mb-0">
+    <dt class="col-sm-3">Nombres</dt><dd class="col-sm-9">{{ aprendiz.acudiente_nombres }}</dd>
+    <dt class="col-sm-3">Documento</dt><dd class="col-sm-9">{{ aprendiz.acudiente_identificacion or '—' }}</dd>
+    <dt class="col-sm-3">Correo</dt><dd class="col-sm-9">{{ aprendiz.acudiente_correo or '—' }}</dd>
+    <dt class="col-sm-3">Teléfono</dt><dd class="col-sm-9">{{ aprendiz.acudiente_telefono or '—' }}</dd>
+    <dt class="col-sm-3">Parentesco</dt><dd class="col-sm-9">{{ aprendiz.acudiente_parentesco or '—' }}</dd>
+  </dl>
+  {% else %}
+  <p class="text-muted mb-0">Sin acudiente registrado</p>
+  {% endif %}
+</div></div>
+
 <a href="{{ url_for('usuarios.editar', uid=aprendiz.id) }}" class="btn btn-primary mt-3">Editar</a>
 <a href="{{ url_for('usuarios.index') }}" class="btn btn-light mt-3">Volver</a>
 {% endblock %}

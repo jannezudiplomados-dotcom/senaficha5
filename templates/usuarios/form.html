@@ -70,6 +70,23 @@
 
         <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
 
+        {# ── Datos institucionales ── #}
+        <div class="col-12">
+          <h6 class="fw-semibold mb-0"><i class="bi bi-mortarboard me-1"></i>Datos institucionales</h6>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Correo institucional</label>
+          <input type="email" name="correo_institucional" class="form-control" placeholder="usuario@soy.sena.edu.co" value="{{ aprendiz.correo_institucional if aprendiz and aprendiz.correo_institucional else '' }}">
+          <div class="form-text">Debe terminar en @soy.sena.edu.co</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Enlace del portafolio</label>
+          <input type="url" name="portafolio_url" class="form-control" placeholder="https://..." value="{{ aprendiz.portafolio_url if aprendiz and aprendiz.portafolio_url else '' }}">
+          <div class="form-text">URL única del portafolio del aprendiz</div>
+        </div>
+
+        <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
+
         <div class="col-md-6">
           <label class="form-label">Ficha</label>
           <select name="ficha_id" class="form-select">
@@ -108,6 +125,41 @@
             <div class="mt-2"><small class="text-info"><i class="bi bi-info-circle"></i> Ya hay una firma guardada. Solo dibuja o sube una nueva si deseas reemplazarla.</small></div>
             <div class="mt-2 border p-2 d-inline-block bg-white" style="border-radius:8px;"><img src="{{ url_for('static', filename='firmas/' ~ aprendiz.firma) }}" alt="Firma actual" style="max-height: 50px;"></div>
           {% endif %}
+        </div>
+      </div>
+
+      {# ── Acudiente ── #}
+      <div class="row g-3 mt-2">
+        <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
+        <div class="col-12">
+          <h6 class="fw-semibold mb-0"><i class="bi bi-people me-1"></i>Datos del Acudiente</h6>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Documento del acudiente</label>
+          <input type="text" name="acudiente_identificacion" class="form-control" value="{{ aprendiz.acudiente_identificacion if aprendiz and aprendiz.acudiente_identificacion else '' }}">
+          <div class="form-text">Si ya existe, se reutiliza (hermanos comparten acudiente)</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Nombres completos del acudiente</label>
+          <input type="text" name="acudiente_nombres" class="form-control" value="{{ aprendiz.acudiente_nombres if aprendiz and aprendiz.acudiente_nombres else '' }}">
+          <div class="form-text">Requerido si se diligencia el bloque de acudiente</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Correo del acudiente</label>
+          <input type="email" name="acudiente_correo" class="form-control" value="{{ aprendiz.acudiente_correo if aprendiz and aprendiz.acudiente_correo else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Teléfono del acudiente</label>
+          <input type="tel" name="acudiente_telefono" class="form-control" value="{{ aprendiz.acudiente_telefono if aprendiz and aprendiz.acudiente_telefono else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Parentesco</label>
+          <select name="acudiente_parentesco" class="form-select">
+            <option value="">— Seleccionar —</option>
+            {% for p in ['Padre','Madre','Tío/a','Abuelo/a','Hermano/a','Otro'] %}
+              <option value="{{ p }}" {{ 'selected' if aprendiz and aprendiz.acudiente_parentesco==p else '' }}>{{ p }}</option>
+            {% endfor %}
+          </select>
         </div>
       </div>
 

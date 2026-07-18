@@ -949,6 +949,9 @@ body {
 .pct-danger  { color: var(--sigda-danger); font-weight: 700; }
 
 .btn-detalle {
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
   background: linear-gradient(135deg, var(--sigda-blue), var(--sigda-blue-dark));
   color: #fff;
   border: none;

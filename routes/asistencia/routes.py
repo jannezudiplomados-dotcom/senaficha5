@@ -7,6 +7,9 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from models import get_connection, registrar_log
 from routes.auth import login_required
 from .constantes import ESTADOS_ASISTENCIA, es_estado_valido
+from servicios.ia_analisis import analizar_asistencia
+
+ANALISIS_CACHE = {}
 
 asistencia_bp = Blueprint(
     "asistencia", __name__,
@@ -322,6 +325,91 @@ def informe():
     )
 
 
+@asistencia_bp.route("/informe/analizar", methods=["POST"])
+@login_required
+def informe_analizar():
+    """Genera o recupera el análisis de IA para el informe actual."""
+    ficha_id = request.json.get("ficha_id")
+    aprendiz_id = request.json.get("aprendiz_id")
+    desde = request.json.get("desde")
+    hasta = request.json.get("hasta")
+
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+    if cache_key in ANALISIS_CACHE:
+        return jsonify({"analisis": ANALISIS_CACHE[cache_key]})
+
+    db = get_connection(); cur = db.cursor(dictionary=True)
+    if ficha_id and not instructor_puede_ver_ficha(cur, ficha_id):
+        cur.close(); db.close()
+        return jsonify({"error": "No autorizado"}), 403
+
+    # Reconstruir datos para la IA
+    cur.execute("SELECT f.numero, p.nombre AS nombre_programa FROM fichas f LEFT JOIN programas p ON p.id = f.programa_id WHERE f.id = %s", (ficha_id,))
+    info = cur.fetchone() or {}
+    
+    where = ["a.ficha_id = %s"]; params = [ficha_id]
+    if desde: where.extend(["a.fecha >= %s"]); params.append(desde)
+    if hasta: where.extend(["a.fecha <= %s"]); params.append(hasta)
+    if aprendiz_id: where.extend(["a.aprendiz_id = %s"]); params.append(aprendiz_id)
+
+    cur.execute(f"SELECT COUNT(DISTINCT a.fecha) AS total FROM asistencias a WHERE {' AND '.join(where)}", params)
+    total_dias = (cur.fetchone() or {}).get("total", 0)
+
+    cur.execute(f"""
+        SELECT u.nombres, u.apellidos, u.identificacion,
+               SUM(a.estado = 'A') AS asiste, SUM(a.estado = 'CE') AS ce,
+               SUM(a.estado = 'SE') AS se, SUM(a.estado = 'INC') AS inc,
+               COUNT(*) AS total_registros
+          FROM asistencias a JOIN usuarios u ON u.id = a.aprendiz_id
+         WHERE {' AND '.join(where)} GROUP BY u.id
+    """, params)
+    filas = cur.fetchall()
+    cur.close(); db.close()
+
+    if not filas:
+        return jsonify({"error": "No hay datos para analizar"}), 400
+
+    # Armar contexto
+    aprendices_ctx = []
+    for f in filas:
+        tot = f["total_registros"] or 1
+        pct = round((f["asiste"] / tot) * 100)
+        aprendices_ctx.append({
+            "nombre": f"{f['apellidos']} {f['nombres']}",
+            "identificacion": f["identificacion"],
+            "pct_asistencia": pct,
+            "A": f["asiste"], "CE": f["ce"], "SE": f["se"], "INC": f["inc"]
+        })
+
+    contexto = {
+        "tipo": "aprendiz" if aprendiz_id else "ficha",
+        "ficha": info.get("numero", ""),
+        "programa": info.get("nombre_programa", ""),
+        "desde": desde, "hasta": hasta,
+        "total_dias": total_dias,
+        "total_estudiantes": len(aprendices_ctx),
+        "aprendices": aprendices_ctx
+    }
+
+    # Llamar al servicio IA
+    analisis = analizar_asistencia(contexto)
+    if not analisis:
+        return jsonify({"error": "Análisis con IA no disponible en este momento."}), 503
+
+    # Guardar en caché y auditar
+    ANALISIS_CACHE[cache_key] = analisis
+    registrar_log(
+        admin_id=session.get('admin_id'),
+        admin_username=session.get('admin_username'),
+        accion='ANALISIS_IA',
+        entidad='asistencia',
+        entidad_id=ficha_id,
+        detalle=f"Análisis IA generado. Desde {desde} hasta {hasta}. Aprendiz: {aprendiz_id}"
+    )
+
+    return jsonify({"analisis": analisis})
+
+
 @asistencia_bp.route("/api/aprendices_ficha", methods=["GET"])
 @login_required
 def api_aprendices_ficha():
@@ -390,7 +478,9 @@ def _generar_excel_asistencia():
     from datetime import datetime
 
     ficha_id = request.args.get("ficha_id", type=int)
-    desde = request.args.get("desde"); hasta = request.args.get("hasta")
+    aprendiz_id = request.args.get("aprendiz_id", "")
+    desde = request.args.get("desde", "")
+    hasta = request.args.get("hasta", "")
     db = get_connection(); cur = db.cursor(dictionary=True)
     if not instructor_puede_ver_ficha(cur, ficha_id):
         cur.close(); db.close()
@@ -413,6 +503,8 @@ def _generar_excel_asistencia():
         where.append("a.fecha >= %s"); params.append(desde)
     if hasta:
         where.append("a.fecha <= %s"); params.append(hasta)
+    if aprendiz_id:
+        where.append("a.aprendiz_id = %s"); params.append(aprendiz_id)
 
     # Incluir observacion en la consulta
     cur.execute(
@@ -593,6 +685,21 @@ def _generar_excel_asistencia():
     for f in filas: conteo[f["estado"]] = conteo.get(f["estado"], 0) + 1
     resumen.append(["Estado", "Total"])
     for cod, total in conteo.items(): resumen.append([cod, total])
+
+    # ─── ANÁLISIS CON IA ───────────────────────────────────────
+    cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
+    if cache_key in ANALISIS_CACHE:
+        resumen.append([])
+        resumen.append(["Análisis con IA"])
+        resumen.append([ANALISIS_CACHE[cache_key]])
+        
+        celda_ia_titulo = resumen.cell(row=resumen.max_row - 1, column=1)
+        celda_ia_titulo.font = Font(bold=True, size=12, color="305496")
+        
+        celda_ia_texto = resumen.cell(row=resumen.max_row, column=1)
+        celda_ia_texto.alignment = Alignment(wrap_text=True, vertical="top")
+        resumen.merge_cells(start_row=resumen.max_row, start_column=1, end_row=resumen.max_row, end_column=8)
+        resumen.row_dimensions[resumen.max_row].height = 120
 
     # ─── CONFIGURACIÓN DE IMPRESIÓN (para PDF) ─────────────────
     from openpyxl.worksheet.page import PageMargins

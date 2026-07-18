@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Informe de Asistencia — SIGDA{% endblock %}
 {% block content %}
+
 <div class="container my-4">
   <div class="d-print-none">
     {% include 'asistencia/_tabs.html' %}
@@ -72,6 +73,9 @@
 
   <!-- ─── BOTONES DE EXPORTACIÓN ──────────────────────── -->
   <div class="export-btn-group">
+    <button id="btnAnalizarIA" class="btn btn-outline-info" title="Analizar resultados con IA">
+      <i class="bi bi-robot"></i> Analizar con IA
+    </button>
     <a class="btn btn-outline-success" href="{{ url_for('asistencia.exportar_excel', ficha_id=ficha_id, desde=desde, hasta=hasta) }}">
       <i class="bi bi-file-earmark-excel"></i> Exportar Excel
     </a>
@@ -133,6 +137,16 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <!-- ─── TARJETA DE ANÁLISIS IA ────────────────────────── -->
+  <div id="iaAnalysisContainer" class="card mt-3 d-none d-print-block">
+    <div class="card-header bg-white fw-bold text-info border-info border-bottom-0">
+      <i class="bi bi-robot"></i> Análisis Inteligente
+    </div>
+    <div class="card-body bg-light border-top border-info">
+      <p id="iaAnalysisContent" class="mb-0 text-dark" style="white-space: pre-wrap; font-size: 0.9rem;"></p>
+    </div>
   </div>
 
   {% if aprendiz_id and detalle_dias %}
@@ -200,5 +214,46 @@ document.getElementById('selFicha')?.addEventListener('change', function() {
       });
     });
 });
+// Lógica para Analizar con IA
+const btnIA = document.getElementById('btnAnalizarIA');
+if (btnIA) {
+  btnIA.addEventListener('click', async function() {
+    const btn = this;
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Analizando...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch("{{ url_for('asistencia.informe_analizar') }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+          ficha_id: "{{ ficha_id or '' }}",
+          aprendiz_id: "{{ aprendiz_id or '' }}",
+          desde: "{{ desde or '' }}",
+          hasta: "{{ hasta or '' }}"
+        })
+      });
+
+      const data = await response.json();
+      
+      if (response.ok && data.analisis) {
+        document.getElementById('iaAnalysisContent').textContent = data.analisis;
+        document.getElementById('iaAnalysisContainer').classList.remove('d-none');
+      } else {
+        alert(data.error || 'Ocurrió un error al analizar con IA.');
+      }
+    } catch (e) {
+      alert('Error de conexión al servidor.');
+    } finally {
+      btn.innerHTML = originalHtml;
+      btn.disabled = false;
+    }
+  });
+}
 </script>
 {% endblock %}
