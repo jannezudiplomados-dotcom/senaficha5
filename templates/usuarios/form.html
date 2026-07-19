@@ -22,6 +22,7 @@
     <form method="post" enctype="multipart/form-data">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <input type="hidden" name="firma_base64" id="firma_base64">
+      <input type="hidden" name="foto_base64" id="foto_base64">
 
       <div class="row g-3">
         <div class="col-md-4">
@@ -75,12 +76,12 @@
           <h6 class="fw-semibold mb-0"><i class="bi bi-mortarboard me-1"></i>Datos institucionales</h6>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Correo institucional</label>
-          <input type="email" name="correo_institucional" class="form-control" placeholder="usuario@soy.sena.edu.co" value="{{ aprendiz.correo_institucional if aprendiz and aprendiz.correo_institucional else '' }}">
-          <div class="form-text">Debe terminar en @soy.sena.edu.co</div>
+          <label class="form-label">Correo institucional <span class="text-muted fw-normal">(Opcional)</span></label>
+          <input type="email" name="correo_institucional" class="form-control" placeholder="usuario@ejemplo.com" value="{{ aprendiz.correo_institucional if aprendiz and aprendiz.correo_institucional else '' }}">
+          <div class="form-text">Debe tener un formato de correo válido</div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Enlace del portafolio</label>
+          <label class="form-label">Enlace del portafolio <span class="text-muted fw-normal">(Opcional)</span></label>
           <input type="url" name="portafolio_url" class="form-control" placeholder="https://..." value="{{ aprendiz.portafolio_url if aprendiz and aprendiz.portafolio_url else '' }}">
           <div class="form-text">URL única del portafolio del aprendiz</div>
         </div>
@@ -96,8 +97,53 @@
             {% endfor %}
           </select>
         </div>
+        
+        <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
+
         <div class="col-md-6">
-          <label class="form-label d-block">Firma</label>
+          <label class="form-label d-block">Foto <span class="text-muted fw-normal">(Opcional)</span></label>
+          
+          <ul class="nav nav-tabs mb-3" id="fotoTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="camera-tab" data-bs-toggle="tab" data-bs-target="#camera-pane" type="button" role="tab">Cámara</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="upload-foto-tab" data-bs-toggle="tab" data-bs-target="#upload-foto-pane" type="button" role="tab">Subir archivo</button>
+            </li>
+          </ul>
+          
+          <div class="tab-content" id="fotoTabContent">
+            <div class="tab-pane fade show active" id="camera-pane" role="tabpanel">
+              <div class="text-center bg-light border p-2" style="border-radius: 8px;">
+                <video id="webcamVideo" autoplay playsinline style="width: 100%; max-width: 250px; border-radius: 8px; display: none; transform: scaleX(-1);"></video>
+                <canvas id="webcamCanvas" style="display: none; width: 100%; max-width: 250px; border-radius: 8px; transform: scaleX(-1);"></canvas>
+                <div class="mt-2 text-center">
+                  <button type="button" class="btn btn-sm btn-primary" id="startCameraBtn"><i class="bi bi-camera me-1"></i>Iniciar Cámara</button>
+                  <button type="button" class="btn btn-sm btn-success" id="takePhotoBtn" style="display: none;"><i class="bi bi-camera-fill me-1"></i>Tomar Foto</button>
+                  <button type="button" class="btn btn-sm btn-warning" id="retakePhotoBtn" style="display: none;"><i class="bi bi-arrow-counterclockwise me-1"></i>Reintentar</button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="upload-foto-pane" role="tabpanel">
+              <input type="file" name="foto_imagen" class="form-control" accept="image/png, image/jpeg, image/jpg">
+              <small class="text-muted d-block mt-1">Formato: PNG o JPG. Tamaño máximo: 2 MB.</small>
+            </div>
+          </div>
+
+          {% if aprendiz and aprendiz.foto %}
+            <div class="mt-2"><small class="text-info"><i class="bi bi-info-circle"></i> Ya hay una foto guardada. Solo toma o sube una nueva si deseas reemplazarla.</small></div>
+            <div class="mt-2 border p-2 d-inline-block bg-white" style="border-radius:8px;">
+              {% if aprendiz.foto.startswith('data:') %}
+                <img src="{{ aprendiz.foto }}" alt="Foto actual" style="max-height: 80px; border-radius: 4px;">
+              {% else %}
+                <img src="{{ url_for('static', filename='fotos/' ~ aprendiz.foto) }}" alt="Foto actual" style="max-height: 80px; border-radius: 4px;">
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label d-block">Firma <span class="text-muted fw-normal">(Opcional)</span></label>
           
           <ul class="nav nav-tabs mb-3" id="firmaTab" role="tablist">
             <li class="nav-item" role="presentation">

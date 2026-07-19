@@ -43,6 +43,19 @@ CREATE TABLE IF NOT EXISTS fichas (
     INDEX idx_ficha_colegio (colegio_id)
 ) ENGINE=InnoDB;
 
+-- Tabla: acudientes
+CREATE TABLE IF NOT EXISTS acudientes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  identificacion VARCHAR(30) NULL,
+  nombres_completos VARCHAR(200) NOT NULL,
+  correo VARCHAR(150) NULL,
+  telefono VARCHAR(30) NULL,
+  parentesco VARCHAR(50) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_acudiente_identificacion (identificacion)
+) ENGINE=InnoDB;
+
 -- Tabla: usuarios (aprendices)
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,17 +64,25 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     correo VARCHAR(150),
+    correo_institucional VARCHAR(150) NULL,
     telefono VARCHAR(30),
     direccion VARCHAR(255),
+    acudiente_id INT NULL,
     ficha_id INT,
     firma VARCHAR(255),
+    foto LONGTEXT NULL,
+    portafolio_url VARCHAR(500) NULL,
     estado ENUM('Activo','Retirado','Graduado') DEFAULT 'Activo',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_usuario_ficha FOREIGN KEY (ficha_id)
         REFERENCES fichas(id) ON DELETE SET NULL,
+    CONSTRAINT fk_usuario_acudiente FOREIGN KEY (acudiente_id)
+        REFERENCES acudientes(id) ON DELETE SET NULL,
     UNIQUE KEY uq_identificacion (identificacion),
+    UNIQUE KEY uq_portafolio_url (portafolio_url),
     INDEX idx_usuario_ficha (ficha_id),
-    INDEX idx_usuario_nombre (nombres, apellidos)
+    INDEX idx_usuario_nombre (nombres, apellidos),
+    INDEX idx_usuario_acudiente (acudiente_id)
 ) ENGINE=InnoDB;
 
 -- Tabla: admin (multi-administrador)

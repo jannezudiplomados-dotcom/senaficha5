@@ -18,6 +18,17 @@
         <a href="{{ aprendiz.portafolio_url }}" target="_blank" rel="noopener">{{ aprendiz.portafolio_url }}</a>
       {% else %}—{% endif %}
     </dd>
+    <dt class="col-sm-3">Foto</dt><dd class="col-sm-9">
+      {% if aprendiz.foto %}
+        {% if aprendiz.foto.startswith('data:') %}
+          <img src="{{ aprendiz.foto }}" class="foto-img img-thumbnail" style="max-height: 120px;" alt="foto">
+        {% else %}
+          <img src="{{ url_for('static', filename='fotos/' + aprendiz.foto) }}" class="foto-img img-thumbnail" style="max-height: 120px;" alt="foto">
+        {% endif %}
+      {% else %}
+        <img src="https://ui-avatars.com/api/?name={{ aprendiz.nombres }}+{{ aprendiz.apellidos }}&background=e9ecef&color=495057&size=120&rounded=true" class="foto-img" style="max-height: 120px;" alt="Avatar predeterminado">
+      {% endif %}
+    </dd>
     <dt class="col-sm-3">Firma</dt><dd class="col-sm-9">
       {% if aprendiz.firma %}<img src="{{ url_for('static', filename='firmas/' + aprendiz.firma) }}" class="firma-img" alt="firma">{% else %}—{% endif %}
     </dd>

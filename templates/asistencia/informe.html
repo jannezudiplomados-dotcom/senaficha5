@@ -139,13 +139,35 @@
     </table>
   </div>
 
-  <!-- ─── TARJETA DE ANÁLISIS IA ────────────────────────── -->
-  <div id="iaAnalysisContainer" class="card mt-3 d-none d-print-block">
-    <div class="card-header bg-white fw-bold text-info border-info border-bottom-0">
-      <i class="bi bi-robot"></i> Análisis Inteligente
+  <!-- ─── GRÁFICA Y ANÁLISIS IA ────────────────────────── -->
+  <div class="row mt-4">
+    <!-- Columna Gráfica -->
+    <div class="col-md-5 mb-3">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-header bg-white fw-bold"><i class="bi bi-pie-chart-fill text-primary me-2"></i>Distribución de Asistencia</div>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <canvas id="graficaInforme" style="max-height: 280px;"></canvas>
+        </div>
+      </div>
     </div>
-    <div class="card-body bg-light border-top border-info">
-      <p id="iaAnalysisContent" class="mb-0 text-dark" style="white-space: pre-wrap; font-size: 0.9rem;"></p>
+    
+    <!-- Columna IA -->
+    <div class="col-md-7 mb-3">
+      <div id="iaAnalysisContainer" class="card h-100 shadow-sm border-0 d-none d-print-block">
+        <div class="card-header bg-white fw-bold text-info border-bottom-0">
+          <i class="bi bi-robot me-2"></i> Análisis Inteligente
+        </div>
+        <div class="card-body bg-light rounded-bottom">
+          <p id="iaAnalysisContent" class="mb-0 text-dark" style="white-space: pre-wrap; font-size: 0.95rem; line-height: 1.5;"></p>
+        </div>
+      </div>
+      
+      <div id="iaPlaceholder" class="card h-100 shadow-sm border-0 d-print-none bg-light d-flex justify-content-center align-items-center text-muted" style="min-height: 200px; border: 2px dashed #dee2e6 !important;">
+        <div class="text-center">
+          <i class="bi bi-magic fs-1 mb-2"></i>
+          <p class="mb-0">Presiona <strong>Analizar con IA</strong> para generar<br>un resumen automático de este informe.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -196,6 +218,7 @@
   {% endif %}
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 // Al cambiar ficha, recargar la lista de aprendices
 document.getElementById('selFicha')?.addEventListener('change', function() {
@@ -214,6 +237,76 @@ document.getElementById('selFicha')?.addEventListener('change', function() {
       });
     });
 });
+
+// Extraer y sumar los datos de la tabla para la gráfica
+{% if datos %}
+  const totales = [0, 0, 0, 0, 0, 0, 0, 0];
+  {% for d in datos %}
+    totales[0] += {{ d.asiste }};
+    totales[1] += {{ d.con_excusa }};
+    totales[2] += {{ d.sin_excusa }};
+    totales[3] += {{ d.incapacidad }};
+    totales[4] += {{ d.licencia }};
+    totales[5] += {{ d.calamidad }};
+    totales[6] += {{ d.sin_formacion }};
+    totales[7] += {{ d.retirado }};
+  {% endfor %}
+
+  // Filtrar valores que sean 0 para no saturar la gráfica
+  const rawLabels = ['Asiste', 'Con excusa', 'Sin excusa', 'Incapacidad', 'Licencia', 'Calamidad', 'Feriados', 'Retirado'];
+  const rawColors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#6b7280', '#60a5fa', '#b91c1c'];
+  
+  const labels = [];
+  const dataVals = [];
+  const bgColors = [];
+  
+  const totalGeneral = totales.reduce((sum, val) => sum + val, 0);
+
+  for(let i=0; i<totales.length; i++) {
+    if(totales[i] > 0) {
+      const porcentaje = Math.round((totales[i] / totalGeneral) * 100);
+      labels.push(`${rawLabels[i]}: ${totales[i]} (${porcentaje}%)`);
+      dataVals.push(totales[i]);
+      bgColors.push(rawColors[i]);
+    }
+  }
+
+  const ctx = document.getElementById('graficaInforme');
+  if (ctx && dataVals.length > 0) {
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: dataVals,
+          backgroundColor: bgColors,
+          borderWidth: 2,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { 
+            position: 'right',
+            labels: {
+              font: { size: 11 }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return ' ' + context.label;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+{% endif %}
+
 // Lógica para Analizar con IA
 const btnIA = document.getElementById('btnAnalizarIA');
 if (btnIA) {
@@ -244,6 +337,7 @@ if (btnIA) {
       if (response.ok && data.analisis) {
         document.getElementById('iaAnalysisContent').textContent = data.analisis;
         document.getElementById('iaAnalysisContainer').classList.remove('d-none');
+        document.getElementById('iaPlaceholder').classList.add('d-none');
       } else {
         alert(data.error || 'Ocurrió un error al analizar con IA.');
       }

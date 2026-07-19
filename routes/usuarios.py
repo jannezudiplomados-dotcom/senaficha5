@@ -57,6 +57,43 @@ def _guardar_firma(firma_base64, firma_file, firma_actual=None):
     return nombre
 
 
+def _guardar_foto(foto_base64, foto_file, foto_actual=None):
+    """Guarda la foto retornando un string Base64 para almacenar en la BD."""
+    if foto_file and foto_file.filename:
+        foto_file.seek(0, os.SEEK_END)
+        size = foto_file.tell()
+        foto_file.seek(0)
+        if size > 5 * 1024 * 1024:
+            raise ValueError("La foto supera el tamaño máximo de 5MB.")
+        
+        datos = foto_file.read()
+        
+        # Comprimir usando Pillow para asegurar tamaño mínimo en la base de datos
+        from PIL import Image
+        import io
+        img = Image.open(io.BytesIO(datos))
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+            
+        max_width = 400
+        if img.width > max_width:
+            ratio = max_width / float(img.width)
+            new_height = int(float(img.height) * float(ratio))
+            img = img.resize((max_width, new_height), Image.Resampling.LANCZOS)
+            
+        out_io = io.BytesIO()
+        img.save(out_io, format='JPEG', quality=70)
+        encoded = base64.b64encode(out_io.getvalue()).decode('utf-8')
+        return f"data:image/jpeg;base64,{encoded}"
+        
+    elif foto_base64:
+        # Ya viene desde la cámara en formato data URI
+        return foto_base64
+    
+    return foto_actual
+
+
+
 def _form_aprendiz():
     """Extrae y normaliza los datos del formulario.
     Clave: ficha_id vacio -> None (evita el error 500 al actualizar)."""
@@ -98,11 +135,11 @@ def _validar_campos_nuevos(d, acud):
     Retorna lista de mensajes de error (vacía si todo OK)."""
     errores = []
 
-    # Correo institucional: si viene, debe terminar en @soy.sena.edu.co
+    # Correo institucional: validación de formato general
     ci = d.get('correo_institucional')
     if ci:
-        if not re.match(r'^.+@soy\.sena\.edu\.co$', ci, re.IGNORECASE):
-            errores.append('El correo institucional debe terminar en @soy.sena.edu.co')
+        if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', ci):
+            errores.append('El correo institucional no tiene un formato válido.')
 
     # Portafolio URL: si viene, debe ser http(s)://
     pu = d.get('portafolio_url')
@@ -176,6 +213,7 @@ def nuevo():
 
         try:
             firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'))
+            foto = _guardar_foto(request.form.get('foto_base64', ''), request.files.get('foto_imagen'))
 
             # Guardar acudiente (upsert) si hay datos
             acudiente_id = _guardar_acudiente(acud)
@@ -185,7 +223,7 @@ def nuevo():
                 d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'],
                 correo_institucional=d['correo_institucional'],
                 portafolio_url=d['portafolio_url'],
-                acudiente_id=acudiente_id)
+                acudiente_id=acudiente_id, foto=foto)
 
             # Auditoría
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
@@ -245,6 +283,7 @@ def editar(uid):
 
         try:
             firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'), aprendiz.get('firma'))
+            foto = _guardar_foto(request.form.get('foto_base64', ''), request.files.get('foto_imagen'), aprendiz.get('foto'))
 
             # Guardar acudiente (upsert) si hay datos
             acudiente_id = _guardar_acudiente(acud)
@@ -257,7 +296,7 @@ def editar(uid):
                 d['correo'], d['telefono'], d['direccion'], d['ficha_id'], firma, d['estado'],
                 correo_institucional=d['correo_institucional'],
                 portafolio_url=d['portafolio_url'],
-                acudiente_id=acudiente_id)
+                acudiente_id=acudiente_id, foto=foto)
 
             # Auditoría
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
@@ -301,6 +340,10 @@ def eliminar(uid):
             ruta = os.path.join(current_app.config['FIRMAS_FOLDER'], aprendiz['firma'])
             if os.path.exists(ruta):
                 os.remove(ruta)
+        if aprendiz.get('foto') and not aprendiz['foto'].startswith('data:'):
+            ruta_foto = os.path.join(current_app.config['FOTOS_FOLDER'], aprendiz['foto'])
+            if os.path.exists(ruta_foto):
+                os.remove(ruta_foto)
         models.eliminar_usuario(uid)
         models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                              'ELIMINAR', 'usuario', uid,

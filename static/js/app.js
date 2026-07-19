@@ -188,4 +188,84 @@ document.addEventListener('DOMContentLoaded', function () {
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
 
+  // ============================================================
+  // 7. WEBCAM (FOTO)
+  // ============================================================
+  const video = document.getElementById('webcamVideo');
+  const webcamCanvas = document.getElementById('webcamCanvas');
+  const startCameraBtn = document.getElementById('startCameraBtn');
+  const takePhotoBtn = document.getElementById('takePhotoBtn');
+  const retakePhotoBtn = document.getElementById('retakePhotoBtn');
+  const fotoBase64 = document.getElementById('foto_base64');
+  let stream = null;
+
+  if (video && startCameraBtn) {
+    startCameraBtn.addEventListener('click', async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+        video.srcObject = stream;
+        video.style.display = 'block';
+        startCameraBtn.style.display = 'none';
+        takePhotoBtn.style.display = 'inline-block';
+        webcamCanvas.style.display = 'none';
+      } catch (err) {
+        console.error('Error accediendo a la cámara:', err);
+        alert('No se pudo acceder a la cámara. Asegúrate de dar los permisos correspondientes y estar en un entorno seguro (localhost o HTTPS).');
+      }
+    });
+
+    takePhotoBtn.addEventListener('click', () => {
+      if (!stream) return;
+      const ctx = webcamCanvas.getContext('2d');
+      
+      // Redimensionar la imagen para que no sea muy pesada (max 400px de ancho)
+      const MAX_WIDTH = 400;
+      let width = video.videoWidth;
+      let height = video.videoHeight;
+      if (width > MAX_WIDTH) {
+        height = Math.round(height * (MAX_WIDTH / width));
+        width = MAX_WIDTH;
+      }
+      
+      webcamCanvas.width = width;
+      webcamCanvas.height = height;
+      
+      // Dibujar normal (el scaleX(-1) en CSS hace el efecto espejo visualmente)
+      ctx.drawImage(video, 0, 0, width, height);
+      
+      // Exportar como JPEG con calidad 0.7 para asegurar que el string sea minúsculo
+      fotoBase64.value = webcamCanvas.toDataURL('image/jpeg', 0.7);
+      
+      video.style.display = 'none';
+      webcamCanvas.style.display = 'block';
+      takePhotoBtn.style.display = 'none';
+      retakePhotoBtn.style.display = 'inline-block';
+    });
+
+    retakePhotoBtn.addEventListener('click', () => {
+      fotoBase64.value = '';
+      webcamCanvas.style.display = 'none';
+      video.style.display = 'block';
+      retakePhotoBtn.style.display = 'none';
+      takePhotoBtn.style.display = 'inline-block';
+    });
+    
+    // Detener la cámara si se cambia de pestaña
+    const uploadTab = document.getElementById('upload-foto-tab');
+    if(uploadTab) {
+        uploadTab.addEventListener('click', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+                video.style.display = 'none';
+                startCameraBtn.style.display = 'inline-block';
+                takePhotoBtn.style.display = 'none';
+                retakePhotoBtn.style.display = 'none';
+                webcamCanvas.style.display = 'none';
+                fotoBase64.value = '';
+            }
+        });
+    }
+  }
+
 });

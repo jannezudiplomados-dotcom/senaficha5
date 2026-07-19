@@ -228,17 +228,17 @@ def usuarios_por_ficha(ficha_id):
         WHERE u.ficha_id=%s ORDER BY u.apellidos, u.nombres''', (ficha_id,))
 
 def crear_usuario(identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado,
-                  correo_institucional=None, portafolio_url=None, acudiente_id=None):
+                  correo_institucional=None, portafolio_url=None, acudiente_id=None, foto=None):
     return execute('''INSERT INTO usuarios
-        (identificacion,tipo_documento,nombres,apellidos,correo,correo_institucional,telefono,direccion,acudiente_id,ficha_id,firma,portafolio_url,estado)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
-        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, portafolio_url, estado))
+        (identificacion,tipo_documento,nombres,apellidos,correo,correo_institucional,telefono,direccion,acudiente_id,ficha_id,firma,foto,portafolio_url,estado)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
+        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, foto, portafolio_url, estado))
 
 def actualizar_usuario(uid, identificacion, tipo, nombres, apellidos, correo, telefono, direccion, ficha_id, firma, estado,
-                       correo_institucional=None, portafolio_url=None, acudiente_id=None):
+                       correo_institucional=None, portafolio_url=None, acudiente_id=None, foto=None):
     execute('''UPDATE usuarios SET identificacion=%s,tipo_documento=%s,nombres=%s,apellidos=%s,
-        correo=%s,correo_institucional=%s,telefono=%s,direccion=%s,acudiente_id=%s,ficha_id=%s,firma=%s,portafolio_url=%s,estado=%s WHERE id=%s''',
-        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, portafolio_url, estado, uid))
+        correo=%s,correo_institucional=%s,telefono=%s,direccion=%s,acudiente_id=%s,ficha_id=%s,firma=%s,foto=%s,portafolio_url=%s,estado=%s WHERE id=%s''',
+        (identificacion, tipo, nombres, apellidos, correo, correo_institucional, telefono, direccion, acudiente_id, ficha_id, firma, foto, portafolio_url, estado, uid))
 
 def eliminar_usuario(uid):
     execute('DELETE FROM usuarios WHERE id=%s', (uid,))

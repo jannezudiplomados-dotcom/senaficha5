@@ -26,7 +26,7 @@ def create_app():
     limiter.init_app(app)
     _configurar_logs(app)
 
-    for folder in (Config.UPLOAD_FOLDER, Config.FIRMAS_FOLDER, Config.GENERADOS_FOLDER):
+    for folder in (Config.UPLOAD_FOLDER, Config.FIRMAS_FOLDER, Config.FOTOS_FOLDER, Config.GENERADOS_FOLDER):
         os.makedirs(folder, exist_ok=True)
 
     models.init_pool()

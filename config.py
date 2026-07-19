@@ -28,6 +28,7 @@ class Config:
     # Carpetas
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'plantillas')
     FIRMAS_FOLDER = os.path.join(BASE_DIR, 'static', 'firmas')
+    FOTOS_FOLDER = os.path.join(BASE_DIR, 'static', 'fotos')
     GENERADOS_FOLDER = os.path.join(BASE_DIR, 'static', 'generados')
 
     ALLOWED_EXTENSIONS = {'docx', 'xlsx'}
