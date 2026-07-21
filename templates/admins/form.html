@@ -2,8 +2,9 @@
 {% block title %}{{ 'Editar' if admin else 'Nuevo' }} administrador{% endblock %}
 {% block content %}
 <h3 class="mb-4">{{ 'Editar' if admin else 'Nuevo' }} administrador</h3>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="firma_base64" id="firma_base64">
   <div class="row g-3">
     {% if not admin %}
     <div class="col-md-6"><label class="form-label">Usuario *</label><input name="username" class="form-control" required></div>
@@ -33,6 +34,38 @@
       </div>
     </div>
     {% endif %}
+    <div class="col-12"><hr class="my-1" style="border-color:var(--sigda-gray-200);"></div>
+    <div class="col-12">
+      <label class="form-label d-block">Firma del administrador <span class="text-muted fw-normal">(Opcional)</span></label>
+      <div class="form-text mb-2">Se usará como {{ '{{' }} firma_admin {{ '}}' }} en las plantillas de documentos.</div>
+      
+      <ul class="nav nav-tabs mb-3" id="firmaTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="canvas-tab" data-bs-toggle="tab" data-bs-target="#canvas-pane" type="button" role="tab">Dibujar firma</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload-pane" type="button" role="tab">Subir imagen</button>
+        </li>
+      </ul>
+      
+      <div class="tab-content" id="firmaTabContent">
+        <div class="tab-pane fade show active" id="canvas-pane" role="tabpanel">
+          <div class="firma-wrap">
+            <canvas id="firmaCanvas" width="400" height="150"></canvas>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="limpiarFirma"><i class="bi bi-eraser me-1"></i>Limpiar firma</button>
+        </div>
+        <div class="tab-pane fade" id="upload-pane" role="tabpanel">
+          <input type="file" name="firma_imagen" class="form-control" accept="image/png, image/jpeg, image/jpg">
+          <small class="text-muted d-block mt-1">Formato: PNG o JPG. Tamaño máximo: 2 MB.</small>
+        </div>
+      </div>
+
+      {% if admin and admin.firma %}
+        <div class="mt-2"><small class="text-info"><i class="bi bi-info-circle"></i> Ya hay una firma guardada. Solo dibuja o sube una nueva si deseas reemplazarla.</small></div>
+        <div class="mt-2 border p-2 d-inline-block bg-white" style="border-radius:8px;"><img src="{{ url_for('static', filename='firmas/' ~ admin.firma) }}" alt="Firma actual" style="max-height: 50px;"></div>
+      {% endif %}
+    </div>
   </div>
   <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('admins.index') }}" class="btn btn-light">Cancelar</a></div>
 </form>

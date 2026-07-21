@@ -41,3 +41,4 @@ output.log
 
 # Logs de la aplicacion (contienen stack traces e info sensible)
 logs/
+azure_credentials.txt

@@ -59,8 +59,16 @@ def create_app():
 
     @app.context_processor
     def inject_user():
+        firma_admin = None
+        admin_id = session.get('admin_id')
+        if admin_id:
+            admin = models.obtener_admin(admin_id)
+            if admin and admin.get('firma'):
+                firma_admin = admin['firma']
+                
         return dict(usuario_actual=session.get('admin_nombre'),
-                    rol_actual=session.get('admin_rol'))
+                    rol_actual=session.get('admin_rol'),
+                    firma_admin=firma_admin)
 
     @app.errorhandler(404)
     def e404(e):

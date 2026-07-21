@@ -9,7 +9,7 @@
       <div class="card-header bg-success text-white">Generar Plantilla General para Grupo (Selección Múltiple)</div>
       <div class="card-body">
         <p class="small text-muted">Genera un <strong>único PDF</strong> con los aprendices que selecciones insertados como filas en la tabla.</p>
-        <form method="post" action="{{ url_for('documentos.generar_grupal') }}">
+        <form id="form-grupal" method="post" action="{{ url_for('documentos.generar_grupal') }}">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           
           <div class="mb-3"><label class="form-label">Programa</label>
@@ -28,6 +28,10 @@
                 {% endif %}
               {% endfor %}
             </select>
+          </div>
+
+          <div class="mb-3"><label class="form-label">Nombre del Proyecto</label>
+            <input type="text" id="nom_proyecto" name="nom_proyecto" class="form-control" maxlength="200">
           </div>
 
           <div class="mb-3"><label class="form-label">Ficha</label>
@@ -53,6 +57,8 @@
     </div>
   </div>
 </div>
+
+{% include 'partials/_overlay_loading.html' %}
 {% endblock %}
 
 {% block scripts %}
@@ -140,5 +146,10 @@ function toggleTodos() {
     const btnTodos = document.getElementById('btnTodos');
     btnTodos.textContent = todosSeleccionados ? "Deseleccionar Todos" : "Seleccionar Todos";
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    SigdaOverlay.attachToForm('form-grupal');
+});
 </script>
+<script src="{{ url_for('static', filename='js/overlay_loading.js') }}?v=1.0"></script>
 {% endblock %}

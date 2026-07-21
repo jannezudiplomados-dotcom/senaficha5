@@ -3,6 +3,10 @@ from flask import (Blueprint, render_template, request, redirect,
                    url_for, session, flash, current_app)
 from mysql.connector import Error as MySQLError
 import models
+import os
+import uuid
+import base64
+import binascii
 from werkzeug.security import generate_password_hash
 from routes.auth import login_required, role_required
 
@@ -19,6 +23,49 @@ def _validar_password(password):
     if not re.search(r'[0-9]', password):
         return 'La contrasena debe incluir al menos un numero.'
     return None
+
+def _guardar_firma(firma_base64, firma_file, firma_actual=None):
+    """Guarda la firma ya sea desde el canvas (base64) o desde un archivo subido.
+    Da prioridad al archivo subido."""
+    nombre = None
+    datos = None
+
+    if firma_file and firma_file.filename:
+        firma_file.seek(0, os.SEEK_END)
+        size = firma_file.tell()
+        firma_file.seek(0)
+        if size > 2 * 1024 * 1024:
+            raise ValueError("La imagen de la firma supera el tamaño máximo de 2MB.")
+        
+        datos = firma_file.read()
+        ext = firma_file.filename.rsplit('.', 1)[-1].lower()
+        if ext not in ['png', 'jpg', 'jpeg']:
+            ext = 'png'
+        nombre = f'firma_admin_{uuid.uuid4().hex}.{ext}'
+    elif firma_base64:
+        if ',' in firma_base64:
+            firma_base64 = firma_base64.split(',', 1)[1]
+        try:
+            datos = base64.b64decode(firma_base64)
+            nombre = f'firma_admin_{uuid.uuid4().hex}.png'
+        except (binascii.Error, ValueError):
+            raise ValueError('La firma desde el lienzo no es válida.')
+    
+    if not nombre or not datos:
+        return firma_actual
+
+    ruta = os.path.join(current_app.config['FIRMAS_FOLDER'], nombre)
+    with open(ruta, 'wb') as fh:
+        fh.write(datos)
+
+    if firma_actual:
+        anterior = os.path.join(current_app.config['FIRMAS_FOLDER'], firma_actual)
+        if os.path.exists(anterior):
+            try:
+                os.remove(anterior)
+            except OSError:
+                pass
+    return nombre
 
 
 @admins_bp.route('/')
@@ -51,7 +98,13 @@ def nuevo():
             flash(error_pw, 'danger')
             return redirect(url_for('admins.nuevo'))
         try:
-            aid = models.crear_admin(username, generate_password_hash(password), nombre, rol, programa_id)
+            firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'))
+        except ValueError as e:
+            flash(str(e), 'danger')
+            return redirect(url_for('admins.nuevo'))
+
+        try:
+            aid = models.crear_admin(username, generate_password_hash(password), nombre, rol, programa_id, firma)
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'CREAR', 'admin', aid, username, request.remote_addr)
             flash('Administrador creado.', 'success')
@@ -89,8 +142,14 @@ def editar(aid):
                 flash(error_pw, 'danger')
                 return redirect(url_for('admins.editar', aid=aid))
         try:
+            firma = _guardar_firma(request.form.get('firma_base64', ''), request.files.get('firma_imagen'), admin.get('firma'))
+        except ValueError as e:
+            flash(str(e), 'danger')
+            return redirect(url_for('admins.editar', aid=aid))
+
+        try:
             models.actualizar_admin(aid, nombre, rol, activo, programa_id,
-                                    generate_password_hash(password) if password else None)
+                                    generate_password_hash(password) if password else None, firma)
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'EDITAR', 'admin', aid, admin['username'], request.remote_addr)
             flash('Administrador actualizado.', 'success')

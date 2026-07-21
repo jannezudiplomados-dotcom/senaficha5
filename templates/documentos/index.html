@@ -23,7 +23,7 @@
       </div>
       <div class="card-body">
         <p class="small text-muted mb-3">Genera un PDF por aprendiz y los descarga en un ZIP.</p>
-        <form method="post" action="{{ url_for('documentos.generar_por_ficha') }}" data-loading="Generando documentos PDF...">
+        <form id="form-individual" method="post" action="{{ url_for('documentos.generar_por_ficha') }}">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           
           <div class="mb-3"><label class="form-label">Programa</label>
@@ -64,7 +64,7 @@
       </div>
       <div class="card-body">
         <p class="small text-muted mb-3">Genera un <strong>único PDF</strong> con todos los aprendices insertados como filas en la tabla.</p>
-        <form method="post" action="{{ url_for('documentos.generar_general') }}" data-loading="Generando documento PDF...">
+        <form id="form-general" method="post" action="{{ url_for('documentos.generar_general') }}">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           
           <div class="mb-3"><label class="form-label">Programa</label>
@@ -105,7 +105,7 @@
       </div>
       <div class="card-body">
         <p class="small text-muted mb-3">Genera un Excel/Word simple y predeterminado con los datos de la ficha.</p>
-        <form method="post" action="{{ url_for('documentos.ficha_listado') }}" data-loading="Generando listado...">
+        <form id="form-basico" method="post" action="{{ url_for('documentos.ficha_listado') }}">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
           <div class="mb-3"><label class="form-label">Programa</label>
@@ -147,6 +147,8 @@
     </div>
   </div>
 </div>
+
+{% include 'partials/_overlay_loading.html' %}
 {% endblock %}
 
 {% block scripts %}
@@ -182,5 +184,13 @@ function filtrarPorPrograma(tipo) {
         });
     }
 }
+</script>
+<script src="{{ url_for('static', filename='js/overlay_loading.js') }}?v=1.0"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      SigdaOverlay.attachToForm('form-individual');
+      SigdaOverlay.attachToForm('form-general');
+      SigdaOverlay.attachToForm('form-basico');
+  });
 </script>
 {% endblock %}

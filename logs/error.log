@@ -3327,3 +3327,8 @@ Traceback (most recent call last):
     cache_key = f"{ficha_id}_{aprendiz_id}_{desde}_{hasta}"
                               ^^^^^^^^^^^
 NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
+2026-07-21 09:49:04,121 INFO: PERF Grupal - Render docs: 6.02s | Batch COM: 10.00s | ZIP: 0.18s | Total: 16.20s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:735]
+2026-07-21 09:50:01,120 INFO: PERF Grupal - Render docs: 6.36s | Batch COM: 8.82s | ZIP: 0.11s | Total: 15.28s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:735]
+2026-07-21 09:58:09,755 INFO: PERF Grupal - Render docs: 6.34s | Batch COM: 31.81s | ZIP: 0.83s | Total: 38.98s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-21 10:00:03,085 INFO: PERF Grupal - Render docs: 6.44s | Batch COM: 30.99s | ZIP: 0.84s | Total: 38.26s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-21 10:01:43,669 INFO: PERF Grupal - Render docs: 3.06s | Batch COM: 57.52s | ZIP: 0.73s | Total: 61.31s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]

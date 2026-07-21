@@ -72,6 +72,7 @@ def _build_context(aprendiz, ficha_info):
         'fecha_fin_programa': str(ficha_info.get('programa_fecha_fin') or ''),
         'colegio': ficha_info.get('nombre_colegio') or '',
         'fecha': datetime.now().strftime('%d/%m/%Y'),
+        'nombre_admin': session.get('admin_nombre') or '',
     }
 
 
@@ -79,6 +80,9 @@ def _render_docx(ruta_plantilla, contexto, firma_path, output_path):
     """Render a DOCX template with docxtpl and save."""
     from docxtpl import DocxTemplate, InlineImage
     from docx.shared import Mm
+    from flask import session, current_app
+    import os
+    import models
 
     tpl = DocxTemplate(ruta_plantilla)
     ctx = dict(contexto)
@@ -86,6 +90,17 @@ def _render_docx(ruta_plantilla, contexto, firma_path, output_path):
         ctx['firma'] = InlineImage(tpl, firma_path, width=Mm(40), height=Mm(15))
     else:
         ctx['firma'] = ''
+        
+    # Inyectar firma_admin en el contexto para cualquier docx
+    ctx['firma_admin'] = ''
+    admin_id = session.get('admin_id')
+    if admin_id:
+        admin = models.obtener_admin(admin_id)
+        if admin and admin.get('firma'):
+            ruta_firma_admin = os.path.join(current_app.config['FIRMAS_FOLDER'], admin['firma'])
+            if os.path.exists(ruta_firma_admin):
+                ctx['firma_admin'] = InlineImage(tpl, ruta_firma_admin, width=Mm(40), height=Mm(15))
+
     tpl.render(ctx)
     tpl.save(output_path)
 
@@ -411,18 +426,24 @@ def _render_xlsx(ruta_plantilla, contexto, firma_path, output_path):
 
     for ws in wb.worksheets:
         firma_cells = []
+        firma_admin_cells = []
         for row in ws.iter_rows():
             for cell in row:
                 if cell.value and isinstance(cell.value, str):
                     if pattern.search(cell.value):
                         has_firma = bool(re.search(
-                            r'\{\{\s*firma[}\s]*', cell.value))
+                            r'\{\{\s*firma(?!\w)', cell.value))
                         if has_firma:
                             firma_cells.append(cell)
+                            
+                        has_firma_admin = bool(re.search(
+                            r'\{\{\s*firma_admin(?!\w)', cell.value))
+                        if has_firma_admin:
+                            firma_admin_cells.append(cell)
 
                         def _repl(match):
                             var = match.group(1)
-                            if var == 'firma':
+                            if var in ('firma', 'firma_admin'):
                                 return ''
                             return str(contexto.get(var, match.group(0)))
 
@@ -431,6 +452,19 @@ def _render_xlsx(ruta_plantilla, contexto, firma_path, output_path):
         if firma_path and os.path.exists(firma_path) and firma_cells:
             for cell in firma_cells:
                 _add_firma_to_worksheet(ws, firma_path, cell.coordinate)
+                
+        # Insertar firma admin si existe
+        if firma_admin_cells:
+            from flask import session, current_app
+            import models
+            admin_id = session.get('admin_id')
+            if admin_id:
+                admin = models.obtener_admin(admin_id)
+                if admin and admin.get('firma'):
+                    f_admin_path = os.path.join(current_app.config['FIRMAS_FOLDER'], admin['firma'])
+                    if os.path.exists(f_admin_path):
+                        for cell in firma_admin_cells:
+                            _add_firma_to_worksheet(ws, f_admin_path, cell.coordinate)
 
     wb.save(output_path)
     # Restaurar drawings/imágenes originales del template (logo, shapes, etc.)
@@ -489,6 +523,8 @@ def _render_xlsx_general(ruta_plantilla, aprendices, f_info, output_path):
             
             has_firma_in_row = False
             firma_col = None
+            has_firma_admin_in_row = False
+            firma_admin_col = None
 
             for col_idx, t_cell in enumerate(template_cells, start=1):
                 cell = ws.cell(row=current_row, column=col_idx)
@@ -502,13 +538,17 @@ def _render_xlsx_general(ruta_plantilla, aprendices, f_info, output_path):
                 
                 val = t_cell['value']
                 if val and isinstance(val, str) and pattern.search(val):
-                    if re.search(r'\{\{\s*firma[}\s]*', val):
+                    if re.search(r'\{\{\s*firma(?!\w)', val):
                         has_firma_in_row = True
                         firma_col = col_idx
+                        
+                    if re.search(r'\{\{\s*firma_admin(?!\w)', val):
+                        has_firma_admin_in_row = True
+                        firma_admin_col = col_idx
 
                     def _repl(match):
                         var = match.group(1)
-                        if var == 'firma':
+                        if var in ('firma', 'firma_admin'):
                             return ''
                         return str(ctx.get(var, match.group(0)))
 
@@ -519,6 +559,18 @@ def _render_xlsx_general(ruta_plantilla, aprendices, f_info, output_path):
             if has_firma_in_row and firma_path and os.path.exists(firma_path):
                 target_cell = ws.cell(row=current_row, column=firma_col)
                 _add_firma_to_worksheet(ws, firma_path, target_cell.coordinate)
+                
+            if has_firma_admin_in_row:
+                from flask import session, current_app
+                import models
+                admin_id = session.get('admin_id')
+                if admin_id:
+                    admin = models.obtener_admin(admin_id)
+                    if admin and admin.get('firma'):
+                        f_admin_path = os.path.join(current_app.config['FIRMAS_FOLDER'], admin['firma'])
+                        if os.path.exists(f_admin_path):
+                            target_cell = ws.cell(row=current_row, column=firma_admin_col)
+                            _add_firma_to_worksheet(ws, f_admin_path, target_cell.coordinate)
 
             current_row += 1
 
@@ -548,6 +600,25 @@ def _convert_to_pdf(input_path, output_path):
     if not os.path.exists(abs_out):
         raise RuntimeError('El archivo PDF no fue generado')
 
+def _convert_to_pdf_batch(directory_path, ext):
+    """Convert a folder of DOCX/XLSX to PDF via subprocess (batch mode)."""
+    import subprocess
+    import sys
+    from flask import current_app
+
+    script = os.path.join(os.path.dirname(os.path.dirname(__file__)),
+                          'convert_to_pdf.py')
+    abs_dir = os.path.abspath(directory_path)
+
+    result = subprocess.run(
+        [sys.executable, script, '--batch', abs_dir, ext],
+        capture_output=True, text=True, timeout=600)
+
+    if result.stderr.strip():
+        current_app.logger.warning(f'Batch PDF Stderr: {result.stderr.strip()}')
+        
+    if result.returncode != 0:
+        current_app.logger.error(f'Error Batch PDF: {result.stderr.strip()}')
 
 @documentos_bp.route('/generar-por-ficha', methods=['POST'])
 @login_required
@@ -577,8 +648,12 @@ def generar_por_ficha():
         dir=current_app.config['GENERADOS_FOLDER'])
 
     try:
+        import time
+        t_start = time.perf_counter()
+        
         pdf_files = []
         errores = []
+        archivos_generados = []
 
         for aprendiz in aprendices:
             contexto = _build_context(aprendiz, ficha)
@@ -608,30 +683,40 @@ def generar_por_ficha():
                 pdf_name = "".join(
                     c for c in pdf_name
                     if c.isalnum() or c in ('_', '-', '.', ' '))
-                pdf_path = os.path.join(tmp_dir, pdf_name)
+                pdf_path = os.path.join(tmp_dir, f"{safe}.pdf")
+                
+                archivos_generados.append((rendered, pdf_path, pdf_name, aprendiz))
 
-                _convert_to_pdf(rendered, pdf_path)
-
-                if os.path.exists(pdf_path):
-                    pdf_files.append((pdf_name, pdf_path))
             except Exception as e:
                 errores.append(
                     f"{aprendiz['nombres']} {aprendiz['apellidos']}: {e}")
                 current_app.logger.warning(
-                    'Error PDF %s: %s', aprendiz['identificacion'], e)
-            finally:
-                if os.path.exists(rendered):
-                    try:
-                        os.remove(rendered)
-                    except OSError:
-                        pass
+                    'Error plantillas %s: %s', aprendiz['identificacion'], e)
+
+        t_render = time.perf_counter()
+        
+        # BATCH CONVERT TO PDF
+        if archivos_generados:
+            _convert_to_pdf_batch(tmp_dir, ext.strip('.'))
+            
+        t_pdf = time.perf_counter()
+
+        for rendered, pdf_path, pdf_name, aprendiz in archivos_generados:
+            if os.path.exists(pdf_path):
+                pdf_files.append((pdf_name, pdf_path))
+            else:
+                errores.append(f"{aprendiz['nombres']} {aprendiz['apellidos']}: Error PDF")
+            
+            if os.path.exists(rendered):
+                try: os.remove(rendered)
+                except OSError: pass
 
         if not pdf_files:
             msg = 'No se genero ningun PDF.'
             if errores:
                 msg += ' ' + '; '.join(errores[:3])
             flash(msg, 'danger')
-            return redirect(url_for('documentos.index'))
+            return msg, 400
 
         if errores:
             flash(f'{len(pdf_files)} PDFs generados, '
@@ -648,6 +733,9 @@ def generar_por_ficha():
             'GENERAR', 'documentos_ficha', ficha['id'],
             f"Ficha {ficha['numero']} - {len(pdf_files)} PDFs",
             request.remote_addr)
+            
+        t_zip = time.perf_counter()
+        current_app.logger.info(f"PERF Grupal - Render docs: {t_render-t_start:.2f}s | Batch COM: {t_pdf-t_render:.2f}s | ZIP: {t_zip-t_pdf:.2f}s | Total: {t_zip-t_start:.2f}s")
 
         return send_file(
             zip_buf, as_attachment=True,
@@ -656,8 +744,7 @@ def generar_por_ficha():
 
     except Exception as e:
         current_app.logger.exception('Error generando documentos por ficha')
-        flash('Error al generar los documentos. Consulta con el administrador.', 'danger')
-        return redirect(url_for('documentos.index'))
+        return 'Error al generar los documentos. Consulta con el administrador.', 500
 
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
@@ -1023,6 +1110,7 @@ def generar_grupal():
     plantilla_id = request.form.get('plantilla_id')
     ficha_id = request.form.get('ficha_id')
     aprendices_ids = request.form.getlist('aprendices_ids')
+    nom_proyecto = request.form.get('nom_proyecto', '').strip()
 
     if not plantilla_id or not ficha_id or not aprendices_ids:
         flash('Datos incompletos. Selecciona plantilla, ficha y al menos un aprendiz.', 'danger')
@@ -1095,6 +1183,9 @@ def generar_grupal():
             # Construir contexto general con la lista completa
             contexto_general = lista_aprendices[0].copy() if lista_aprendices else {}
             contexto_general['aprendices'] = lista_aprendices
+            
+            import html
+            contexto_general['nom_proyecto'] = html.escape(nom_proyecto)
             
             # Generar el documento final único
             temp_docx = os.path.join(temp_dir, f"Listado_Grupal_Ficha_{ficha_info['numero']}.docx")

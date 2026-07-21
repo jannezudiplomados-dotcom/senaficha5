@@ -271,18 +271,18 @@ def obtener_admin(aid):
     return query('SELECT * FROM admin WHERE id=%s', (aid,), fetchone=True)
 
 def listar_admins():
-    return query('SELECT a.id, a.username, a.nombre, a.rol, a.activo, a.created_at, p.nombre AS programa_nombre FROM admin a LEFT JOIN programas p ON a.programa_id = p.id ORDER BY a.created_at')
+    return query('SELECT a.id, a.username, a.nombre, a.rol, a.activo, a.firma, a.created_at, p.nombre AS programa_nombre FROM admin a LEFT JOIN programas p ON a.programa_id = p.id ORDER BY a.created_at')
 
-def crear_admin(username, password_hash, nombre, rol, programa_id=None):
-    return execute('INSERT INTO admin (username,password_hash,nombre,rol,programa_id) VALUES (%s,%s,%s,%s,%s)',
-                   (username, password_hash, nombre, rol, programa_id))
+def crear_admin(username, password_hash, nombre, rol, programa_id=None, firma=None):
+    return execute('INSERT INTO admin (username,password_hash,nombre,rol,programa_id,firma) VALUES (%s,%s,%s,%s,%s,%s)',
+                   (username, password_hash, nombre, rol, programa_id, firma))
 
-def actualizar_admin(aid, nombre, rol, activo, programa_id=None, password_hash=None):
+def actualizar_admin(aid, nombre, rol, activo, programa_id=None, password_hash=None, firma=None):
     if password_hash:
-        execute('UPDATE admin SET nombre=%s,rol=%s,activo=%s,programa_id=%s,password_hash=%s WHERE id=%s',
-                (nombre, rol, activo, programa_id, password_hash, aid))
+        execute('UPDATE admin SET nombre=%s,rol=%s,activo=%s,programa_id=%s,password_hash=%s,firma=%s WHERE id=%s',
+                (nombre, rol, activo, programa_id, password_hash, firma, aid))
     else:
-        execute('UPDATE admin SET nombre=%s,rol=%s,activo=%s,programa_id=%s WHERE id=%s', (nombre, rol, activo, programa_id, aid))
+        execute('UPDATE admin SET nombre=%s,rol=%s,activo=%s,programa_id=%s,firma=%s WHERE id=%s', (nombre, rol, activo, programa_id, firma, aid))
 
 def eliminar_admin(aid):
     execute('DELETE FROM admin WHERE id=%s', (aid,))
