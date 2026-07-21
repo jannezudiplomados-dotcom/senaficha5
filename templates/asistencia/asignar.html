@@ -1,48 +1,197 @@
 {% extends "base.html" %}
+{% block title %}Asignar Instructor — SIGDA{% endblock %}
+
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/asistencia.css') }}?v=1.0">
+
 <div class="container my-4">
-  <h3>Asignar a: {{ instructor.nombre }} <small class="text-muted">({{ instructor.username }})</small></h3>
-
-  <!-- Paso 1: Programas -->
-  <form method="post" action="{{ url_for('asignacion.guardar_programas', instructor_id=instructor.id) }}" class="mb-4">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <h5>1. Programas</h5>
-    <div class="row">
-      {% for p in programas %}
-      <div class="col-md-4">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="programa_id" value="{{ p.id }}"
-                 id="prog{{ p.id }}" {{ 'checked' if p.id in prog_asignados }}>
-          <label class="form-check-label" for="prog{{ p.id }}">{{ p.nombre }}</label>
+    
+    <!-- ENCABEZADO DEL INSTRUCTOR -->
+    <div class="card asig-card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="{{ url_for('asignacion.instructores') }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> Volver a instructores
+                </a>
+                <span class="badge bg-primary">Asignación de Asistencias</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h3 class="mb-1">{{ instructor.nombre }} <span class="text-muted fs-5">({{ instructor.username }})</span></h3>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-secondary"><i class="bi bi-person-workspace"></i> Instructor</span>
+                        <span class="badge bg-info text-dark"><i class="bi bi-journal-bookmark"></i> {{ prog_asignados|length }} Programas</span>
+                        <span class="badge bg-success"><i class="bi bi-people"></i> {{ fichas_asignadas|length }} Fichas</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      {% endfor %}
     </div>
-    <button class="btn btn-primary btn-sm mt-2">Guardar programas</button>
-  </form>
 
-  <!-- Paso 2: Fichas (solo de los programas asignados) -->
-  <form method="post" action="{{ url_for('asignacion.guardar_fichas', instructor_id=instructor.id) }}">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <h5>2. Fichas de esos programas</h5>
-    {% if fichas %}
-      <div class="row">
-        {% for f in fichas %}
-        <div class="col-md-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="ficha_id" value="{{ f.id }}"
-                   id="ficha{{ f.id }}" {{ 'checked' if f.id in fichas_asignadas }}>
-            <label class="form-check-label" for="ficha{{ f.id }}">{{ f.numero }}</label>
-          </div>
+    <!-- SECCIÓN 1: PROGRAMAS -->
+    <form method="post" action="{{ url_for('asignacion.guardar_programas', instructor_id=instructor.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="card asig-card">
+            <div class="asig-card-header">
+                <h5 class="asig-card-title"><i class="bi bi-journal-text me-2"></i>Programas de formación</h5>
+                <span class="badge bg-white text-primary border" id="badgeProgramasSeleccionados">0 seleccionados</span>
+            </div>
+            
+            <div class="card-body border-bottom bg-light py-2">
+                <div class="input-group input-group-sm w-50">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" id="searchProgramas" placeholder="Buscar por código o nombre...">
+                </div>
+            </div>
+
+            <div class="asig-table-wrapper asig-table-responsive">
+                <table class="table asig-table table-hover align-middle" id="tablaProgramas">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;" class="text-center">
+                                <input type="checkbox" class="form-check-input" id="chkAllProgramas" aria-label="Seleccionar todos los programas">
+                            </th>
+                            <th>Código</th>
+                            <th>Nombre del programa</th>
+                            <th class="text-center">Duración</th>
+                            <th class="text-center">Nº Fichas</th>
+                            <th class="text-center">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in programas %}
+                        <tr>
+                            <td class="text-center">
+                                <input class="form-check-input chk-programa" type="checkbox" name="programa_id" value="{{ p.id }}" id="prog{{ p.id }}" {{ 'checked' if p.id in prog_asignados }}>
+                            </td>
+                            <td><label for="prog{{ p.id }}" class="fw-semibold text-secondary">{{ p.codigo or p.id }}</label></td>
+                            <td><label for="prog{{ p.id }}" class="mb-0">{{ p.nombre }}</label></td>
+                            <td class="text-center">{{ p.duracion_meses }} meses</td>
+                            <td class="text-center"><span class="badge bg-secondary">{{ p.num_fichas }}</span></td>
+                            <td class="text-center"><span class="badge bg-success">Activo</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card-footer bg-white text-end py-3">
+                <a href="{{ url_for('asignacion.instructores') }}" class="btn btn-outline-secondary me-2">Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar programas</button>
+            </div>
         </div>
-        {% endfor %}
-      </div>
-      <button class="btn btn-success btn-sm mt-2">Guardar fichas</button>
-    {% elif prog_asignados %}
-      <div class="alert alert-warning">No se encontraron fichas registradas para los programas seleccionados.</div>
-    {% else %}
-      <div class="alert alert-info">Asigna primero uno o más programas para ver sus fichas.</div>
-    {% endif %}
-  </form>
+    </form>
+
+    <!-- SECCIÓN 2: FICHAS POR PROGRAMA -->
+    <form method="post" action="{{ url_for('asignacion.guardar_fichas', instructor_id=instructor.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="card asig-card">
+            <div class="asig-card-header">
+                <h5 class="asig-card-title"><i class="bi bi-people-fill me-2"></i>Fichas por programa</h5>
+                <span class="badge bg-white text-primary border" id="badgeFichasGlobal">0 seleccionadas</span>
+            </div>
+
+            {% if not prog_asignados %}
+            <div class="asig-empty-state">
+                <i class="bi bi-info-circle"></i>
+                <h5>Sin programas asignados</h5>
+                <p class="mb-0">Asigna primero programas en la sección superior para poder asignar sus fichas.</p>
+            </div>
+            {% else %}
+            
+            <div class="card-body border-bottom bg-light py-2">
+                <div class="input-group input-group-sm w-50">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" id="searchFichas" placeholder="Buscar fichas por número...">
+                </div>
+            </div>
+
+            <div class="card-body pb-0">
+                {% for pid in prog_asignados %}
+                    {% set prog = programas | selectattr("id", "equalto", pid) | first %}
+                    {% set prog_fichas = fichas | selectattr("programa_id", "equalto", pid) | list %}
+                    
+                    <details class="asig-details" {% if prog_fichas %}open{% endif %}>
+                        <summary class="asig-summary">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-chevron-down text-muted"></i>
+                                <span>{{ prog.nombre if prog else 'Programa Desconocido' }}</span>
+                                <span class="badge bg-secondary ms-2" id="badgeFichas_{{ pid }}">{{ prog_fichas|length }} fichas</span>
+                            </div>
+                            <div class="form-check" onclick="event.stopPropagation();">
+                                <input type="checkbox" class="form-check-input chk-all-fichas" data-prog="{{ pid }}" id="chkAll_{{ pid }}">
+                                <label class="form-check-label fw-normal small" for="chkAll_{{ pid }}">Seleccionar todas</label>
+                            </div>
+                        </summary>
+                        
+                        <div class="asig-details-body asig-table-responsive">
+                            {% if not prog_fichas %}
+                            <div class="p-4 text-center text-muted">
+                                <i class="bi bi-inbox fs-4 mb-2 d-block"></i>
+                                Este programa aún no tiene fichas registradas.
+                            </div>
+                            {% else %}
+                            <table class="table asig-table table-sm table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;" class="text-center">#</th>
+                                        <th>Nº de Ficha</th>
+                                        <th>Jornada</th>
+                                        <th class="text-center">Fecha Inicio</th>
+                                        <th class="text-center">Fecha Fin</th>
+                                        <th class="text-center">Estado</th>
+                                        <th class="text-center">Aprendices</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for f in prog_fichas %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" class="form-check-input chk-ficha" name="ficha_id" value="{{ f.id }}" id="ficha{{ f.id }}" data-prog="{{ pid }}" {{ 'checked' if f.id in fichas_asignadas }}>
+                                        </td>
+                                        <td><label for="ficha{{ f.id }}" class="fw-semibold">{{ f.numero }}</label></td>
+                                        <td>
+                                            {% if f.jornada == 'Manana' %} <span class="badge bg-warning text-dark">Mañana</span>
+                                            {% elif f.jornada == 'Tarde' %} <span class="badge bg-orange text-dark" style="background-color: #fd7e14;">Tarde</span>
+                                            {% elif f.jornada == 'Noche' %} <span class="badge bg-dark">Noche</span>
+                                            {% else %} <span class="badge bg-secondary">{{ f.jornada }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">{{ f.fecha_inicio.strftime('%d/%m/%Y') if f.fecha_inicio else '--' }}</td>
+                                        <td class="text-center">{{ f.fecha_fin.strftime('%d/%m/%Y') if f.fecha_fin else '--' }}</td>
+                                        <td class="text-center">
+                                            {% if f.fecha_fin and f.fecha_fin < today %}
+                                                <span class="badge bg-secondary">Finalizada</span>
+                                            {% else %}
+                                                <span class="badge bg-success">Activa</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge bg-light text-dark border"><i class="bi bi-people"></i> {{ f.num_aprendices }}</span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </details>
+                {% endfor %}
+            </div>
+
+            <div class="card-footer bg-white text-end py-3">
+                <a href="{{ url_for('asignacion.instructores') }}" class="btn btn-outline-secondary me-2">Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar fichas</button>
+            </div>
+            {% endif %}
+        </div>
+    </form>
 </div>
+
+<script src="{{ url_for('static', filename='js/asistencia_asignar.js') }}?v=1.0"></script>
 {% endblock %}

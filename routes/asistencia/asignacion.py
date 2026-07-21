@@ -29,7 +29,13 @@ def asignar(instructor_id):
         flash("Instructor no encontrado", "danger")
         return redirect(url_for("asignacion.instructores"))
 
-    cur.execute("SELECT id, nombre FROM programas ORDER BY nombre")
+    cur.execute("""
+        SELECT p.id, p.codigo, p.nombre, p.duracion_meses, COUNT(f.id) as num_fichas 
+        FROM programas p 
+        LEFT JOIN fichas f ON p.id = f.programa_id 
+        GROUP BY p.id 
+        ORDER BY p.nombre
+    """)
     programas = cur.fetchall()
 
     # Programas ya asignados
@@ -41,7 +47,11 @@ def asignar(instructor_id):
     if prog_asignados:
         placeholders = ",".join(["%s"] * len(prog_asignados))
         cur.execute(
-            f"SELECT id, numero, programa_id FROM fichas WHERE programa_id IN ({placeholders}) ORDER BY numero",
+            f"""SELECT f.id, f.numero, f.programa_id, f.jornada, f.fecha_inicio, f.fecha_fin, 
+                (SELECT COUNT(u.id) FROM usuarios u WHERE u.ficha_id = f.id) as num_aprendices 
+                FROM fichas f 
+                WHERE f.programa_id IN ({placeholders}) 
+                ORDER BY f.numero""",
             tuple(prog_asignados)
         )
         fichas = cur.fetchall()
@@ -50,10 +60,11 @@ def asignar(instructor_id):
     fichas_asignadas = {r["ficha_id"] for r in cur.fetchall()}
     cur.close(); db.close()
 
+    import datetime
     return render_template(
         "asistencia/asignar.html",
         instructor=instructor, programas=programas, prog_asignados=prog_asignados,
-        fichas=fichas, fichas_asignadas=fichas_asignadas
+        fichas=fichas, fichas_asignadas=fichas_asignadas, today=datetime.date.today()
     )
 
 @asignacion_bp.route("/<int:instructor_id>/programas", methods=["POST"])

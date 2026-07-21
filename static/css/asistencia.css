@@ -1,0 +1,111 @@
+/* Estilos específicos para la asignación de instructores en Asistencias */
+
+.asig-card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+
+.asig-card-header {
+    background-color: #e9f2fb; /* Azul claro suave basado en la paleta SIGDA */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1rem 1.25rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asig-card-title {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0d47a1; /* Azul corporativo */
+}
+
+.asig-table-wrapper {
+    margin: 0;
+    padding: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    overflow: hidden;
+}
+
+.asig-table {
+    margin-bottom: 0;
+}
+
+.asig-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.asig-table td {
+    vertical-align: middle;
+}
+
+.asig-empty-state {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.asig-empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #adb5bd;
+}
+
+.asig-details {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.asig-summary {
+    padding: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.asig-summary::-webkit-details-marker {
+    display: none;
+}
+
+.asig-summary:hover {
+    background-color: #e2e6ea;
+}
+
+.asig-details[open] .asig-summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.asig-details-body {
+    padding: 0;
+}
+
+/* Responsividad para tablas en móviles */
+@media (max-width: 767.98px) {
+    .asig-table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
