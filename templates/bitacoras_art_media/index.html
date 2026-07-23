@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Bitácora Art. Media{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='bitacoras_art_media/wizard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Nueva Bitácora de Etapa Productiva (Art. Media)</h2>
+        <span class="text-muted" id="status-guardado"></span>
+    </div>
+
+    <!-- Stepper Visual -->
+    <ul class="nav nav-pills nav-fill mb-4" id="wizard-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="paso1-tab" data-bs-toggle="pill" data-bs-target="#paso1" type="button" role="tab">1. Selección</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="paso2-tab" data-bs-toggle="pill" data-bs-target="#paso2" type="button" role="tab">2. Aprendices</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="paso3-tab" data-bs-toggle="pill" data-bs-target="#paso3" type="button" role="tab">3. Datos Generales</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="paso4-tab" data-bs-toggle="pill" data-bs-target="#paso4" type="button" role="tab">4. Co-formador</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="paso5-tab" data-bs-toggle="pill" data-bs-target="#paso5" type="button" role="tab">5. Actividades</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="paso6-tab" data-bs-toggle="pill" data-bs-target="#paso6" type="button" role="tab">6. ARL</button>
+        </li>
+    </ul>
+
+    <form id="bitacoraForm" class="needs-validation" novalidate>
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="tab-content" id="wizard-content">
+            <!-- Paso 1 -->
+            <div class="tab-pane fade show active" id="paso1" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso1.html" %}
+            </div>
+            <!-- Paso 2 -->
+            <div class="tab-pane fade" id="paso2" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso2.html" %}
+            </div>
+            <!-- Paso 3 -->
+            <div class="tab-pane fade" id="paso3" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso3.html" %}
+            </div>
+            <!-- Paso 4 -->
+            <div class="tab-pane fade" id="paso4" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso4.html" %}
+            </div>
+            <!-- Paso 5 -->
+            <div class="tab-pane fade" id="paso5" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso5.html" %}
+            </div>
+            <!-- Paso 6 -->
+            <div class="tab-pane fade" id="paso6" role="tabpanel">
+                {% include "bitacoras_art_media/wizard_paso6.html" %}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary d-none" id="btn-prev">Anterior</button>
+            <button type="button" class="btn btn-primary" id="btn-next">Siguiente</button>
+            <button type="button" class="btn btn-success d-none" id="btn-submit">
+                <span class="spinner-border spinner-border-sm d-none" id="submit-spinner" role="status" aria-hidden="true"></span>
+                Generar PDF
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='bitacoras_art_media/wizard.js') }}"></script>
+{% endblock %}

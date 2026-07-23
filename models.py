@@ -524,3 +524,29 @@ def actualizar_colegio(cid, nombre, descripcion):
 
 def eliminar_colegio(cid):
     execute('DELETE FROM colegios WHERE idcolegio=%s', (cid,))
+
+# ---------------------------------------------------------
+# JUSTIFICACIONES ACUDIENTE (MODULO ADMINISTRADOR)
+# ---------------------------------------------------------
+
+def obtener_justificaciones_admin():
+    sql = """
+        SELECT j.id, j.fecha_inasistencia, j.comentario, j.archivo_ruta, j.estado, j.creado_en,
+               u.nombres AS aprendiz_nombres, u.apellidos AS aprendiz_apellidos, u.identificacion AS aprendiz_id,
+               ad.nombre AS acudiente_nombre,
+               f.numero AS ficha_numero
+        FROM acudiente_justificaciones j
+        JOIN usuarios u ON j.aprendiz_id = u.id
+        JOIN admin ad ON j.usuario_id = ad.id
+        LEFT JOIN fichas f ON u.ficha_id = f.id
+        ORDER BY j.creado_en DESC
+    """
+    return query(sql)
+
+def actualizar_estado_justificacion(justificacion_id, estado, revisado_por, comentario_revision=""):
+    sql = """
+        UPDATE acudiente_justificaciones
+        SET estado = %s, revisado_por = %s, comentario_revision = %s, revisado_en = NOW()
+        WHERE id = %s
+    """
+    execute(sql, (estado, revisado_por, comentario_revision, justificacion_id))

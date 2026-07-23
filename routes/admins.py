@@ -105,6 +105,36 @@ def nuevo():
 
         try:
             aid = models.crear_admin(username, generate_password_hash(password), nombre, rol, programa_id, firma)
+            
+            # ACUDIENTE LOGIC
+            if rol == 'acudiente':
+                models.execute('UPDATE admin SET requiere_cambio_password = 1 WHERE id = %s', (aid,))
+                aprendices_ids = request.form.getlist('aprendices_ids[]')
+                parentesco = request.form.get('parentesco', 'otro')
+                
+                # Documento soporte (opcional, pero puede guardarse)
+                doc_soporte = None
+                doc_file = request.files.get('documento_soporte')
+                if doc_file and doc_file.filename:
+                    ext = doc_file.filename.rsplit('.', 1)[-1].lower()
+                    doc_soporte = f'soporte_acu_{aid}_{uuid.uuid4().hex}.{ext}'
+                    ruta_doc = os.path.join(current_app.config.get('UPLOAD_FOLDER', 'static/uploads'), 'acudiente_justificaciones')
+                    os.makedirs(ruta_doc, exist_ok=True)
+                    doc_file.save(os.path.join(ruta_doc, doc_soporte))
+
+                estado_relacion = 'activo' # el creador es superadmin en esta ruta
+                for ap_id in aprendices_ids:
+                    if ap_id.isdigit():
+                        models.execute('''
+                            INSERT INTO acudiente_aprendiz 
+                            (usuario_id, aprendiz_id, parentesco, documento_soporte, estado, aprobado_por, aprobado_en)
+                            VALUES (%s, %s, %s, %s, %s, %s, NOW())
+                        ''', (aid, int(ap_id), parentesco, doc_soporte, estado_relacion, session.get('admin_id')))
+                
+                # TODO: Enviar correo con contraseña temporal
+                # enviar_correo(username, password)
+                pass
+            
             models.registrar_log(session.get('admin_id'), session.get('admin_username'),
                                  'CREAR', 'admin', aid, username, request.remote_addr)
             flash('Administrador creado.', 'success')
@@ -114,7 +144,9 @@ def nuevo():
             flash('Error al crear el administrador. Verifica que el usuario no exista.', 'danger')
         return redirect(url_for('admins.nuevo'))
     programas = models.listar_programas()
-    return render_template('admins/form.html', admin=None, programas=programas)
+    todas_las_fichas = models.query('SELECT id, numero FROM fichas ORDER BY numero')
+    todos_los_aprendices = models.query('SELECT u.id, u.identificacion, u.nombres, u.apellidos, u.ficha_id, f.numero AS ficha_numero FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.estado = "Activo" ORDER BY u.apellidos, u.nombres')
+    return render_template('admins/form.html', admin=None, programas=programas, todos_los_aprendices=todos_los_aprendices, todas_las_fichas=todas_las_fichas)
 
 
 @admins_bp.route('/editar/<int:aid>', methods=['GET', 'POST'])
@@ -159,7 +191,9 @@ def editar(aid):
             flash('Error al actualizar el administrador.', 'danger')
         return redirect(url_for('admins.editar', aid=aid))
     programas = models.listar_programas()
-    return render_template('admins/form.html', admin=admin, programas=programas)
+    todas_las_fichas = models.query('SELECT id, numero FROM fichas ORDER BY numero')
+    todos_los_aprendices = models.query('SELECT u.id, u.identificacion, u.nombres, u.apellidos, u.ficha_id, f.numero AS ficha_numero FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.estado = "Activo" ORDER BY u.apellidos, u.nombres')
+    return render_template('admins/form.html', admin=admin, programas=programas, todos_los_aprendices=todos_los_aprendices, todas_las_fichas=todas_las_fichas)
 
 
 @admins_bp.route('/eliminar/<int:aid>', methods=['POST'])

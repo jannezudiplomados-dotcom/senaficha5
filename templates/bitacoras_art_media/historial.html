@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Bitácoras Art. Media{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Historial de Bitácoras (Art. Media)</h2>
+        <a href="{{ url_for('bitacoras_art_media.nueva_bitacora') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nueva Bitácora
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>N° Bitácora</th>
+                            <th>Ficha</th>
+                            <th>Programa</th>
+                            <th>Período</th>
+                            <th>Estado</th>
+                            <th>Fecha Creación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in bitacoras %}
+                        <tr>
+                            <td>{{ b.numero_bitacora or 'S/N' }}</td>
+                            <td>{{ b.ficha_numero }}</td>
+                            <td>{{ b.programa_nombre }}</td>
+                            <td>{{ b.periodo_desde }} al {{ b.periodo_hasta }}</td>
+                            <td>
+                                {% if b.estado == 'generada' %}
+                                <span class="badge bg-success">Generada</span>
+                                {% else %}
+                                <span class="badge bg-warning text-dark">Borrador</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ b.creado_en.strftime('%Y-%m-%d %H:%M') if b.creado_en else '' }}</td>
+                            <td>
+                                <a href="{{ url_for('bitacoras_art_media.ver_detalle', id=b.id) }}" class="btn btn-sm btn-outline-secondary" title="Ver Detalle"><i class="bi bi-eye"></i></a>
+                                {% if b.estado == 'generada' and b.pdf_ruta %}
+                                <a href="{{ url_for('static', filename=b.pdf_ruta.replace('static/', '')) }}" class="btn btn-sm btn-outline-danger" target="_blank" title="Descargar PDF">
+                                    <i class="bi bi-file-pdf"></i>
+                                </a>
+                                {% endif %}
+                                <form action="{{ url_for('bitacoras_art_media.eliminar', id=b.id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar esta bitácora?');">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">
+                                No se encontraron bitácoras generadas.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

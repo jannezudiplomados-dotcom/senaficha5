@@ -31,7 +31,7 @@
     <tspan fill="#FFFFFF">SIG</tspan><tspan fill="#6DB8F2">DA</tspan>
   </text>
   <text x="142" y="115" font-family="'Segoe UI', 'Inter', Arial, Helvetica, sans-serif" font-size="15" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="0.3">
-    Sistema Integrado de Gestión Documental de Articulación y Media Técnica
+    Sistema Integrado de Gestión Documental Automatizada para el SENA
   </text>
   <rect x="142" y="125" width="60" height="3" rx="1.5" fill="#6DB8F2" opacity="0.5"/>
 </svg>

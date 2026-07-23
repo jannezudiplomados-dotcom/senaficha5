@@ -1,0 +1,48 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Datos Generales</h5>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Número de Bitácora</label>
+                <input type="text" class="form-control" name="numero_bitacora" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Modalidad de Formación</label>
+                <input type="text" class="form-control" name="modalidad_formacion" value="Articulación con la Educación Media" required>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Período (Desde)</label>
+                <input type="date" class="form-control" name="periodo_desde" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Período (Hasta)</label>
+                <input type="date" class="form-control" name="periodo_hasta" required>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Modalidad de Ejecución</label>
+                <select class="form-select" name="modalidad_ejecucion" required>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Mixta">Mixta</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Alternativa de Etapa Productiva</label>
+                <select class="form-select" name="alternativa_etapa" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Contrato aprendizaje">Contrato de Aprendizaje</option>
+                    <option value="Contrato vínculo formativo">Contrato Vínculo Formativo</option>
+                    <option value="Monitoria">Monitoria</option>
+                    <option value="Proyecto productivo">Proyecto Productivo</option>
+                    <option value="Vínculo laboral">Vínculo Laboral</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

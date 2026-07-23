@@ -16,6 +16,7 @@
         <option value="instructor" {{ 'selected' if admin and admin.rol=='instructor' else '' }}>instructor</option>
         <option value="admin" {{ 'selected' if admin and admin.rol=='admin' else '' }}>admin</option>
         <option value="superadmin" {{ 'selected' if admin and admin.rol=='superadmin' else '' }}>superadmin</option>
+        <option value="acudiente" {{ 'selected' if admin and admin.rol=='acudiente' else '' }}>acudiente</option>
       </select>
     </div>
     <div class="col-md-6"><label class="form-label">Programa Asociado (Opcional)</label>
@@ -26,6 +27,56 @@
         {% endfor %}
       </select>
     </div>
+
+    <!-- SECCIÓN CONDICIONAL ACUDIENTE -->
+    <div class="col-12" id="seccion_acudiente" style="display: none;">
+      <div class="card bg-light border-success">
+        <div class="card-header bg-success text-white">Configuración de Acudiente</div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <label class="form-label">Filtrar por Ficha (Opcional)</label>
+              <select id="filtro_ficha" class="form-select mb-2">
+                <option value="">-- Mostrar todos los aprendices --</option>
+                {% if todas_las_fichas %}
+                  {% for f in todas_las_fichas %}
+                    <option value="{{ f.id }}">Ficha {{ f.numero }}</option>
+                  {% endfor %}
+                {% endif %}
+              </select>
+            </div>
+            <div class="col-md-12">
+              <label class="form-label">Aprendices a asociar *</label>
+              <select name="aprendices_ids[]" id="aprendices_ids" class="form-select" multiple size="6">
+                {% if todos_los_aprendices %}
+                  {% for a in todos_los_aprendices %}
+                    <option value="{{ a.id }}" data-ficha="{{ a.ficha_id }}">{{ a.identificacion }} - {{ a.nombres }} {{ a.apellidos }} (Ficha: {{ a.ficha_numero }})</option>
+                  {% endfor %}
+                {% endif %}
+              </select>
+              <small class="text-muted">Mantén presionado Ctrl (o Cmd) para seleccionar múltiples.</small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Parentesco *</label>
+              <select name="parentesco" class="form-select">
+                <option value="padre">Padre</option>
+                <option value="madre">Madre</option>
+                <option value="tutor">Tutor / Representante Legal</option>
+                <option value="abuelo">Abuelo(a)</option>
+                <option value="tio">Tío(a)</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Documento Soporte (Opcional, PDF/JPG)</label>
+              <input type="file" name="documento_soporte" class="form-control" accept=".pdf, .jpg, .jpeg, .png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FIN SECCIÓN CONDICIONAL ACUDIENTE -->
+
     {% if admin %}
     <div class="col-md-6 mt-4">
       <div class="form-check">
@@ -69,4 +120,57 @@
   </div>
   <div class="mt-4"><button class="btn btn-success">Guardar</button> <a href="{{ url_for('admins.index') }}" class="btn btn-light">Cancelar</a></div>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const rolSelect = document.querySelector('select[name="rol"]');
+    const seccionAcudiente = document.getElementById('seccion_acudiente');
+    const inputAprendices = document.getElementById('aprendices_ids');
+    const inputParentesco = document.querySelector('select[name="parentesco"]');
+    const filtroFicha = document.getElementById('filtro_ficha');
+
+    function toggleAcudienteFields() {
+      if (rolSelect.value === 'acudiente') {
+        seccionAcudiente.style.display = 'block';
+        inputAprendices.required = true;
+        inputParentesco.required = true;
+      } else {
+        seccionAcudiente.style.display = 'none';
+        inputAprendices.required = false;
+        inputParentesco.required = false;
+      }
+    }
+
+    if (rolSelect) {
+      rolSelect.addEventListener('change', toggleAcudienteFields);
+      toggleAcudienteFields();
+    }
+    
+    if (filtroFicha && inputAprendices) {
+      const allOptions = Array.from(inputAprendices.options);
+      
+      filtroFicha.addEventListener('change', function() {
+        const fichaId = this.value;
+        
+        // Remove all options currently
+        inputAprendices.innerHTML = '';
+        
+        let count = 0;
+        allOptions.forEach(opt => {
+          if (!fichaId || opt.getAttribute('data-ficha') === fichaId) {
+            inputAprendices.appendChild(opt);
+            count++;
+          }
+        });
+        
+        if (count === 0) {
+            const emptyOpt = document.createElement('option');
+            emptyOpt.text = "No hay aprendices en esta ficha";
+            emptyOpt.disabled = true;
+            inputAprendices.appendChild(emptyOpt);
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}

@@ -1,0 +1,25 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Selección de Programa, Ficha y Plantilla</h5>
+        <div class="mb-3">
+            <label for="programa_id" class="form-label">Programa de Formación</label>
+            <select class="form-select" id="programa_id" name="programa_id" required>
+                <option value="">Seleccione un programa...</option>
+                <!-- Opciones cargadas por AJAX -->
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ficha_id" class="form-label">Ficha (Grupo)</label>
+            <select class="form-select" id="ficha_id" name="ficha_id" disabled required>
+                <option value="">Seleccione una ficha...</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="plantilla_id" class="form-label">Plantilla (Filtrado por 'Grupal')</label>
+            <select class="form-select" id="plantilla_id" name="plantilla_id" required>
+                <option value="">Seleccione una plantilla...</option>
+            </select>
+            <div class="form-text">Se muestran plantillas tipo 'Grupal' activas.</div>
+        </div>
+    </div>
+</div>

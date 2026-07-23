@@ -44,6 +44,11 @@ class Config:
     SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() in ['true', '1', 't']
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
     
+    # Acudiente Config
+    ACUDIENTE_SESSION_MINUTES = int(os.environ.get('ACUDIENTE_SESSION_MINUTES', 20))
+    ACUDIENTE_MAX_JUSTIFICACIONES_MB = int(os.environ.get('ACUDIENTE_MAX_JUSTIFICACIONES_MB', 5))
+    RATELIMIT_STORAGE_URL = os.environ.get('RATELIMIT_STORAGE_URL', 'memory://')
+    
     # Entorno
     DEBUG = os.environ.get('FLASK_DEBUG', 'False').lower() in ['true', '1', 't']
 

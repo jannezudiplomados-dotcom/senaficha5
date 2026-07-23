@@ -55,8 +55,16 @@ def login():
             session['admin_nombre'] = admin['nombre']
             session['admin_rol'] = admin['rol']
             session['admin_programa_id'] = admin['programa_id']
+            # Para acudientes
+            if 'requiere_cambio_password' in admin:
+                session['requiere_cambio_password'] = admin['requiere_cambio_password']
+            
             models.registrar_log(admin['id'], admin['username'], 'LOGIN', 'admin',
                                   admin['id'], 'Inicio de sesion', request.remote_addr)
+            
+            if admin['rol'] == 'acudiente':
+                return redirect('/acudiente/portal')
+                
             next_url = request.args.get('next') or request.form.get('next')
             if next_url and next_url.startswith('/') and not next_url.startswith('//'):
                 return redirect(next_url)

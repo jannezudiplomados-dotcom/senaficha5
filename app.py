@@ -43,6 +43,10 @@ def create_app():
     from routes.colegios import colegios_bp
     from routes.asistencia.routes import asistencia_bp
     from routes.asistencia.asignacion import asignacion_bp
+    from routes.bitacoras_art_media import bp as bam_bp
+    from routes.bitacoras_art_media_api import bp as bam_api_bp
+    from routes.acudiente import bp as acudiente_bp
+    from routes.justificaciones import justificaciones_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp)
@@ -56,6 +60,10 @@ def create_app():
     app.register_blueprint(colegios_bp, url_prefix='/colegios')
     app.register_blueprint(asistencia_bp)
     app.register_blueprint(asignacion_bp)
+    app.register_blueprint(bam_bp, url_prefix="/bitacoras-art-media")
+    app.register_blueprint(bam_api_bp, url_prefix="/bitacoras-art-media/api")
+    app.register_blueprint(acudiente_bp, url_prefix="/acudiente")
+    app.register_blueprint(justificaciones_bp, url_prefix="/justificaciones")
 
     @app.context_processor
     def inject_user():
@@ -84,8 +92,21 @@ def create_app():
         return render_template('errors/500.html'), 500
 
     @app.before_request
-    def make_session_permanent():
+    def check_acudiente_access():
+        from flask import request, redirect, url_for, abort
         session.permanent = True
+        
+        if session.get('admin_rol') == 'acudiente':
+            from servicios.acu_auth import WHITELIST_ACUDIENTE
+            ep = request.endpoint or ''
+            if not ep.startswith(WHITELIST_ACUDIENTE):
+                app.logger.warning(
+                    "Acudiente %s intentó acceder a %s (bloqueado)",
+                    session.get('admin_id'), request.path
+                )
+                if '/api/' in request.path or request.is_json:
+                    abort(403)
+                return redirect(url_for('acudiente.portal'))
 
     @app.after_request
     def add_headers(response):

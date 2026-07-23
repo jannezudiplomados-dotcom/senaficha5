@@ -3332,3 +3332,1111 @@ NameError: name 'aprendiz_id' is not defined. Did you mean: 'aprendices'?
 2026-07-21 09:58:09,755 INFO: PERF Grupal - Render docs: 6.34s | Batch COM: 31.81s | ZIP: 0.83s | Total: 38.98s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
 2026-07-21 10:00:03,085 INFO: PERF Grupal - Render docs: 6.44s | Batch COM: 30.99s | ZIP: 0.84s | Total: 38.26s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
 2026-07-21 10:01:43,669 INFO: PERF Grupal - Render docs: 3.06s | Batch COM: 57.52s | ZIP: 0.73s | Total: 61.31s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-21 20:16:55,957 INFO: PERF Grupal - Render docs: 16.41s | Batch COM: 87.13s | ZIP: 1.43s | Total: 104.97s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-21 20:21:31,861 INFO: PERF Grupal - Render docs: 4.74s | Batch COM: 114.30s | ZIP: 1.51s | Total: 120.55s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-22 22:13:36,120 ERROR: Exception on /bitacoras-art-media/historial [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 28, in historial
+    return render_template('bitacoras_art_media/historial.html', bitacoras=bitacoras)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\historial.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:13:36,188 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 28, in historial
+    return render_template('bitacoras_art_media/historial.html', bitacoras=bitacoras)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\historial.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:13:39,335 ERROR: Exception on /bitacoras-art-media/plantillas [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:13:39,341 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:13:40,748 ERROR: Exception on /bitacoras-art-media/configuracion [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:13:40,755 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:07,160 ERROR: Exception on /bitacoras-art-media/historial [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 28, in historial
+    return render_template('bitacoras_art_media/historial.html', bitacoras=bitacoras)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\historial.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:07,165 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 28, in historial
+    return render_template('bitacoras_art_media/historial.html', bitacoras=bitacoras)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\historial.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:31,479 ERROR: Exception on /bitacoras-art-media/plantillas [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:31,484 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:32,666 ERROR: Exception on /bitacoras-art-media/plantillas [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:32,675 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:51,677 ERROR: Exception on /bitacoras-art-media/configuracion [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:51,683 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:53,257 ERROR: Exception on /bitacoras-art-media/configuracion [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:14:53,263 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in configuracion
+    return render_template('bitacoras_art_media/config.html', config=configuracion_actual)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\config.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:15:06,051 ERROR: Exception on /bitacoras-art-media/plantillas [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:15:06,059 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 16, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 40, in plantillas_list
+    return render_template('bitacoras_art_media/plantillas_list.html', plantillas=plantillas)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\templates\bitacoras_art_media\plantillas_list.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: layout.html
+2026-07-22 22:34:19,305 ERROR: Error generando bitacora: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sena_fichas4`.`bam_bitacoras`, CONSTRAINT `bam_bitacoras_ibfk_4` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`)) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py:234]
+2026-07-22 22:38:02,607 ERROR: Error generando bitacora: No se encontró la plantilla base: C:\Users\JANNEZ\Pictures\sena_fichas4\static\plantillas\static/plantillas_base/GFPI-F-147FormatoBitacoraSeguimientoEtapaProductiva.xlsx [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py:234]
+2026-07-22 22:41:54,998 ERROR: Error generando bitacora: [WinError 2] El sistema no puede encontrar el archivo especificado [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py:234]
+2026-07-22 22:48:57,710 ERROR: Exception on /bitacoras-art-media/api/generar [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py", line 14, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py", line 78, in generar
+    from servicios import bam_writer, bam_pdf
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_pdf.py", line 65
+    if os.path.exists(final_path):
+IndentationError: unexpected indent
+2026-07-22 22:48:57,713 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py", line 14, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py", line 78, in generar
+    from servicios import bam_writer, bam_pdf
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_pdf.py", line 65
+    if os.path.exists(final_path):
+IndentationError: unexpected indent
+2026-07-23 06:58:27,316 ERROR: Exception on /dashboard/ [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 15, in index
+    db = models.get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-23 06:58:27,423 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 750, in open_connection
+    self.sock.connect(sockaddr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1294, in reconnect
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1237, in connect
+    self._open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 349, in _open_connection
+    self._socket.open_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\network.py", line 752, in open_connection
+    raise InterfaceError(
+    ...<6 lines>...
+    ) from err
+mysql.connector.errors.InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\dashboard.py", line 15, in index
+    db = models.get_connection()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 22, in get_connection
+    return _pool.get_connection()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\pooling.py", line 587, in get_connection
+    cnx.reconnect()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1303, in reconnect
+    raise InterfaceError(msg) from err
+mysql.connector.errors.InterfaceError: Can not reconnect to MySQL after 1 attempt(s): 2003: Can't connect to MySQL server on 'localhost:3306' (10061 No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2026-07-23 07:23:10,588 ERROR: Error generando bitacora: Error al generar el PDF: Property 'Excel.Application.Visible' can not be set. [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py:234]
+2026-07-23 07:38:29,924 ERROR: Exception on /bitacoras-art-media/plantillas/eliminar/1 [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 83, in eliminar_plantilla_route
+    bam_models.eliminar_plantilla(id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 32, in eliminar_plantilla
+    models.execute('DELETE FROM bam_plantillas WHERE id=%s', (pid,))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sena_fichas4`.`bam_bitacoras`, CONSTRAINT `bam_bitacoras_ibfk_1` FOREIGN KEY (`plantilla_id`) REFERENCES `bam_plantillas` (`id`))
+2026-07-23 07:38:29,993 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 83, in eliminar_plantilla_route
+    bam_models.eliminar_plantilla(id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 32, in eliminar_plantilla
+    models.execute('DELETE FROM bam_plantillas WHERE id=%s', (pid,))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sena_fichas4`.`bam_bitacoras`, CONSTRAINT `bam_bitacoras_ibfk_1` FOREIGN KEY (`plantilla_id`) REFERENCES `bam_plantillas` (`id`))
+2026-07-23 07:38:52,610 ERROR: Exception on /bitacoras-art-media/plantillas/eliminar/1 [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 83, in eliminar_plantilla_route
+    bam_models.eliminar_plantilla(id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 32, in eliminar_plantilla
+    models.execute('DELETE FROM bam_plantillas WHERE id=%s', (pid,))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sena_fichas4`.`bam_bitacoras`, CONSTRAINT `bam_bitacoras_ibfk_1` FOREIGN KEY (`plantilla_id`) REFERENCES `bam_plantillas` (`id`))
+2026-07-23 07:38:52,616 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 83, in eliminar_plantilla_route
+    bam_models.eliminar_plantilla(id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 32, in eliminar_plantilla
+    models.execute('DELETE FROM bam_plantillas WHERE id=%s', (pid,))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sena_fichas4`.`bam_bitacoras`, CONSTRAINT `bam_bitacoras_ibfk_1` FOREIGN KEY (`plantilla_id`) REFERENCES `bam_plantillas` (`id`))
+2026-07-23 07:43:50,886 ERROR: Exception on /bitacoras-art-media/plantillas [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in plantillas_list
+    bam_models.crear_plantilla(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        nombre=nombre,
+        ^^^^^^^^^^^^^^
+    ...<2 lines>...
+        creado_por=session.get('admin_id', 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 23, in crear_plantilla
+    return models.execute('''INSERT INTO bam_plantillas
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo_generacion, max_aprendices, creado_por)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s)''',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo, max_aprendices, creado_por))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sena_fichas4`.`bam_plantillas`, CONSTRAINT `bam_plantillas_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`))
+2026-07-23 07:43:50,898 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in plantillas_list
+    bam_models.crear_plantilla(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        nombre=nombre,
+        ^^^^^^^^^^^^^^
+    ...<2 lines>...
+        creado_por=session.get('admin_id', 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 23, in crear_plantilla
+    return models.execute('''INSERT INTO bam_plantillas
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo_generacion, max_aprendices, creado_por)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s)''',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo, max_aprendices, creado_por))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sena_fichas4`.`bam_plantillas`, CONSTRAINT `bam_plantillas_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`))
+2026-07-23 07:44:29,597 ERROR: Exception on /bitacoras-art-media/plantillas [POST] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in plantillas_list
+    bam_models.crear_plantilla(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        nombre=nombre,
+        ^^^^^^^^^^^^^^
+    ...<2 lines>...
+        creado_por=session.get('admin_id', 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 23, in crear_plantilla
+    return models.execute('''INSERT INTO bam_plantillas
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo_generacion, max_aprendices, creado_por)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s)''',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo, max_aprendices, creado_por))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sena_fichas4`.`bam_plantillas`, CONSTRAINT `bam_plantillas_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`))
+2026-07-23 07:44:29,607 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:87]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media.py", line 56, in plantillas_list
+    bam_models.crear_plantilla(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        nombre=nombre,
+        ^^^^^^^^^^^^^^
+    ...<2 lines>...
+        creado_por=session.get('admin_id', 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\servicios\bam_models.py", line 23, in crear_plantilla
+    return models.execute('''INSERT INTO bam_plantillas
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo_generacion, max_aprendices, creado_por)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s)''',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (nombre, archivo_ruta, hoja_objetivo, tipo, max_aprendices, creado_por))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 61, in execute
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.IntegrityError: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sena_fichas4`.`bam_plantillas`, CONSTRAINT `bam_plantillas_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`))
+2026-07-23 08:02:19,248 ERROR: Error generando bitacora: Error al generar el PDF: (-2147221008, 'No se ha llamado a CoInitialize.', None, None) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\bitacoras_art_media_api.py:234]
+2026-07-23 08:35:23,854 ERROR: Exception on /admins/nuevo [GET] [en C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py:825]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 31, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\admins.py", line 147, in nuevo
+    todos_los_aprendices = models.query('SELECT u.id, u.identificacion, u.nombres, u.apellidos, f.numero AS ficha_numero FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.rol IS NULL OR u.rol != "admin" ORDER BY u.apellidos, u.nombres')
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 33, in query
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'u.rol' in 'where clause'
+2026-07-23 08:35:23,863 ERROR: Error interno 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [en C:\Users\JANNEZ\Pictures\sena_fichas4\app.py:89]
+Traceback (most recent call last):
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 20, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\auth.py", line 31, in wrapper
+    return f(*args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\routes\admins.py", line 147, in nuevo
+    todos_los_aprendices = models.query('SELECT u.id, u.identificacion, u.nombres, u.apellidos, f.numero AS ficha_numero FROM usuarios u LEFT JOIN fichas f ON u.ficha_id = f.id WHERE u.rol IS NULL OR u.rol != "admin" ORDER BY u.apellidos, u.nombres')
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\models.py", line 33, in query
+    cur.execute(sql, params or ())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\cursor.py", line 617, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 843, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\JANNEZ\Pictures\sena_fichas4\venv\Lib\site-packages\mysql\connector\connection.py", line 620, in _handle_result
+    raise get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'u.rol' in 'where clause'
+2026-07-23 09:40:54,196 INFO: PERF Grupal - Render docs: 4.33s | Batch COM: 97.75s | ZIP: 1.19s | Total: 103.27s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]
+2026-07-23 09:53:39,449 WARNING: Batch PDF Stderr: Error procesando C:\Users\JANNEZ\Pictures\sena_fichas4\static\generados\tmp_669bu8m\1083048324_6d4656.xlsx: (-2146777998, None, (None, None, None, 0, None)) [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:618]
+2026-07-23 09:53:40,740 INFO: PERF Grupal - Render docs: 8.69s | Batch COM: 65.47s | ZIP: 1.29s | Total: 75.45s [en C:\Users\JANNEZ\Pictures\sena_fichas4\routes\documentos.py:738]

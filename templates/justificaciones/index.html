@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Gestión de Justificaciones{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-header bg-white py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="mb-0 text-primary fw-bold">
+        <i class="bi bi-journal-medical me-2"></i>Gestión de Justificaciones
+      </h4>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0" id="tablaJustificaciones">
+        <thead class="table-light">
+          <tr>
+            <th class="px-4">Fecha Falla</th>
+            <th>Aprendiz</th>
+            <th>Acudiente</th>
+            <th>Motivo</th>
+            <th>Adjunto</th>
+            <th>Estado</th>
+            <th class="text-end px-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for j in justificaciones %}
+          <tr>
+            <td class="px-4 fw-medium">{{ j.fecha_inasistencia }}</td>
+            <td>
+              {{ j.aprendiz_nombres }} {{ j.aprendiz_apellidos }}<br>
+              <small class="text-muted"><i class="bi bi-person-badge me-1"></i>{{ j.aprendiz_id }} | Ficha: {{ j.ficha_numero or 'N/A' }}</small>
+            </td>
+            <td>{{ j.acudiente_nombre }}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#motivoModal{{ j.id }}">
+                <i class="bi bi-chat-dots"></i> Ver Motivo
+              </button>
+            </td>
+            <td>
+              {% if j.archivo_ruta %}
+                <a href="{{ url_for('static', filename='uploads/acudiente_justificaciones/' ~ j.archivo_ruta) }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-paperclip"></i> Ver
+                </a>
+              {% else %}
+                <span class="text-muted"><i class="bi bi-x-circle"></i> No</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if j.estado == 'pendiente' %}
+                <span class="badge bg-warning text-dark"><i class="bi bi-clock me-1"></i>Pendiente</span>
+              {% elif j.estado == 'aprobada' %}
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aprobada</span>
+              {% else %}
+                <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Rechazada</span>
+              {% endif %}
+            </td>
+            <td class="text-end px-4">
+              {% if j.estado == 'pendiente' %}
+                <form action="{{ url_for('justificaciones.cambiar_estado', jid=j.id) }}" method="POST" class="d-inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="estado" value="aprobada">
+                  <button type="submit" class="btn btn-sm btn-primary" title="Aprobar"><i class="bi bi-check-lg"></i></button>
+                </form>
+                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rechazarModal{{ j.id }}" title="Rechazar">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              {% else %}
+                <span class="text-muted small">Revisada el<br>{{ j.creado_en.strftime('%Y-%m-%d') if j.creado_en else '' }}</span>
+              {% endif %}
+            </td>
+          </tr>
+
+          <!-- Modal Ver Motivo -->
+          <div class="modal fade" id="motivoModal{{ j.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Motivo de Inasistencia</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><strong>Enviado por:</strong> {{ j.acudiente_nombre }}</p>
+                  <p><strong>Fecha Inasistencia:</strong> {{ j.fecha_inasistencia }}</p>
+                  <hr>
+                  <p class="text-break">{{ j.comentario or 'Sin comentario.' }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Rechazar (con comentario) -->
+          <div class="modal fade" id="rechazarModal{{ j.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form action="{{ url_for('justificaciones.cambiar_estado', jid=j.id) }}" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="estado" value="rechazada">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Rechazar Justificación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Estás seguro de rechazar esta justificación para el aprendiz <strong>{{ j.aprendiz_nombres }}</strong>?</p>
+                    <div class="mb-3">
+                      <label class="form-label">Comentario o motivo del rechazo (Opcional):</label>
+                      <textarea class="form-control" name="comentario_revision" rows="2"></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar Rechazo</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if not justificaciones %}
+    <div class="text-center py-5">
+      <div class="text-muted mb-3">
+        <i class="bi bi-folder2-open" style="font-size: 3rem;"></i>
+      </div>
+      <h5 class="text-muted">No hay justificaciones pendientes</h5>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+      if ($('#tablaJustificaciones tbody tr').length > 0) {
+          $('#tablaJustificaciones').DataTable({
+              "language": {
+                  "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+              },
+              "order": [[0, "desc"]]
+          });
+      }
+  });
+</script>
+{% endblock %}

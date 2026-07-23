@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Bitácora{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Detalle de Bitácora N° {{ bitacora.numero_bitacora or 'S/N' }}</h2>
+        <div>
+            {% if bitacora.pdf_ruta %}
+            <a href="{{ url_for('static', filename=bitacora.pdf_ruta.replace('static/', '')) }}" class="btn btn-danger" target="_blank">
+                <i class="bi bi-file-pdf"></i> Descargar PDF
+            </a>
+            {% endif %}
+            <a href="{{ url_for('bitacoras_art_media.historial') }}" class="btn btn-outline-secondary">
+                Volver al Historial
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Información General -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white fw-bold">Información General</div>
+                <div class="card-body">
+                    <p><strong>Período:</strong> {{ bitacora.periodo_desde }} al {{ bitacora.periodo_hasta }}</p>
+                    <p><strong>Modalidad Formación:</strong> {{ bitacora.modalidad_formacion }}</p>
+                    <p><strong>Modalidad Ejecución:</strong> {{ bitacora.modalidad_ejecucion }}</p>
+                    <p><strong>Alternativa Etapa:</strong> {{ bitacora.alternativa_etapa }}</p>
+                    <p><strong>Fecha Entrega:</strong> {{ bitacora.fecha_entrega }}</p>
+                    <p><strong>Estado:</strong> <span class="badge bg-{{ 'success' if bitacora.estado == 'generada' else 'warning text-dark' }}">{{ bitacora.estado }}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ente Co-formador -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white fw-bold">Ente Co-formador</div>
+                <div class="card-body">
+                    <p><strong>Entidad:</strong> {{ bitacora.entidad_nombre }} (NIT: {{ bitacora.entidad_nit }})</p>
+                    <p><strong>Dirección:</strong> {{ bitacora.entidad_direccion }}</p>
+                    <p><strong>Jefe Inmediato:</strong> {{ bitacora.jefe_nombre }} ({{ bitacora.jefe_cargo }})</p>
+                    <p><strong>Contacto:</strong> {{ bitacora.jefe_telefono }} | {{ bitacora.jefe_correo }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aprendices Relacionados -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white fw-bold">Aprendices Vinculados</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Identificación</th>
+                            <th>Nombres y Apellidos</th>
+                            <th>Teléfono</th>
+                            <th>ARL Afiliado</th>
+                            <th>Nivel Riesgo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in aprendices %}
+                        <tr>
+                            <td>{{ a.identificacion }}</td>
+                            <td>{{ a.nombres }} {{ a.apellidos }}</td>
+                            <td>{{ a.telefono }}</td>
+                            <td>{{ a.arl_afiliado }}</td>
+                            <td>{{ a.arl_nivel_riesgo }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actividades -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white fw-bold">Actividades Realizadas</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Evidencia</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for act in actividades %}
+                        <tr>
+                            <td>{{ act.descripcion }}</td>
+                            <td>{{ act.fecha_inicio }}</td>
+                            <td>{{ act.fecha_fin }}</td>
+                            <td>{{ act.evidencia }}</td>
+                            <td>{{ act.observaciones }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -84,7 +84,7 @@
       <div class="sidebar-divider"></div>
 
       {# Asistencia — collapsible #}
-      {% set asistencia_active = request.endpoint and (request.endpoint.startswith('asistencia.') or request.endpoint.startswith('asignacion.')) %}
+      {% set asistencia_active = request.endpoint and (request.endpoint.startswith('asistencia.') or request.endpoint.startswith('asignacion.') or request.endpoint.startswith('justificaciones.')) %}
       <button class="sidebar-collapse-btn {{ 'active' if asistencia_active else '' }}"
               data-bs-toggle="collapse" data-bs-target="#sidebarAsistencia"
               aria-expanded="{{ 'true' if asistencia_active else 'false' }}"
@@ -111,6 +111,13 @@
            {% if request.endpoint == 'asistencia.informe' %}aria-current="page"{% endif %}>
           <i class="bi bi-file-earmark-bar-graph"></i>
           <span class="sidebar-link-text">Informe de Asistencia</span>
+        </a>
+        <div class="sidebar-divider"></div>
+        <a class="sidebar-link {{ 'active' if request.endpoint and request.endpoint.startswith('justificaciones.') else '' }}"
+           href="{{ url_for('justificaciones.index') }}"
+           {% if request.endpoint and request.endpoint.startswith('justificaciones.') %}aria-current="page"{% endif %}>
+          <i class="bi bi-envelope-open"></i>
+          <span class="sidebar-link-text">Justificaciones</span>
         </a>
         {% if rol_actual == 'superadmin' %}
         <div class="sidebar-divider"></div>
@@ -154,6 +161,40 @@
         </a>
       </div>
 
+      {# Bitácoras Art. Media — collapsible #}
+      {% set bam_active = request.endpoint and request.endpoint.startswith('bitacoras_art_media.') %}
+      <button class="sidebar-collapse-btn {{ 'active' if bam_active else '' }}"
+              data-bs-toggle="collapse" data-bs-target="#sidebarBam"
+              aria-expanded="{{ 'true' if bam_active else 'false' }}"
+              aria-controls="sidebarBam">
+        <i class="bi bi-clipboard2-check menu-icon"></i>
+        <span class="sidebar-link-text">Bitácoras Art. Media</span>
+        <i class="bi bi-chevron-right chevron"></i>
+      </button>
+      <div class="collapse sidebar-submenu {{ 'show' if bam_active else '' }}" id="sidebarBam">
+        <a class="sidebar-link {{ 'active' if request.endpoint == 'bitacoras_art_media.nueva_bitacora' else '' }}"
+           href="{{ url_for('bitacoras_art_media.nueva_bitacora') }}">
+          <i class="bi bi-plus-square"></i>
+          <span class="sidebar-link-text">Nueva bitácora</span>
+        </a>
+        <a class="sidebar-link {{ 'active' if request.endpoint == 'bitacoras_art_media.historial' else '' }}"
+           href="{{ url_for('bitacoras_art_media.historial') }}">
+          <i class="bi bi-clock-history"></i>
+          <span class="sidebar-link-text">Historial</span>
+        </a>
+        {% if rol_actual != 'instructor' %}
+        <a class="sidebar-link {{ 'active' if request.endpoint == 'bitacoras_art_media.plantillas_list' else '' }}"
+           href="{{ url_for('bitacoras_art_media.plantillas_list') }}">
+          <i class="bi bi-files"></i>
+          <span class="sidebar-link-text">Plantillas</span>
+        </a>
+        <a class="sidebar-link {{ 'active' if request.endpoint == 'bitacoras_art_media.configuracion' else '' }}"
+           href="{{ url_for('bitacoras_art_media.configuracion') }}">
+          <i class="bi bi-gear"></i>
+          <span class="sidebar-link-text">Configuración</span>
+        </a>
+        {% endif %}
+      </div>
       {% if rol_actual == 'superadmin' %}
       <div class="sidebar-divider"></div>
       <div class="nav-section">Admin</div>

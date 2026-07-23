@@ -1,0 +1,35 @@
+.nav-pills .nav-link {
+    border-radius: 50rem;
+    margin: 0 5px;
+    font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #39A900; /* SENA Green */
+}
+
+.nav-pills .nav-link.disabled {
+    color: #6c757d;
+    background-color: #e9ecef;
+}
+
+.tab-content {
+    min-height: 300px;
+}
+
+.thumbnail-firma {
+    width: 180px;
+    height: 60px;
+    object-fit: contain;
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 4px;
+}
+
+.actividad-row .btn-remove {
+    color: #dc3545;
+}
+
+.actividad-row .btn-remove:hover {
+    color: #a71d2a;
+}

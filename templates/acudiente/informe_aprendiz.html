@@ -1,0 +1,208 @@
+{% extends 'acudiente/base_acudiente.html' %}
+
+{% block title %}Informe de {{ aprendiz.nombres }}{% endblock %}
+
+{% block content %}
+<div class="portal-header pb-5">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <a href="{{ url_for('acudiente.portal') }}" class="btn btn-outline-light btn-sm mb-2"><i class="fa-solid fa-arrow-left me-1"></i> Volver</a>
+            <h2 class="mb-1">Informe Académico</h2>
+            <p class="mb-0">{{ aprendiz.nombre_completo }} - Ficha: {{ aprendiz.ficha_numero }}</p>
+        </div>
+        <div class="bg-white p-2 rounded shadow-sm">
+            <label class="form-label text-dark small fw-bold mb-1"><i class="fa-regular fa-calendar-alt me-1"></i>Periodo de Consulta:</label>
+            <form id="formMes" action="" method="GET" class="d-flex align-items-center">
+                <input type="month" name="mes" id="inputMes" class="form-control form-control-sm" value="{{ mes_actual }}" onchange="document.getElementById('formMes').submit();">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: -30px;">
+    <!-- Resumen Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 border-start border-danger border-4">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted text-uppercase small fw-bold">Total Fallas (Mes)</h6>
+                    <h2 class="card-title text-danger mb-0"><i class="fa-solid fa-user-xmark me-2"></i>{{ resumen.total_fallas }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 border-start border-primary border-4">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted text-uppercase small fw-bold">Promedio Notas (Mes)</h6>
+                    <h2 class="card-title text-primary mb-0"><i class="fa-solid fa-star me-2"></i>{{ resumen.promedio_notas }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Asistencias Table -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="card-title mb-0"><i class="fa-solid fa-clipboard-list me-2 text-secondary"></i>Historial de Asistencias</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Observación</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if asistencias %}
+                                    {% for asis in asistencias %}
+                                    <tr>
+                                        <td>{{ asis.fecha }}</td>
+                                        <td>
+                                            {% if asis.estado == 'A' %}
+                                                <span class="badge bg-success">Asistió</span>
+                                            {% elif asis.estado == 'LIC' or asis.estado == 'INC' %}
+                                                <span class="badge bg-info text-dark">Justificada ({{ asis.estado }})</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Falla ({{ asis.estado }})</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-muted small">{{ asis.observacion or '-' }}</td>
+                                        <td>
+                                            {% if asis.estado != 'A' and asis.estado != 'LIC' and asis.estado != 'INC' %}
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill btn-justificar" data-fecha="{{ asis.fecha }}" data-bs-toggle="modal" data-bs-target="#justificarModal">Justificar</button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td colspan="4" class="text-center text-muted py-4">No hay registros de asistencia en el mes seleccionado.</td></tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Observaciones Sidebar -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-light">
+                <div class="card-header bg-light py-3 border-bottom border-warning">
+                    <h5 class="card-title mb-0"><i class="fa-solid fa-comment-dots me-2 text-warning"></i>Observaciones Recientes</h5>
+                </div>
+                <div class="card-body">
+                    {% if resumen.observaciones %}
+                        <ul class="list-group list-group-flush bg-transparent">
+                        {% for obs in resumen.observaciones %}
+                            <li class="list-group-item bg-transparent px-0">
+                                <div class="d-flex justify-content-between w-100">
+                                    <small class="text-primary fw-bold">{{ obs.fecha }}</small>
+                                    <span class="badge bg-secondary">{{ obs.estado }}</span>
+                                </div>
+                                <p class="mb-1 small mt-1">{{ obs.observacion }}</p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted small text-center my-3">No hay observaciones registradas en este periodo.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Justificar -->
+<div class="modal fade" id="justificarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title">Justificar Falla</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-3">Enviando justificación para la fecha <strong id="fechaText"></strong>.</p>
+                <div class="mb-3">
+                    <label class="form-label">Motivo detallado</label>
+                    <textarea class="form-control" id="motivoText" rows="3" required></textarea>
+                </div>
+                <input type="hidden" id="fechaHidden">
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnEnviarJustificacion">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Set CSRF globally for fetch if needed (since it's a POST we might need it, assuming csrf protection is on API)
+    const csrfToken = "{{ csrf_token() }}";
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const btns = document.querySelectorAll('.btn-justificar');
+        const modalFechaText = document.getElementById('fechaText');
+        const modalFechaHidden = document.getElementById('fechaHidden');
+        const btnEnviar = document.getElementById('btnEnviarJustificacion');
+        const motivoText = document.getElementById('motivoText');
+        
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const fecha = btn.getAttribute('data-fecha');
+                modalFechaText.textContent = fecha;
+                modalFechaHidden.value = fecha;
+                motivoText.value = '';
+            });
+        });
+        
+        btnEnviar.addEventListener('click', async () => {
+            const fecha = modalFechaHidden.value;
+            const motivo = motivoText.value.trim();
+            const aprendizId = {{ aprendiz.aprendiz_id }};
+            
+            if (!motivo) {
+                Swal.fire('Error', 'Debes escribir el motivo de la falla.', 'error');
+                return;
+            }
+            
+            btnEnviar.disabled = true;
+            btnEnviar.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
+            
+            try {
+                const res = await fetch(`/acudiente/api/aprendiz/${aprendizId}/justificar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({ fecha, motivo })
+                });
+                const data = await res.json();
+                
+                if (res.ok && data.status === 'ok') {
+                    await Swal.fire('Enviado', 'La justificación fue registrada y está pendiente de revisión.', 'success');
+                    window.location.reload();
+                } else {
+                    Swal.fire('Error', data.message || 'Error al enviar la justificación.', 'error');
+                }
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un error de conexión.', 'error');
+            } finally {
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = 'Enviar';
+                const modal = bootstrap.Modal.getInstance(document.getElementById('justificarModal'));
+                if(modal) modal.hide();
+            }
+        });
+    });
+</script>
+{% endblock %}
